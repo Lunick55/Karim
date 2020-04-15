@@ -161,6 +161,8 @@
     <ClInclude Include="math\vector3.h" />
     <ClInclude Include="math\vector4.h" />
     <ClInclude Include="math\quaternion.h" />
+    <ClInclude Include="Test1.h" />
+    <ClInclude Include="Test2.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main\andrick_plugin.cpp" />
@@ -168,6 +170,8 @@
     <ClCompile Include="math\quaternion.cpp" />
     <ClCompile Include="math\vector3.cpp" />
     <ClCompile Include="math\vector4.cpp" />
+    <ClCompile Include="Test1.cpp" />
+    <ClCompile Include="Test2.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
