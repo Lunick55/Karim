@@ -13,54 +13,72 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\Examples">
+      <UniqueIdentifier>{be49289f-c1af-420d-b442-f530f4ba55dd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Examples">
+      <UniqueIdentifier>{3f8ee028-7453-4f8a-b4c8-f1e9f2d4444a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Networking">
+      <UniqueIdentifier>{04d100e2-303c-4a66-9cfc-1b0eabc72007}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Common">
+      <UniqueIdentifier>{b0a016a3-2f30-4c49-9274-252e42adcf7e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Common">
+      <UniqueIdentifier>{a9be3848-1ce1-460e-a15d-ac876cef12ec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Networking">
+      <UniqueIdentifier>{4ea58234-f239-4695-b917-707b8c491a48}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Networking\Packet">
+      <UniqueIdentifier>{77a558ed-8ed1-478d-9cc7-525918ea875c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Networking\Packet">
+      <UniqueIdentifier>{6c8c6c43-880c-4081-878c-600b7450be32}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="main\andrick_plugin.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="main\lib.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="math\vector3.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="template_examples\PluginTemplateExample.h">
+      <Filter>Header Files\Examples</Filter>
     </ClInclude>
-    <ClInclude Include="math\vector4.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="_source\Networking\andrick_server.h">
+      <Filter>Header Files\Networking</Filter>
     </ClInclude>
-    <ClInclude Include="math\quaternion.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="_source\Utils\andrick_common.h">
+      <Filter>Header Files\Common</Filter>
     </ClInclude>
-    <ClInclude Include="math\math_util.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="_source\Networking\andrick_client.h">
+      <Filter>Header Files\Networking</Filter>
     </ClInclude>
-    <ClInclude Include="Test1.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="_source\Networking\Packet\andrick_packet.h">
+      <Filter>Header Files\Networking\Packet</Filter>
     </ClInclude>
-    <ClInclude Include="Test2.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="_source\Networking\Packet\andrick_packethandler.h">
+      <Filter>Header Files\Networking\Packet</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main\dllmain.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="math\vector3.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="template_examples\PluginTemplateExample.cpp">
+      <Filter>Source Files\Examples</Filter>
     </ClCompile>
-    <ClCompile Include="math\vector4.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="_source\Utils\andrick_common.cpp">
+      <Filter>Source Files\Common</Filter>
     </ClCompile>
-    <ClCompile Include="math\quaternion.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="_source\Networking\andrick_server.cpp">
+      <Filter>Source Files\Networking</Filter>
     </ClCompile>
-    <ClCompile Include="main\andrick_plugin.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="_source\Networking\andrick_client.cpp">
+      <Filter>Source Files\Networking</Filter>
     </ClCompile>
-    <ClCompile Include="Test1.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Test2.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="_source\Networking\Packet\andrick_packethandler.cpp">
+      <Filter>Source Files\Networking\Packet</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

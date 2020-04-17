@@ -37,4 +37,20 @@ public class AndrickPlugin
 
     [DllImport("AndrickPlugin")]
     public static extern float GetMagnitudeSquared(float[] quaternion);
+
+    [DllImport("AndrickPlugin")]
+    public static extern float AddNumbers(float x, float y);
+
+    [DllImport("AndrickPlugin")]
+    public static extern float FunctionExample(float x, float y);
+
+    [DllImport("AndrickPlugin")]
+    public static extern void AddNumToManagerStringA(int newNum);
+
+    [DllImport("AndrickPlugin")]
+    public static extern void AddNumToManagerStringB(int newNum);
+
+    [DllImport("AndrickPlugin")]
+    public static extern int PrintManagerString();
+
 }

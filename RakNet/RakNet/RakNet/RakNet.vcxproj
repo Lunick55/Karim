@@ -1,0 +1,283 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\Source\Base64Encoder.cpp" />
+    <ClCompile Include="..\..\Source\BitStream.cpp" />
+    <ClCompile Include="..\..\Source\CCRakNetSlidingWindow.cpp" />
+    <ClCompile Include="..\..\Source\CCRakNetUDT.cpp" />
+    <ClCompile Include="..\..\Source\CheckSum.cpp" />
+    <ClCompile Include="..\..\Source\CloudClient.cpp" />
+    <ClCompile Include="..\..\Source\CloudCommon.cpp" />
+    <ClCompile Include="..\..\Source\CloudServer.cpp" />
+    <ClCompile Include="..\..\Source\CommandParserInterface.cpp" />
+    <ClCompile Include="..\..\Source\ConnectionGraph2.cpp" />
+    <ClCompile Include="..\..\Source\ConsoleServer.cpp" />
+    <ClCompile Include="..\..\Source\DataCompressor.cpp" />
+    <ClCompile Include="..\..\Source\DirectoryDeltaTransfer.cpp" />
+    <ClCompile Include="..\..\Source\DR_SHA1.cpp" />
+    <ClCompile Include="..\..\Source\DS_BytePool.cpp" />
+    <ClCompile Include="..\..\Source\DS_ByteQueue.cpp" />
+    <ClCompile Include="..\..\Source\DS_HuffmanEncodingTree.cpp" />
+    <ClCompile Include="..\..\Source\DS_Table.cpp" />
+    <ClCompile Include="..\..\Source\DynDNS.cpp" />
+    <ClCompile Include="..\..\Source\EmailSender.cpp" />
+    <ClCompile Include="..\..\Source\EpochTimeToString.cpp" />
+    <ClCompile Include="..\..\Source\FileList.cpp" />
+    <ClCompile Include="..\..\Source\FileListTransfer.cpp" />
+    <ClCompile Include="..\..\Source\FileOperations.cpp" />
+    <ClCompile Include="..\..\Source\FormatString.cpp" />
+    <ClCompile Include="..\..\Source\FullyConnectedMesh2.cpp" />
+    <ClCompile Include="..\..\Source\Getche.cpp" />
+    <ClCompile Include="..\..\Source\Gets.cpp" />
+    <ClCompile Include="..\..\Source\GetTime.cpp" />
+    <ClCompile Include="..\..\Source\gettimeofday.cpp" />
+    <ClCompile Include="..\..\Source\GridSectorizer.cpp" />
+    <ClCompile Include="..\..\Source\HTTPConnection.cpp" />
+    <ClCompile Include="..\..\Source\HTTPConnection2.cpp" />
+    <ClCompile Include="..\..\Source\IncrementalReadInterface.cpp" />
+    <ClCompile Include="..\..\Source\Itoa.cpp" />
+    <ClCompile Include="..\..\Source\LinuxStrings.cpp" />
+    <ClCompile Include="..\..\Source\LocklessTypes.cpp" />
+    <ClCompile Include="..\..\Source\LogCommandParser.cpp" />
+    <ClCompile Include="..\..\Source\MessageFilter.cpp" />
+    <ClCompile Include="..\..\Source\NatPunchthroughClient.cpp" />
+    <ClCompile Include="..\..\Source\NatPunchthroughServer.cpp" />
+    <ClCompile Include="..\..\Source\NatTypeDetectionClient.cpp" />
+    <ClCompile Include="..\..\Source\NatTypeDetectionCommon.cpp" />
+    <ClCompile Include="..\..\Source\NatTypeDetectionServer.cpp" />
+    <ClCompile Include="..\..\Source\NetworkIDManager.cpp" />
+    <ClCompile Include="..\..\Source\NetworkIDObject.cpp" />
+    <ClCompile Include="..\..\Source\PacketConsoleLogger.cpp" />
+    <ClCompile Include="..\..\Source\PacketFileLogger.cpp" />
+    <ClCompile Include="..\..\Source\PacketizedTCP.cpp" />
+    <ClCompile Include="..\..\Source\PacketLogger.cpp" />
+    <ClCompile Include="..\..\Source\PacketOutputWindowLogger.cpp" />
+    <ClCompile Include="..\..\Source\PluginInterface2.cpp" />
+    <ClCompile Include="..\..\Source\PS4Includes.cpp" />
+    <ClCompile Include="..\..\Source\Rackspace.cpp" />
+    <ClCompile Include="..\..\Source\RakMemoryOverride.cpp" />
+    <ClCompile Include="..\..\Source\RakNetCommandParser.cpp" />
+    <ClCompile Include="..\..\Source\RakNetSocket.cpp" />
+    <ClCompile Include="..\..\Source\RakNetSocket2.cpp" />
+    <ClCompile Include="..\..\Source\RakNetSocket2_360_720.cpp" />
+    <ClCompile Include="..\..\Source\RakNetSocket2_Berkley.cpp" />
+    <ClCompile Include="..\..\Source\RakNetSocket2_Berkley_NativeClient.cpp" />
+    <ClCompile Include="..\..\Source\RakNetSocket2_NativeClient.cpp" />
+    <ClCompile Include="..\..\Source\RakNetSocket2_PS3_PS4.cpp" />
+    <ClCompile Include="..\..\Source\RakNetSocket2_PS4.cpp" />
+    <ClCompile Include="..\..\Source\RakNetSocket2_Vita.cpp" />
+    <ClCompile Include="..\..\Source\RakNetSocket2_WindowsStore8.cpp" />
+    <ClCompile Include="..\..\Source\RakNetSocket2_Windows_Linux.cpp" />
+    <ClCompile Include="..\..\Source\RakNetSocket2_Windows_Linux_360.cpp" />
+    <ClCompile Include="..\..\Source\RakNetStatistics.cpp" />
+    <ClCompile Include="..\..\Source\RakNetTransport2.cpp" />
+    <ClCompile Include="..\..\Source\RakNetTypes.cpp" />
+    <ClCompile Include="..\..\Source\RakPeer.cpp" />
+    <ClCompile Include="..\..\Source\RakSleep.cpp" />
+    <ClCompile Include="..\..\Source\RakString.cpp" />
+    <ClCompile Include="..\..\Source\RakThread.cpp" />
+    <ClCompile Include="..\..\Source\RakWString.cpp" />
+    <ClCompile Include="..\..\Source\Rand.cpp" />
+    <ClCompile Include="..\..\Source\RandSync.cpp" />
+    <ClCompile Include="..\..\Source\ReadyEvent.cpp" />
+    <ClCompile Include="..\..\Source\RelayPlugin.cpp" />
+    <ClCompile Include="..\..\Source\ReliabilityLayer.cpp" />
+    <ClCompile Include="..\..\Source\ReplicaManager3.cpp" />
+    <ClCompile Include="..\..\Source\Router2.cpp" />
+    <ClCompile Include="..\..\Source\RPC4Plugin.cpp" />
+    <ClCompile Include="..\..\Source\SecureHandshake.cpp" />
+    <ClCompile Include="..\..\Source\SendToThread.cpp" />
+    <ClCompile Include="..\..\Source\SignaledEvent.cpp" />
+    <ClCompile Include="..\..\Source\SimpleMutex.cpp" />
+    <ClCompile Include="..\..\Source\SocketLayer.cpp" />
+    <ClCompile Include="..\..\Source\StatisticsHistory.cpp" />
+    <ClCompile Include="..\..\Source\StringCompressor.cpp" />
+    <ClCompile Include="..\..\Source\StringTable.cpp" />
+    <ClCompile Include="..\..\Source\SuperFastHash.cpp" />
+    <ClCompile Include="..\..\Source\TableSerializer.cpp" />
+    <ClCompile Include="..\..\Source\TCPInterface.cpp" />
+    <ClCompile Include="..\..\Source\TeamBalancer.cpp" />
+    <ClCompile Include="..\..\Source\TeamManager.cpp" />
+    <ClCompile Include="..\..\Source\TelnetTransport.cpp" />
+    <ClCompile Include="..\..\Source\ThreadsafePacketLogger.cpp" />
+    <ClCompile Include="..\..\Source\TwoWayAuthentication.cpp" />
+    <ClCompile Include="..\..\Source\UDPForwarder.cpp" />
+    <ClCompile Include="..\..\Source\UDPProxyClient.cpp" />
+    <ClCompile Include="..\..\Source\UDPProxyCoordinator.cpp" />
+    <ClCompile Include="..\..\Source\UDPProxyServer.cpp" />
+    <ClCompile Include="..\..\Source\VariableDeltaSerializer.cpp" />
+    <ClCompile Include="..\..\Source\VariableListDeltaTracker.cpp" />
+    <ClCompile Include="..\..\Source\VariadicSQLParser.cpp" />
+    <ClCompile Include="..\..\Source\VitaIncludes.cpp" />
+    <ClCompile Include="..\..\Source\WSAStartupSingleton.cpp" />
+    <ClCompile Include="..\..\Source\_FindFirst.cpp" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{9DDE6D41-33A8-4519-A836-AF45C81F5648}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>RakNet</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>$(SolutionDir)lib\$(PlatformTarget)\$(PlatformToolset)\$(Configuration)\</OutDir>
+    <IntDir>$(ProjectDir)build\$(PlatformTarget)\$(PlatformToolset)\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>$(SolutionDir)lib\$(PlatformTarget)\$(PlatformToolset)\$(Configuration)\</OutDir>
+    <IntDir>$(ProjectDir)build\$(PlatformTarget)\$(PlatformToolset)\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <OutDir>$(SolutionDir)lib\$(PlatformTarget)\$(PlatformToolset)\$(Configuration)\</OutDir>
+    <IntDir>$(ProjectDir)build\$(PlatformTarget)\$(PlatformToolset)\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <OutDir>$(SolutionDir)lib\$(PlatformTarget)\$(PlatformToolset)\$(Configuration)\</OutDir>
+    <IntDir>$(ProjectDir)build\$(PlatformTarget)\$(PlatformToolset)\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_LIB;_CRT_SECURE_NO_WARNINGS;_WINSOCK_DEPRECATED_NO_WARNINGS;WIN32;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+    <Lib>
+      <AdditionalDependencies>ws2_32.lib</AdditionalDependencies>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_LIB;_CRT_SECURE_NO_WARNINGS;_WINSOCK_DEPRECATED_NO_WARNINGS;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+    <Lib>
+      <AdditionalDependencies>ws2_32.lib</AdditionalDependencies>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>_LIB;_CRT_SECURE_NO_WARNINGS;_WINSOCK_DEPRECATED_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+    <Lib>
+      <AdditionalDependencies>ws2_32.lib</AdditionalDependencies>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>_LIB;_CRT_SECURE_NO_WARNINGS;_WINSOCK_DEPRECATED_NO_WARNINGS;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+    <Lib>
+      <AdditionalDependencies>ws2_32.lib</AdditionalDependencies>
+    </Lib>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

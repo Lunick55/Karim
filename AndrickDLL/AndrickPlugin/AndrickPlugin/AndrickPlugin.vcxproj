@@ -107,11 +107,14 @@
       <PreprocessorDefinitions>ANDRICKPLUGIN_EXPORT;ANDRICKPLUGIN_EXPORT_DEBUG;ANDRICKPLUGIN_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\..\..\RakNet;$(SolutionDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableUAC>false</EnableUAC>
+      <AdditionalDependencies>RakNet.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)..\..\..\RakNet\RakNet\lib\x64\v142\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -155,23 +158,21 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="main\andrick_plugin.h" />
     <ClInclude Include="main\lib.h" />
-    <ClInclude Include="math\math_util.h" />
-    <ClInclude Include="math\vector3.h" />
-    <ClInclude Include="math\vector4.h" />
-    <ClInclude Include="math\quaternion.h" />
-    <ClInclude Include="Test1.h" />
-    <ClInclude Include="Test2.h" />
+    <ClInclude Include="template_examples\PluginTemplateExample.h" />
+    <ClInclude Include="_source\Networking\andrick_client.h" />
+    <ClInclude Include="_source\Networking\andrick_server.h" />
+    <ClInclude Include="_source\Networking\Packet\andrick_packet.h" />
+    <ClInclude Include="_source\Networking\Packet\andrick_packethandler.h" />
+    <ClInclude Include="_source\Utils\andrick_common.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main\andrick_plugin.cpp" />
     <ClCompile Include="main\dllmain.cpp" />
-    <ClCompile Include="math\quaternion.cpp" />
-    <ClCompile Include="math\vector3.cpp" />
-    <ClCompile Include="math\vector4.cpp" />
-    <ClCompile Include="Test1.cpp" />
-    <ClCompile Include="Test2.cpp" />
+    <ClCompile Include="template_examples\PluginTemplateExample.cpp" />
+    <ClCompile Include="_source\Networking\andrick_client.cpp" />
+    <ClCompile Include="_source\Networking\andrick_server.cpp" />
+    <ClCompile Include="_source\Networking\Packet\andrick_packethandler.cpp" />
+    <ClCompile Include="_source\Utils\andrick_common.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

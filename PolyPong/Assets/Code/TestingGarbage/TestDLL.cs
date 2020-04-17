@@ -7,9 +7,12 @@ public class TestDLL : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        float[] quatBaby = new float[4];
-        AndrickPlugin.CreateDefaultQuaternion(true, quatBaby);
-        Debug.Log(quatBaby);
+        AndrickPlugin.AddNumToManagerStringA(5);
+        AndrickPlugin.AddNumToManagerStringB(3);
+        Debug.Log(AndrickPlugin.PrintManagerString());
+        AndrickPlugin.AddNumToManagerStringA(5);
+        Debug.Log(AndrickPlugin.PrintManagerString());
+
     }
 
     // Update is called once per frame
