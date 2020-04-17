@@ -8,4 +8,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SampleScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Resources/Scenes/Persistent/CameraManager.unity
+    guid: 98d058aa63aead145bb0e798e78c68ae
+  - enabled: 1
+    path: Assets/Resources/Scenes/PreGame/TitleMenu.unity
+    guid: 26f5030b853941b4ab26f0987319b6ad
   m_configObjects: {}
