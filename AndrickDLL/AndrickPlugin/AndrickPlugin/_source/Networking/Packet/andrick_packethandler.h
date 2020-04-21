@@ -7,7 +7,7 @@ class PacketHandler
 {
 	friend class Server;
 public:
-	PacketHandler(bool isServer);
+	PacketHandler();
 	virtual ~PacketHandler() = default;
 
 	inline bool isInitialized() const { return mpPeer != nullptr; }
@@ -28,6 +28,7 @@ public:
 
 private:
 	bool mIsServer;
+
 	std::size_t mMaxConnections;
 	RakNet::SystemAddress mServerAddress;
 

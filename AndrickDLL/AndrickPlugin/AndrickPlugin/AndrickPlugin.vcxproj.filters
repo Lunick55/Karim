@@ -37,6 +37,12 @@
     <Filter Include="Source Files\Networking\Packet">
       <UniqueIdentifier>{6c8c6c43-880c-4081-878c-600b7450be32}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Event">
+      <UniqueIdentifier>{b2a98943-60e6-46a8-966d-d6c2bceb2cf0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Event">
+      <UniqueIdentifier>{6a7cc04f-7842-4f1f-bba1-8d284b941ec0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main\lib.h">
@@ -60,6 +66,18 @@
     <ClInclude Include="_source\Networking\Packet\andrick_packethandler.h">
       <Filter>Header Files\Networking\Packet</Filter>
     </ClInclude>
+    <ClInclude Include="_source\Event\andrick_event.h">
+      <Filter>Header Files\Event</Filter>
+    </ClInclude>
+    <ClInclude Include="_source\Event\andrick_eventSystem.h">
+      <Filter>Header Files\Event</Filter>
+    </ClInclude>
+    <ClInclude Include="_source\Event\andrick_event_chatmessage.h">
+      <Filter>Header Files\Event</Filter>
+    </ClInclude>
+    <ClInclude Include="_source\Utils\network_manager.h">
+      <Filter>Header Files\Common</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main\dllmain.cpp">
@@ -79,6 +97,18 @@
     </ClCompile>
     <ClCompile Include="_source\Networking\Packet\andrick_packethandler.cpp">
       <Filter>Source Files\Networking\Packet</Filter>
+    </ClCompile>
+    <ClCompile Include="_source\Event\andrick_event.cpp">
+      <Filter>Source Files\Event</Filter>
+    </ClCompile>
+    <ClCompile Include="_source\Event\andrick_eventSystem.cpp">
+      <Filter>Source Files\Event</Filter>
+    </ClCompile>
+    <ClCompile Include="_source\Event\andrick_event_chatmessage.cpp">
+      <Filter>Source Files\Event</Filter>
+    </ClCompile>
+    <ClCompile Include="_source\Utils\network_manager.cpp">
+      <Filter>Source Files\Common</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

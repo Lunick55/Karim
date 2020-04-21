@@ -1,13 +1,14 @@
 #include <_source/Networking/Packet/andrick_packethandler.h>
 #include <_source/Networking/Packet/andrick_packet.h>
 #include <_source/Networking/andrick_client.h>
+#include <_source/Networking/andrick_server.h>
+#include <_source/Utils/network_manager.h>
 
-PacketHandler::PacketHandler(bool isServer) :
-	mIsServer(isServer),
+PacketHandler::PacketHandler() :
 	mMaxConnections(0),
 	mpPeer(nullptr)
 {
-
+	mIsServer = gNetManager.mpServer->isActive;
 }
 
 bool PacketHandler::startup(int maxConnections)
@@ -35,7 +36,7 @@ bool PacketHandler::startup(int maxConnections)
 				}
 				else
 				{
-					//gDemoState->mpClient->setAddress(mpPeer->GetSystemAddressFromGuid(mpPeer->GetMyGUID()));
+					gNetManager.mpClient->setAddress(mpPeer->GetSystemAddressFromGuid(mpPeer->GetMyGUID()));
 				}
 
 				return true;

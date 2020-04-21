@@ -104,7 +104,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>ANDRICKPLUGIN_EXPORT;ANDRICKPLUGIN_EXPORT_DEBUG;ANDRICKPLUGIN_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;ANDRICKPLUGIN_EXPORT;ANDRICKPLUGIN_EXPORT_DEBUG;ANDRICKPLUGIN_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <AdditionalIncludeDirectories>$(SolutionDir)..\..\..\RakNet;$(SolutionDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -160,19 +160,27 @@
   <ItemGroup>
     <ClInclude Include="main\lib.h" />
     <ClInclude Include="template_examples\PluginTemplateExample.h" />
+    <ClInclude Include="_source\Event\andrick_event.h" />
+    <ClInclude Include="_source\Event\andrick_eventSystem.h" />
+    <ClInclude Include="_source\Event\andrick_event_chatmessage.h" />
     <ClInclude Include="_source\Networking\andrick_client.h" />
     <ClInclude Include="_source\Networking\andrick_server.h" />
     <ClInclude Include="_source\Networking\Packet\andrick_packet.h" />
     <ClInclude Include="_source\Networking\Packet\andrick_packethandler.h" />
     <ClInclude Include="_source\Utils\andrick_common.h" />
+    <ClInclude Include="_source\Utils\network_manager.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main\dllmain.cpp" />
     <ClCompile Include="template_examples\PluginTemplateExample.cpp" />
+    <ClCompile Include="_source\Event\andrick_event.cpp" />
+    <ClCompile Include="_source\Event\andrick_eventSystem.cpp" />
+    <ClCompile Include="_source\Event\andrick_event_chatmessage.cpp" />
     <ClCompile Include="_source\Networking\andrick_client.cpp" />
     <ClCompile Include="_source\Networking\andrick_server.cpp" />
     <ClCompile Include="_source\Networking\Packet\andrick_packethandler.cpp" />
     <ClCompile Include="_source\Utils\andrick_common.cpp" />
+    <ClCompile Include="_source\Utils\network_manager.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

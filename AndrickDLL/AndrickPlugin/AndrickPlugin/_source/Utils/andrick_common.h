@@ -9,7 +9,6 @@
 #include <RakTits/RakPeerInterface.h>
 #include <RakTits/MessageIdentifiers.h>
 
-
 typedef char UserId;
 typedef unsigned int UnitID;
 
@@ -24,33 +23,8 @@ static const int MAX_INPUT_LENGTH = 512;
 
 static constexpr int BOID_COUNT = 1;
 
-//struct AndrickUtils
-//{
-//	static a3vec3 createVec3(float x, float y, float z)
-//	{
-//		a3vec3 vec;
-//		vec.x = x;
-//		vec.y = y;
-//		vec.z = z;
-//		return vec;
-//	}
-//};
-//
-//typedef a3vec4 Color;
-//
-//struct AndrickColors
-//{
-//	//Because a3vec4s structs don't have constructors to initalize the vars...
-//	static Color createColor(float r, float g, float b, float a)
-//	{
-//		a3vec4 color;
-//		color.r = r;
-//		color.g = g;
-//		color.b = b;
-//		color.a = a;
-//		return color;
-//	}
-//};
+extern class EventSystem& gEventSystem;
+extern class NetworkManager& gNetManager;
 
 enum class CommandId : char
 {

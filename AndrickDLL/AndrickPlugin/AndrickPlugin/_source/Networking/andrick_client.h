@@ -2,15 +2,15 @@
 #define CLIENT_H_
 
 #include <_source/Utils/andrick_common.h>
+#include <_source/Event/andrick_eventSystem.h>
 
-class Client
+class Client : public EventListener
 {
 public:
-	Client(bool isRemote = false);
+	Client();
 	virtual ~Client() = default;
 
-	//void processIncomingEvent(std::shared_ptr<struct Event> evnt) override;
-
+	void processIncomingEvent(std::shared_ptr<struct Event> evnt) override;
 	void initNewUser(const UserId id, const std::string& username);
 
 	//These are all clientside functions.
@@ -33,8 +33,8 @@ public:
 	inline std::size_t getMaxUserCount() const { return mServersMaxUserCount; };
 	inline std::size_t getConnectedUserCount() const { return mConnectedUserCount; };
 
+	bool isActive = false;
 private:
-	bool mIsRemoteUser;
 	UserId mUserId;
 	std::string mUsername;
 	AuthorityId mAuthority;

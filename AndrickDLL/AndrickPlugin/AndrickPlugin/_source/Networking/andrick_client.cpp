@@ -1,13 +1,15 @@
 #include <_source/Networking/andrick_client.h>
 //#include <A3_DEMO/_andrick_Network/_andrick_Packet/andrick_packethandler.h>
+#include <_source/Utils/network_manager.h>
 
-Client::Client(bool isRemote) :
-	mIsRemoteUser(isRemote),
+Client::Client() :
 	mAuthority(AuthorityId::NORMAL),
 	mUserId(-1),
 	mServersMaxUserCount(0),
 	mClientMap({})
-{}
+{
+
+}
 
 void Client::setUserId(const UserId id)
 {
@@ -39,26 +41,26 @@ const AuthorityId& Client::getAuthority() const
 	return mAuthority;
 }
 
-//void Client::processIncomingEvent(std::shared_ptr<struct Event> evnt)
-//{
-//	///We can just use execute() in the future if necessary, but for now, switch is fine.
-//
-//	switch (evnt->eventId)
-//	{
-//		case EventId::CONNECTION_NEW_USER_JOINED:
-//		{
-//			evnt->execute();
-//			break;
-//		}
-//		case EventId::USER_DISCONNECTED:
-//		{
-//			evnt->execute();
-//			break;
-//		}
-//		default:
-//			break;
-//	}
-//}
+void Client::processIncomingEvent(std::shared_ptr<struct Event> evnt)
+{
+	///We can just use execute() in the future if necessary, but for now, switch is fine.
+
+	switch (evnt->eventId)
+	{
+		case EventId::CONNECTION_NEW_USER_JOINED:
+		{
+			evnt->execute();
+			break;
+		}
+		case EventId::USER_DISCONNECTED:
+		{
+			evnt->execute();
+			break;
+		}
+		default:
+			break;
+	}
+}
 
 bool Client::getClientFromUsername(const std::string& username, std::shared_ptr<Client>& out)
 {
@@ -80,7 +82,7 @@ bool Client::getClientFromUsername(const std::string& username, std::shared_ptr<
 
 void Client::initNewUser(const UserId id, const std::string& username)
 {
-	std::shared_ptr<Client> newUser = std::make_shared<Client>(true);
+	std::shared_ptr<Client> newUser = std::make_shared<Client>();
 	newUser->setUserId(id);
 	newUser->setUsername(username);
 	newUser->setAuthority(AuthorityId::NORMAL);///TODO: Send this over the network.
