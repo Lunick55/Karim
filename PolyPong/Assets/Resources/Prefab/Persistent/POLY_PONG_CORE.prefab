@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: -230803859535092553}
   - component: {fileID: 3091904079806996587}
   m_Layer: 0
-  m_Name: _PERSISTENT
+  m_Name: POLY_PONG_CORE
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

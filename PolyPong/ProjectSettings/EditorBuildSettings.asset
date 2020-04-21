@@ -18,7 +18,7 @@ EditorBuildSettings:
     path: Assets/Resources/Scenes/TitleMenu.unity
     guid: 26f5030b853941b4ab26f0987319b6ad
   - enabled: 1
-    path: Assets/Resources/Scenes/CreateServerMenu.unity
+    path: Assets/Resources/Scenes/CreateServer.unity
     guid: 47e2d09766a3c4f4aac9c4145f191dc3
   - enabled: 1
     path: Assets/Resources/Scenes/JoinServer.unity

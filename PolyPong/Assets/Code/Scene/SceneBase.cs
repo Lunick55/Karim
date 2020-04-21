@@ -1,22 +1,46 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class SceneBase : MonoBehaviour
+public class SceneBase<T> : Singleton<T> where T : Singleton<T>
 {
-    private static GameObject instance;
+    private static GameObject persistenceInstance;
 
-    protected void Awake()
+    public GameObject GetPersistentTracker()
     {
-        if (!instance)
+        if (!persistenceInstance)
         {
-            instance = Instantiate(Resources.Load<GameObject>("Prefab/Persistent/POLY_PONG_CORE"));
-            instance.name = "POLY_PONG_CORE";
-            
-            SceneTracker sceneTracker = instance.GetComponent<SceneTracker>();
-            sceneTracker.LoadSceneAsync(SceneInfoList.CAMERA_MANAGER);
-            
-            //instance.GetComponent<SceneTracker>().LoadSceneAsync(SceneInfoList.SCENE_SWITCHER);
+            persistenceInstance = Instantiate(Resources.Load<GameObject>("Prefab/Persistent/POLY_PONG_CORE"));
+            persistenceInstance.name = "POLY_PONG_CORE";
         }
+
+        return persistenceInstance;
+    }
+
+    public SceneTracker GetSceneTracker()
+    {
+        return GetPersistentTracker().GetComponent<SceneTracker>();
+    }
+
+    public void OnQuitPressed()
+    {
+        Application.Quit();
+    }
+
+    public void OnMainMenuPressed()
+    {
+        GetSceneTracker().LoadSceneSynchronously(SceneInfoList.TITLE_MENU);
+    }
+
+    public void OnJoinLobbyClient()
+    {
+        //Send over the necessary info to the server.
+        GetSceneTracker().LoadSceneSynchronously(SceneInfoList.LOBBY_CLIENT);
+    }
+
+    public void OnJoinLobbyServer()
+    {
+        GetSceneTracker().LoadSceneSynchronously(SceneInfoList.LOBBY_SERVER);
     }
 }
