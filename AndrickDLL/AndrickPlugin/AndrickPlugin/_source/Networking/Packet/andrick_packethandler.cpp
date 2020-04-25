@@ -8,7 +8,14 @@ PacketHandler::PacketHandler() :
 	mMaxConnections(0),
 	mpPeer(nullptr)
 {
-	mIsServer = gNetManager.mpServer->isActive;
+	if (gNetManager.mpServer)
+	{
+		mIsServer = true;//gNetManager.mpServer->isActive;
+	}
+	else
+	{
+		mIsServer = false;
+	}
 }
 
 bool PacketHandler::startup(int maxConnections)

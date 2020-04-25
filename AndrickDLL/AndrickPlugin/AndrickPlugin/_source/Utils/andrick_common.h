@@ -26,6 +26,9 @@ static constexpr int BOID_COUNT = 1;
 extern class EventSystem& gEventSystem;
 extern class NetworkManager& gNetManager;
 
+int initializeServer(int maxUsers);
+int initializeClient(char* ip);
+
 enum class CommandId : char
 {
 	INVALID_COMMAND = -1,
@@ -117,8 +120,6 @@ extern "C"
 {
 #endif
 	// C header here
-	extern void initializeServer();
-	extern void initializeClient();
 	extern void shutdownRakNet();
 	extern RakNet::Time getTime();
 #ifdef __cplusplus

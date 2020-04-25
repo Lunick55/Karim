@@ -57,6 +57,26 @@ void Client::processIncomingEvent(std::shared_ptr<struct Event> evnt)
 			evnt->execute();
 			break;
 		}
+		case EventId::CONNECTION_REQUEST_FAILED:
+		{
+			evnt->execute();
+			break;
+		}
+		case EventId::CONNECTION_REQUEST_ACCEPTED:
+		{
+			evnt->execute();
+			break;
+		}
+		case EventId::CONNECTION_JOIN_ACCEPTED:
+		{
+			evnt->execute();
+			break;
+		}
+		case EventId::CONNECTION_JOIN_FAILED:
+		{
+			evnt->execute();
+			break;
+		}
 		default:
 			break;
 	}

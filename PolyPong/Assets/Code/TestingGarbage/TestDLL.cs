@@ -7,7 +7,7 @@ public class TestDLL : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        AndrickPlugin.ActivateServer();
+        Debug.Log(AndrickPlugin.ActivateServer(5));
         Debug.Log(AndrickPlugin.TestMeDaddy());
 
     }

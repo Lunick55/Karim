@@ -6,11 +6,18 @@ using UnityEngine;
 public class AndrickPlugin
 {
     [DllImport("AndrickPlugin")]
-    public static extern void ActivateServer();
+    public static extern int ActivateServer(int maxUsers);
 
     [DllImport("AndrickPlugin")]
     public static extern bool TestMeDaddy();
 
-    
+    [DllImport("AndrickPlugin")]
+    public static extern int ActivateClient(string ip);
+
+    [DllImport("AndrickPlugin")]
+    public static extern void UpdateClient();
+
+    [DllImport("AndrickPlugin")]
+    public static extern void UpdateServer();
 
 }

@@ -2,6 +2,7 @@
 #define NETWORK_MANAGER_H_
 
 #include <_source/Utils/andrick_common.h>
+#include <string>
 #include <_source/Networking/andrick_client.h>
 #include <_source/Networking/andrick_server.h>
 #include <_source/Networking/Packet/andrick_packethandler.h>
@@ -44,7 +45,10 @@ extern "C"
 #endif // End __cplusplus
 
 // C++ code exposed to user program.
-ANDRICK_PLUGIN_SYMBOL void ActivateServer();
+ANDRICK_PLUGIN_SYMBOL int ActivateServer(int maxUsers);
+ANDRICK_PLUGIN_SYMBOL int ActivateClient(char* ip);
+ANDRICK_PLUGIN_SYMBOL void UpdateClient();
+ANDRICK_PLUGIN_SYMBOL void UpdateServer();
 ANDRICK_PLUGIN_SYMBOL bool TestMeDaddy();
 
 #ifdef __cplusplus // Start __cplusplus

@@ -10,28 +10,56 @@
 EventSystem& gEventSystem = EventSystem::get();
 NetworkManager& gNetManager = NetworkManager::get();
 
+int initializeServer(int maxUsers)
+{
+	gNetManager.mpServer = std::make_shared<Server>();
+	gEventSystem.addListener(gNetManager.mpServer, EventProcessingType::SERVERSIDE);
+	gNetManager.mpServer->isActive = true;
+	gNetManager.mpPacketHandler = std::make_shared<PacketHandler>();
+	std::cout << "Initializing server and server packet handler!" << std::endl;
+
+	gNetManager.mpServer->setMaxUsers(maxUsers);
+
+	if (gNetManager.mpPacketHandler->startup(gNetManager.mpServer->getMaxUserCount()))
+	{
+		//printf("\nServer spinning up... \n");
+		return 1;
+	}
+	else
+	{
+		return 0;
+	}
+}
+
+int initializeClient(char* ip)
+{
+	gNetManager.mpClient = std::make_shared<Client>();
+	gEventSystem.addListener(gNetManager.mpClient, EventProcessingType::CLIENTSIDE);
+	gNetManager.mpPacketHandler = std::make_shared<PacketHandler>();
+	std::cout << "Initializing client packet handler!" << std::endl;
+
+	//TODO: maybe not be one?
+	if (gNetManager.mpPacketHandler->startup(1))
+	{
+		if (gNetManager.mpPacketHandler->connect(ip))
+		{
+			//std::cout << "Client spinning up..." << std::endl;
+			return 1;
+		}
+		else
+		{
+			//std::cout << "Failed to connect to server." << std::endl;
+			return 0;
+		}
+	}
+	return 0;
+}
+
 #ifdef __cplusplus
 extern "C"
 {
 #endif
 	// C header here
-	void initializeServer()
-	{
-		gNetManager.mpServer = std::make_shared<Server>();
-		gEventSystem.addListener(gNetManager.mpServer, EventProcessingType::SERVERSIDE);
-		gNetManager.mpServer->isActive = true;
-		//Packet handler is singleton now. Next line should be irrelevant
-		gNetManager.mpPacketHandler = std::make_shared<PacketHandler>();
-		std::cout << "Initializing server and server packet handler!" << std::endl;
-	}
-
-	void initializeClient()
-	{
-		gNetManager.mpClient = std::make_shared<Client>();
-		gEventSystem.addListener(gNetManager.mpClient, EventProcessingType::CLIENTSIDE);
-		gNetManager.mpPacketHandler = std::make_shared<PacketHandler>();
-		std::cout << "Initializing client packet handler!" << std::endl;
-	}
 
 	void shutdownRakNet()
 	{
