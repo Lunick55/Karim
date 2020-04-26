@@ -63,9 +63,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Temp chat message Temp chat message Temp chat message Temp chat message
-    Temp chat message Temp chat message Temp chat message Temp chat message Temp
-    chat message Temp chat message Temp chat message Temp chat message '
+  m_text: 'Noob0: Lolz'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 693d29b59c3c1884d9afee0b513be759, type: 2}
   m_sharedMaterial: {fileID: 538950037389867942, guid: 693d29b59c3c1884d9afee0b513be759,
@@ -114,7 +112,7 @@ MonoBehaviour:
   m_firstOverflowCharacterIndex: -1
   m_linkedTextComponent: {fileID: 0}
   m_isLinkedTextComponent: 0
-  m_isTextTruncated: 1
+  m_isTextTruncated: 0
   m_enableKerning: 1
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
@@ -135,10 +133,10 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 8358049433097502423}
-    characterCount: 70
+    characterCount: 11
     spriteCount: 0
-    spaceCount: 11
-    wordCount: 12
+    spaceCount: 1
+    wordCount: 2
     linkCount: 0
     lineCount: 1
     pageCount: 1
@@ -168,6 +166,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8663353242959121684}
   - component: {fileID: 6152516299977055351}
+  - component: {fileID: 7255122317035396609}
   m_Layer: 5
   m_Name: ChatItem
   m_TagString: Untagged
@@ -190,10 +189,10 @@ RectTransform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -0.000030517578, y: 133.5825}
-  m_SizeDelta: {x: -0.000061035, y: -267.165}
+  m_SizeDelta: {x: 950, y: 34.83499}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6152516299977055351
 CanvasRenderer:
@@ -203,3 +202,16 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7317864137615661368}
   m_CullTransparentMesh: 0
+--- !u!114 &7255122317035396609
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7317864137615661368}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b85220c187c147740895171db2ae08a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ChatItemText: {fileID: 8358049433097502423}
