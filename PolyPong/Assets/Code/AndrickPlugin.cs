@@ -30,11 +30,13 @@ public class AndrickPlugin
     public static extern void CreateMessagePacket(string packet);
 
     [DllImport("AndrickPlugin")]
-    public static extern int ReadMessageLog(string[] chatlog);
+    [return: MarshalAs(UnmanagedType.LPStr)]
+    public static extern string ReadMessageLog();
 
     //Testing //daddy is dll
     [DllImport("AndrickPlugin")]
-    public static extern Cummies FromDaddy();
+    [return: MarshalAs(UnmanagedType.LPStr)]
+    public static extern string FromDaddy(string inbound);
 
     [DllImport("AndrickPlugin")]
     public static extern void ToDaddy(Cummies incuming);

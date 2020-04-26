@@ -38,6 +38,11 @@ void Server::processIncomingEvent(std::shared_ptr<struct Event> evnt)
 		evnt->execute();
 		break;
 	}
+	case EventId::MESSAGE:
+	{
+		evnt->execute();
+		break;
+	}
 	default:
 		break;
 	}

@@ -319,7 +319,12 @@ MessageEvent::MessageEvent(const std::string& message) :
 
 void MessageEvent::execute()
 {
-	if (gNetManager.mpClient)
+	if (gNetManager.mpServer)
+	{
+		std::shared_ptr<MessageEvent> packetData = std::make_shared<MessageEvent>(std::string(mMessage));
+		gEventSystem.queueNetworkEvent(packetData);
+	}
+	else if (gNetManager.mpClient)
 	{
 		//add to vector
 		if (gNetManager.mpClient->chatlog.size() >= gNetManager.mpClient->chatlogNextLength)

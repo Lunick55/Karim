@@ -22,12 +22,22 @@ public class Lobby : SceneBase<Lobby>
 
         AndrickPlugin.ProcessPackets();
         AndrickPlugin.ExecuteEvents();
+
+        string tempLog = AndrickPlugin.ReadMessageLog();
+        while(tempLog != null)
+        {
+            LobbyChatLog.AddChatItem(tempLog);
+            tempLog = AndrickPlugin.ReadMessageLog();
+        }
+
+        //tempLog = AndrickPlugin.FromDaddy(tempLog);
+
         AndrickPlugin.SendPackets();
     }
 
     public void OnSendClicked()
     {
-        LobbyChatLog.AddChatItem("NOOB", ChatMessageBox.text);
+        //LobbyChatLog.AddChatItem("NOOB", ChatMessageBox.text);
         AndrickPlugin.CreateMessagePacket(string.Format("{0}: {1}", "NOOB", ChatMessageBox.text));
         ChatMessageBox.text = "";
     }
@@ -54,7 +64,7 @@ public class Lobby : SceneBase<Lobby>
 
             while (StartCounter < MaxCount)
             {
-                LobbyChatLog.AddChatItem("Server", string.Format("Starting game in {0}!", MaxCount - StartCounter));
+                LobbyChatLog.AddChatItem(string.Format("Server: Starting game in {0}!", MaxCount - StartCounter));
                 yield return new WaitForSeconds(0.7f);
                 ++StartCounter;
             }
@@ -68,6 +78,6 @@ public class Lobby : SceneBase<Lobby>
     private void StartGame()
     {
         Debug.Log("This is when we'd call into the DLL to start the game.");
-        LobbyChatLog.AddChatItem("Server", "This is when we'd call into the DLL to start the game.");
+        LobbyChatLog.AddChatItem("Server: This is when we'd call into the DLL to start the game.");
     }
 }
