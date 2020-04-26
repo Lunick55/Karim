@@ -26,6 +26,12 @@ public class AndrickPlugin
     [DllImport("AndrickPlugin")]
     public static extern void CreatePacket(string packet);
 
+    [DllImport("AndrickPlugin")]
+    public static extern void CreateMessagePacket(string packet);
+
+    [DllImport("AndrickPlugin")]
+    public static extern int ReadMessageLog(string[] chatlog);
+
     //Testing //daddy is dll
     [DllImport("AndrickPlugin")]
     public static extern Cummies FromDaddy();

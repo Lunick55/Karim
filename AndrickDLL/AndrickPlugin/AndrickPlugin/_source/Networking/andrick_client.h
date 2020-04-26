@@ -3,6 +3,7 @@
 
 #include <_source/Utils/andrick_common.h>
 #include <_source/Event/andrick_eventSystem.h>
+#include <queue>
 
 class Client : public EventListener
 {
@@ -34,6 +35,9 @@ public:
 	inline std::size_t getConnectedUserCount() const { return mConnectedUserCount; };
 
 	bool isActive = false;
+	int chatlogNextLength = 50;
+	std::queue<std::string> chatlog;
+
 private:
 	UserId mUserId;
 	std::string mUsername;
@@ -44,6 +48,7 @@ private:
 	std::size_t mConnectedUserCount;
 
 	std::map<UserId, std::shared_ptr<Client>> mClientMap;
+
 };
 
 #endif

@@ -111,7 +111,7 @@ int PacketHandler::processInboundPackets()
 		//RakNet::BitStream inBitStream(packet->data, packet->length, false);
 		//inBitStream.Read(messageId);
 
-		//std::vector<std::shared_ptr<Event>> newEvents;
+		std::vector<std::shared_ptr<Event>> newEvents;
 
 		switch (packet->data[0])
 		{
@@ -172,61 +172,57 @@ int PacketHandler::processInboundPackets()
 		{
 			std::cout << "andrick_ID_CONNECTION_REQUEST_ACCEPTED" << std::endl;
 			ConnectionRequestAcceptedPacket* requestAcceptedPacket = (ConnectionRequestAcceptedPacket*)packet->data;
-			//newEvents.push_back(std::make_shared<ConnectionRequestAcceptedEvent>(packet->systemAddress, requestAcceptedPacket->newUserId));
+			newEvents.push_back(std::make_shared<ConnectionRequestAcceptedEvent>(packet->systemAddress, requestAcceptedPacket->newUserId));
 			break;
 		}
 		case andrick_ID_CONNECTION_ATTEMPT_FAILED:///Server sends this to Client - Server rejected us for some reason
 		{
 			std::cout << "andrick_ID_CONNECTION_ATTEMPT_FAILED" << std::endl;
 			ConnectionRequestFailedPacket* requestFailedPacket = (ConnectionRequestFailedPacket*)packet->data;
-			//newEvents.push_back(std::make_shared<ConnectionRequestFailedEvent>(packet->systemAddress, requestFailedPacket->errorMessage));
+			newEvents.push_back(std::make_shared<ConnectionRequestFailedEvent>(packet->systemAddress, requestFailedPacket->errorMessage));
 			break;
 		}
 		case andrick_ID_REQUEST_JOIN_SERVER:///Client sends this to Server
 		{
 			std::cout << "andrick_ID_REQUEST_JOIN_SERVER" << std::endl;
 			RequestJoinServerPacket* requestJoinServerPacket = (RequestJoinServerPacket*)packet->data;
-			//newEvents.push_back(std::make_shared<ConnectionRequestJoinEvent>(requestJoinServerPacket->userId,
-				//requestJoinServerPacket->username, false, requestJoinServerPacket->userId));
+			newEvents.push_back(std::make_shared<ConnectionRequestJoinEvent>(requestJoinServerPacket->userId,
+				requestJoinServerPacket->username, false, requestJoinServerPacket->userId));
 			break;
 		}
 		case andrick_ID_JOIN_ACCEPTED:///Server sends this to Joining Client
 		{
 			std::cout << "andrick_ID_JOIN_ACCEPTED" << std::endl;
 			JoinAcceptedPacket* joinAcceptedPacket = (JoinAcceptedPacket*)packet->data;
-			//newEvents.push_back(std::make_shared<ConnectionJoinAcceptedEvent>(joinAcceptedPacket->username, 
-				//joinAcceptedPacket->maxUserCount, joinAcceptedPacket->connectedUserCount));
+			newEvents.push_back(std::make_shared<ConnectionJoinAcceptedEvent>(joinAcceptedPacket->username, 
+				joinAcceptedPacket->maxUserCount, joinAcceptedPacket->connectedUserCount));
 			break;
 		}
 		case andrick_ID_JOIN_FAILED:///Server sends this to Joining Client
 		{
 			std::cout << "andrick_ID_JOIN_FAILED" << std::endl;
 			JoinFailedPacket* joinFailedPacket = (JoinFailedPacket*)packet->data;
-			//newEvents.push_back(std::make_shared<ConnectionJoinFailedEvent>(joinFailedPacket->userId, joinFailedPacket->errorMessage));
+			newEvents.push_back(std::make_shared<ConnectionJoinFailedEvent>(joinFailedPacket->userId, joinFailedPacket->errorMessage));
 			break;
 		}
 		case andrick_ID_USER_JOINED_SERVER:///Server sends this to existing Clients
 		{
 			std::cout << "andrick_ID_USER_JOINED_SERVER" << std::endl;
 			NewUserJoinedServerPacket* userJoinedPacket = (NewUserJoinedServerPacket*)packet->data;
-			//newEvents.push_back(std::make_shared<ConnectionNewUserJoinedEvent>(userJoinedPacket->userId, userJoinedPacket->username));
+			newEvents.push_back(std::make_shared<ConnectionNewUserJoinedEvent>(userJoinedPacket->userId, userJoinedPacket->username));
 			break;
 		}
 		case andrick_ID_USER_DISCONNECTED:
 		{
 			std::cout << "andrick_ID_USER_DISCONNECTED" << std::endl;
 			UserDisconnectedPacket* userDisconnectedPacket = (UserDisconnectedPacket*)packet->data;
-			//newEvents.push_back(std::make_shared<UserDisconnectedEvent>(userDisconnectedPacket->userId));
+			newEvents.push_back(std::make_shared<UserDisconnectedEvent>(userDisconnectedPacket->userId));
 			break;
 		}
-			////////////////////////////////////////////////
-			// BOID PACKET TYPES (They all do the same thing rn, but I wanted the separate couts)                 
-			////////////////////////////////////////////////
-		case andrick_ID_BOID_DATA_PUSH_EVENT:
+		case andrick_ID_SEND_MESSAGE:
 		{
-			//BoidDataPacket* boidEvntPacket = (BoidDataPacket*)packet->data;
-			//newEvents.push_back(std::make_shared<BoidDataEvent>(boidEvntPacket->packetId, getTime(), boidEvntPacket->boidColor, boidEvntPacket->boids, boidEvntPacket->senderId));
-			break;
+			MessagePacket* messagePacket = (MessagePacket*)packet->data;
+			newEvents.push_back(std::make_shared<MessageEvent>(messagePacket->message));
 		}
 			////////////////////////////////////////////////
 			// UNKNOWN PACKETS                            

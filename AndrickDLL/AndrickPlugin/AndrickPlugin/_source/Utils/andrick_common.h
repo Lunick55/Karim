@@ -49,6 +49,7 @@ enum class EventId : char
 	CONNECTION_NEW_USER_JOINED,///Server -> All Clients - A new user joined the server
 	USER_DISCONNECTED,///Disconnected Client -> Server. Server -> All Clients - A client left the server
 	CHAT_MESSAGE,
+	MESSAGE,
 	INCREMENT_THE_SPACE,
 	//GENERIC_EVENT,
 	BOID_DATA_EVENT,
@@ -78,6 +79,8 @@ enum PacketEventId : unsigned char
 
 	andrick_ID_DELIVER_PUBLIC_MESSAGE,			//Serverside command
 	andrick_ID_DELIVER_PRIVATE_MESSAGE,			//Serverside command
+
+	andrick_ID_SEND_MESSAGE,
 
 	andrick_ID_CONNECTION_REQUEST_ACCEPTED,
 	andrick_ID_CONNECTION_ATTEMPT_FAILED,

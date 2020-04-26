@@ -184,4 +184,15 @@ struct UserDisconnectedEvent : public SendableEvent
 	UserId userId;
 };
 
+struct MessageEvent : public SendableEvent
+{
+	MessageEvent(const std::string& message);
+	virtual ~MessageEvent() = default;
+
+	virtual void execute() override;
+	virtual std::size_t allocatePacket(char*& out) override;
+
+	std::string mMessage;
+};
+
 #endif

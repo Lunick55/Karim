@@ -59,6 +59,28 @@ void CreatePacket(char* packet)
 	//send it out
 }
 
+void CreateMessagePacket(char* packet)
+{
+	//Turn into packet
+
+
+	//Add packet to queue
+}
+
+int ReadMessageLog(char* chatlog[])
+{
+	int index = 0;
+	while (!gNetManager.mpClient->chatlog.empty());
+	{
+		//chatlog[i] = gNetManager.mpClient->chatlog.front();
+		strcpy(chatlog[index++], gNetManager.mpClient->chatlog.front().c_str());
+
+		gNetManager.mpClient->chatlog.pop();
+	}
+
+	return index;
+}
+
 
 //Testing
 Cummies FromDaddy()

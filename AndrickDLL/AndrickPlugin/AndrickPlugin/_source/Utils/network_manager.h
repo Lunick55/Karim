@@ -66,6 +66,8 @@ ANDRICK_PLUGIN_SYMBOL void ProcessPackets();
 ANDRICK_PLUGIN_SYMBOL void ExecuteEvents();
 ANDRICK_PLUGIN_SYMBOL void SendPackets();
 ANDRICK_PLUGIN_SYMBOL void CreatePacket(char* packet);
+ANDRICK_PLUGIN_SYMBOL void CreateMessagePacket(char* packet);
+ANDRICK_PLUGIN_SYMBOL int ReadMessageLog(char* chatlog[]);
 
 //Testing //daddy is dll
 ANDRICK_PLUGIN_SYMBOL Cummies FromDaddy();

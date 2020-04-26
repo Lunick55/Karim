@@ -215,6 +215,24 @@ struct DeliverPrivateMessagePacket
 };
 #pragma pack(pop)
 
+
+//A message sent out. Broadcast by Host
+#pragma pack(push, 1)
+struct MessagePacket
+{
+	PacketEventId packetId;
+	char message[sMAX_MESSAGE_LENGTH];
+
+	//TODO: init user id also at some point
+	MessagePacket(const std::string& newMessage) :
+		packetId(andrick_ID_SEND_MESSAGE)
+	{
+		strcpy(message, newMessage.c_str());
+	}
+};
+#pragma pack(pop)
+
+
 #pragma pack(push, 1)
 struct WhisperPacket
 {

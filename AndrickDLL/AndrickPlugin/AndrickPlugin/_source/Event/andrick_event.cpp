@@ -307,3 +307,35 @@ std::size_t UserDisconnectedEvent::allocatePacket(char*& out)
 }
 
 #pragma endregion
+
+#pragma region MessageEvent
+
+MessageEvent::MessageEvent(const std::string& message) :
+	SendableEvent(EventId::MESSAGE, EventProcessingType::BOTH, gNetManager.mpPacketHandler->isServer()),
+	mMessage(message)
+{
+
+}
+
+void MessageEvent::execute()
+{
+	if (gNetManager.mpClient)
+	{
+		//add to vector
+		if (gNetManager.mpClient->chatlog.size() >= gNetManager.mpClient->chatlogNextLength)
+		{
+			gNetManager.mpClient->chatlog.pop();
+		}
+		gNetManager.mpClient->chatlog.push(mMessage);
+	}
+}
+
+std::size_t MessageEvent::allocatePacket(char*& out)
+{
+	std::size_t packetSize = sizeof(MessagePacket);
+	out = (char*)malloc(packetSize);
+	memcpy(out, (char*)&MessagePacket(mMessage), packetSize);
+	return packetSize;
+}
+
+#pragma endregion
