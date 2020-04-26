@@ -22,9 +22,7 @@ int ActivateClient(char* ip, char* username)
 	gNetManager.mpClient = nullptr;
 	gNetManager.mpPacketHandler = nullptr;
 
-	int result = initializeClient(ip);
-
-	gEventSystem.queueNetworkEvent(std::make_shared<ConnectionRequestJoinEvent>(gNetManager.mpClient->getId(), username));
+	int result = initializeClient(ip, username);
 
 	return result;
 }
@@ -62,30 +60,62 @@ void CreatePacket(char* packet)
 void CreateMessagePacket(char* packet)
 {
 	//Turn into packet
-
+	std::shared_ptr<MessageEvent> packetData = std::make_shared<MessageEvent>(std::string(packet));
+	gEventSystem.queueNetworkEvent(packetData);
 
 	//Add packet to queue
 }
 
-int ReadMessageLog(char* chatlog[])
+char* ReadMessageLog()
 {
-	int index = 0;
-	while (!gNetManager.mpClient->chatlog.empty());
+	if (!gNetManager.mpClient)
 	{
-		//chatlog[i] = gNetManager.mpClient->chatlog.front();
-		strcpy(chatlog[index++], gNetManager.mpClient->chatlog.front().c_str());
-
-		gNetManager.mpClient->chatlog.pop();
+		return 0;
 	}
+	if (!gNetManager.mpClient->chatlog.empty())
+	{
+		//char* message = (char*)gNetManager.mpClient->chatlog.front().c_str();
+		char* message = NULL;
 
-	return index;
+		message = (char*)::CoTaskMemAlloc(strlen(gNetManager.mpClient->chatlog.front().c_str() + sizeof(char)));
+
+		strcpy(message, gNetManager.mpClient->chatlog.front().c_str());
+		gNetManager.mpClient->chatlog.pop();
+
+		return message;
+	}
+	return 0;
 }
 
+char* GetUsername()
+{
+	char* name = NULL;
+
+	name = (char*)::CoTaskMemAlloc(strlen(gNetManager.mpClient->getUsername().c_str() + sizeof(char)));
+
+	strcpy(name, gNetManager.mpClient->getUsername().c_str());
+
+	return name;
+}
 
 //Testing
-Cummies FromDaddy()
+char* FromDaddy(char* inbound)
 {
-	return gNetManager.cum;
+	//TODO: check if you can just not do this complex shit and just return a normal char*
+
+	std::string temp = "FUCKING JERIIAH";
+	strcpy(inbound, temp.c_str());
+
+	//ULONG ulSize = strlen(inbound) + sizeof(char);
+	//char* pszReturn = NULL;
+	//pszReturn = (char*)::CoTaskMemAlloc(ulSize);
+	//// Copy the contents of szSampleString
+	//// to the memory pointed to by pszReturn.
+	//strcpy(pszReturn, inbound);
+	//// Return pszReturn.
+	//return pszReturn;
+
+	return inbound;
 }
 
 void ToDaddy(Cummies incuming)

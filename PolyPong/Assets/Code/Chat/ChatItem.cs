@@ -7,8 +7,8 @@ public class ChatItem : MonoBehaviour
 {
     public TextMeshProUGUI ChatItemText;
 
-    public void PopulateMessage(string Username, string Message)
+    public void PopulateMessage(string Message)
     {
-        ChatItemText.text = string.Format("{0}: {1}", Username, Message);
+        ChatItemText.text = string.Format(Message);
     }
 }

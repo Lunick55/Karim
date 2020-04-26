@@ -20,7 +20,7 @@ public class ChatLog : MonoBehaviour
         ChatItemList = new LinkedList<ChatItem>();
     }
 
-    public void AddChatItem(string Username, string Message)
+    public void AddChatItem(string Message)
     {
         if (ChatItemList.Count == MaxChatsInLog)
         {
@@ -31,7 +31,7 @@ public class ChatLog : MonoBehaviour
 
         GameObject SpawnedItem = Instantiate(ChatItemPrefab, ParentContentTransform, false);
         ChatItem NewChatItem = SpawnedItem.GetComponent<ChatItem>();
-        NewChatItem.PopulateMessage(Username, Message);
+        NewChatItem.PopulateMessage(Message);
         ChatItemList.AddLast(NewChatItem);
     }
 }

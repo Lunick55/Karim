@@ -53,6 +53,8 @@ void ConnectionRequestAcceptedEvent::execute()
 {
 	gNetManager.mpPacketHandler->setServerAddress(serverAddress);
 	gNetManager.mpClient->setUserId(newUserId);
+
+	gEventSystem.queueNetworkEvent(std::make_shared<ConnectionRequestJoinEvent>(gNetManager.mpClient->getId(), gNetManager.mpClient->getUsername()));
 	std::cout << "Our connection request was accepted! UserId: " << std::to_string(newUserId) << std::endl;
 }
 
@@ -319,7 +321,12 @@ MessageEvent::MessageEvent(const std::string& message) :
 
 void MessageEvent::execute()
 {
-	if (gNetManager.mpClient)
+	if (gNetManager.mpServer)
+	{
+		std::shared_ptr<MessageEvent> packetData = std::make_shared<MessageEvent>(std::string(mMessage));
+		gEventSystem.queueNetworkEvent(packetData);
+	}
+	else if (gNetManager.mpClient)
 	{
 		//add to vector
 		if (gNetManager.mpClient->chatlog.size() >= gNetManager.mpClient->chatlogNextLength)

@@ -142,7 +142,7 @@ int PacketHandler::processInboundPackets()
 		case ID_NEW_INCOMING_CONNECTION:
 		{
 			std::cout << "ID_NEW_INCOMING_CONNECTION" << std::endl;
-			//newEvents.push_back(std::make_shared<NewIncomingConnectionEvent>(packet->systemAddress));
+			newEvents.push_back(std::make_shared<NewIncomingConnectionEvent>(packet->systemAddress));
 			break;
 		}
 		case ID_NO_FREE_INCOMING_CONNECTIONS:
@@ -234,10 +234,10 @@ int PacketHandler::processInboundPackets()
 		}
 		}
 
-		//for (auto iter = newEvents.begin(); iter != newEvents.end(); ++iter)
-		//{
-		//	gEventSystem.queueLocalEvent(*iter);
-		//}
+		for (auto iter = newEvents.begin(); iter != newEvents.end(); ++iter)
+		{
+			gEventSystem.queueLocalEvent(*iter);
+		}
 	}
 
 	return packetsProcessed;

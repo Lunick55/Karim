@@ -67,10 +67,11 @@ ANDRICK_PLUGIN_SYMBOL void ExecuteEvents();
 ANDRICK_PLUGIN_SYMBOL void SendPackets();
 ANDRICK_PLUGIN_SYMBOL void CreatePacket(char* packet);
 ANDRICK_PLUGIN_SYMBOL void CreateMessagePacket(char* packet);
-ANDRICK_PLUGIN_SYMBOL int ReadMessageLog(char* chatlog[]);
+ANDRICK_PLUGIN_SYMBOL char* ReadMessageLog();
+ANDRICK_PLUGIN_SYMBOL char* GetUsername();
 
 //Testing //daddy is dll
-ANDRICK_PLUGIN_SYMBOL Cummies FromDaddy();
+ANDRICK_PLUGIN_SYMBOL char* FromDaddy(char* inbound);
 ANDRICK_PLUGIN_SYMBOL void ToDaddy(Cummies incuming);
 
 #ifdef __cplusplus // Start __cplusplus

@@ -17,8 +17,8 @@ static const int sMAX_USERNAME_LENGTH = 20;
 static const int sMAX_USERS = 64;
 static const int sMAX_MESSAGE_LENGTH = 128;
 static const int sDEFAULT_MAX_USERS = 10;
-static const int sPORT = 12975;
-//static const int sPORT = 5555;
+//static const int sPORT = 12975;
+static const int sPORT = 5555;
 
 static const int MAX_INPUT_LENGTH = 512;
 
@@ -28,7 +28,7 @@ extern class EventSystem& gEventSystem;
 extern class NetworkManager& gNetManager;
 
 int initializeServer(int maxUsers);
-int initializeClient(char* ip);
+int initializeClient(char* ip, char* username);
 
 enum class CommandId : char
 {
