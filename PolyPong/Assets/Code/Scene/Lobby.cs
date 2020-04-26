@@ -19,6 +19,10 @@ public class Lobby : SceneBase<Lobby>
     {
         if (Input.GetKeyDown(KeyCode.Return))
             OnSendClicked();
+
+        AndrickPlugin.ProcessPackets();
+        AndrickPlugin.ExecuteEvents();
+        AndrickPlugin.SendPackets();
     }
 
     public void OnSendClicked()
