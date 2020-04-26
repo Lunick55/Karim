@@ -8,7 +8,6 @@ public class TestDLL : MonoBehaviour
     void Start()
     {
         Debug.Log(AndrickPlugin.ActivateServer(5));
-        Debug.Log(AndrickPlugin.TestMeDaddy());
 
     }
 

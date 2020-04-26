@@ -7,6 +7,16 @@
 #include <_source/Networking/andrick_server.h>
 #include <_source/Networking/Packet/andrick_packethandler.h>
 
+#pragma pack(push, 1)
+struct Cummies
+{
+	int numCummies = 0;
+	bool cumFriend = false;
+	float cumPercent = 0.5f;
+	//char* cumName;
+};
+#pragma pack(pop)
+
 class NetworkManager
 {
 public:
@@ -22,6 +32,8 @@ public:
 	std::shared_ptr<class Client> mpClient;
 	std::shared_ptr<class Server> mpServer;
 	std::shared_ptr<class PacketHandler> mpPacketHandler;
+
+	struct Cummies cum;
 
 private:
 };
@@ -47,10 +59,17 @@ extern "C"
 // C++ code exposed to user program.
 ANDRICK_PLUGIN_SYMBOL int ActivateServer(int maxUsers);
 ANDRICK_PLUGIN_SYMBOL int ActivateClient(char* ip);
+
+//Networking
 ANDRICK_PLUGIN_SYMBOL int ShutdownNetwork();
-ANDRICK_PLUGIN_SYMBOL void UpdateClient();
-ANDRICK_PLUGIN_SYMBOL void UpdateServer();
-ANDRICK_PLUGIN_SYMBOL bool TestMeDaddy();
+ANDRICK_PLUGIN_SYMBOL void ProcessPackets();
+ANDRICK_PLUGIN_SYMBOL void ExecuteEvents();
+ANDRICK_PLUGIN_SYMBOL void SendPackets();
+ANDRICK_PLUGIN_SYMBOL void CreatePacket(char* packet);
+
+//Testing //daddy is dll
+ANDRICK_PLUGIN_SYMBOL Cummies FromDaddy();
+ANDRICK_PLUGIN_SYMBOL void ToDaddy(Cummies incuming);
 
 #ifdef __cplusplus // Start __cplusplus
 }

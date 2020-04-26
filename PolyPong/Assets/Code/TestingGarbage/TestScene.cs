@@ -2,6 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System.Runtime.InteropServices;
+
+[StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
+public struct Cummies
+{
+    //[MarshalAs(UnmanagedType.SysInt, SizeConst = 32)]
+    public int numCummies;
+
+    public bool cumFriend;
+
+    public float cumPercent;
+
+    //public string cumName;
+};
 
 public class TestScene : MonoBehaviour
 {
@@ -16,9 +30,17 @@ public class TestScene : MonoBehaviour
 
     bool client = false, server = false;
 
+    private Cummies tester;
+
     void Start()
     {
         count = 0;
+
+        tester = new Cummies();
+        tester.numCummies = count;
+        tester.cumFriend = true;
+        tester.cumPercent = 0.6f;
+        //tester.cumName = "Jakob";
     }
 
     // Update is called once per frame
@@ -26,15 +48,12 @@ public class TestScene : MonoBehaviour
     {
         counter.text = count.ToString();
 
-        if(client)
+        if (client || server)
         {
-            AndrickPlugin.UpdateClient();
+            AndrickPlugin.ProcessPackets();
+            AndrickPlugin.ExecuteEvents();
+            AndrickPlugin.SendPackets();
         }
-        else if(server)
-        {
-            AndrickPlugin.UpdateServer();
-        }
-
     }
 
     public void StartServer()
@@ -57,7 +76,7 @@ public class TestScene : MonoBehaviour
     public void StartClient()
     {
         console.text = "Client Init Trying...";
-        if (AndrickPlugin.ActivateClient("192.168.1.18") != 0)
+        if (AndrickPlugin.ActivateClient("25.38.3.50") != 0)
         {
             client = true;
             testInit.SetActive(false);
@@ -86,7 +105,11 @@ public class TestScene : MonoBehaviour
 
     public void IncrementCounter()
     {
-        count++;
+        tester.numCummies = ++count;
+
+        AndrickPlugin.ToDaddy(tester);
+        Debug.Log(AndrickPlugin.FromDaddy().numCummies);
+        //SendPacket
     }
 
     void OnApplicationQuit()

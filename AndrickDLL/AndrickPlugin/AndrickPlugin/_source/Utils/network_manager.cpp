@@ -34,31 +34,42 @@ int ShutdownNetwork()
 	return shutdownRakNet();
 }
 
-bool TestMeDaddy()
-{
-	return true;
-}
-
-void UpdateClient()
+void ProcessPackets()
 {
 	if (gNetManager.mpPacketHandler && gNetManager.mpPacketHandler->isInitialized())
 	{
 		gNetManager.mpPacketHandler->processInboundPackets();
 	}
+}
 
+void ExecuteEvents()
+{
 	gEventSystem.executeQueuedLocalEvents();
+}
 
+void SendPackets()
+{
 	gEventSystem.sendQueuedNetworkEvents();
 }
 
-void UpdateServer()
+void CreatePacket(char* packet)
 {
-	if (gNetManager.mpPacketHandler && gNetManager.mpPacketHandler->isInitialized())
-	{
-		gNetManager.mpPacketHandler->processInboundPackets();
-	}
+	//ConnectionRequestAcceptedPacket* requestAcceptedPacket = (ConnectionRequestAcceptedPacket*)packet->data;
+	//newEvents.push_back(std::make_shared<ConnectionRequestAcceptedEvent>(packet->systemAddress, requestAcceptedPacket->newUserId));
+	//send it out
+}
 
-	gEventSystem.executeQueuedLocalEvents();
 
-	gEventSystem.sendQueuedNetworkEvents();
+//Testing
+Cummies FromDaddy()
+{
+	return gNetManager.cum;
+}
+
+void ToDaddy(Cummies incuming)
+{
+	NetworkManager::get();
+	EventSystem::get();
+
+	gNetManager.cum = (incuming);	
 }
