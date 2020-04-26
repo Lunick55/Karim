@@ -7,12 +7,12 @@ public class Lobby : SceneBase<Lobby>
 {
     public TMP_InputField ChatMessageBox;
     private ChatLog LobbyChatLog;
-    private bool IsGameStarting;
+    private bool IsGameCountdownRunning;
 
     public void Start()
     {
         LobbyChatLog = GetComponent<ChatLog>();
-        IsGameStarting = false;
+        IsGameCountdownRunning = false;
     }
 
     public void Update()
@@ -29,33 +29,40 @@ public class Lobby : SceneBase<Lobby>
 
     public void OnStartGameClicked()
     {
-        if (!IsGameStarting)
-        {
-            StartCoroutine(StartGame());
-        }
+        if (!IsGameCountdownRunning)
+            StartCoroutine(StartGameCountdown());
     }
 
-    private IEnumerator StartGame()
+    private IEnumerator StartGameCountdown()
     {
-        if (IsGameStarting)
+        if (IsGameCountdownRunning)
         {
             Debug.LogWarning("Already counting down!");
             yield return null;
         }
         else
         {
-            IsGameStarting = true;
+            IsGameCountdownRunning = true;
 
             int MaxCount = 3;
             int StartCounter = 0;
 
-            while (StartCounter <= MaxCount)
+            while (StartCounter < MaxCount)
             {
                 LobbyChatLog.AddChatItem("Server", string.Format("Starting game in {0}!", MaxCount - StartCounter));
-                yield return new WaitForSeconds(1.0f);
+                yield return new WaitForSeconds(0.7f);
+                ++StartCounter;
             }
 
-            IsGameStarting = false;
+            IsGameCountdownRunning = false;
+            StartGame();
+
         }
+    }
+
+    private void StartGame()
+    {
+        Debug.Log("This is when we'd call into the DLL to start the game.");
+        LobbyChatLog.AddChatItem("Server", "This is when we'd call into the DLL to start the game.");
     }
 }
