@@ -13,7 +13,7 @@ int ActivateServer(int maxUsers)
 	return initializeServer(maxUsers);
 }
 
-int ActivateClient(char* ip)
+int ActivateClient(char* ip, char* username)
 {
 	NetworkManager::get();
 	EventSystem::get();
@@ -24,7 +24,7 @@ int ActivateClient(char* ip)
 
 	int result = initializeClient(ip);
 
-	gEventSystem.queueNetworkEvent(std::make_shared<ConnectionRequestJoinEvent>(gNetManager.mpClient->getId(), "noob"));
+	gEventSystem.queueNetworkEvent(std::make_shared<ConnectionRequestJoinEvent>(gNetManager.mpClient->getId(), username));
 
 	return result;
 }

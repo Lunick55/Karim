@@ -36,11 +36,28 @@ public class SceneBase<T> : Singleton<T> where T : Singleton<T>
     public void OnJoinLobbyClient()
     {
         //Send over the necessary info to the server.
-        GetSceneTracker().LoadSceneSynchronously(SceneInfoList.LOBBY_CLIENT);
+        GetSceneTracker().LoadSceneSynchronously(SceneInfoList.LOBBY);
     }
 
     public void OnJoinLobbyServer()
     {
-        GetSceneTracker().LoadSceneSynchronously(SceneInfoList.LOBBY_SERVER);
+        GetSceneTracker().LoadSceneSynchronously(SceneInfoList.LOBBY);
+    }
+
+    public void Shutdown()
+    {
+        if (AndrickPlugin.ShutdownNetwork() == 0)
+        {
+            Debug.Log("Shutdown is a no-go");
+        }
+        else
+        {
+            Debug.Log("I've died inside again");
+        }
+    }
+
+    private void OnApplicationQuit()
+    {
+        Shutdown();
     }
 }

@@ -9,7 +9,7 @@ public class AndrickPlugin
     public static extern int ActivateServer(int maxUsers);
 
     [DllImport("AndrickPlugin")]
-    public static extern int ActivateClient(string ip);
+    public static extern int ActivateClient(string ip, string username);
 
     [DllImport("AndrickPlugin")]
     public static extern int ShutdownNetwork();
