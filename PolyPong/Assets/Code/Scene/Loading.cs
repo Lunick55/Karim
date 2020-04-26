@@ -79,7 +79,7 @@ public class Loading : SceneBase<Loading>
         yield return new WaitForSeconds(5.0f);
 
         ServerCreationCoroutine = null;
-        GetSceneTracker().LoadSceneSynchronously(SceneInfoList.LOBBY_SERVER);
+        GetSceneTracker().LoadSceneSynchronously(SceneInfoList.LOBBY);
         IsLoading = false;
     }
 
