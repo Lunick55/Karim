@@ -5,7 +5,7 @@ using TMPro;
 
 public class Lobby : SceneBase<Lobby>
 {
-    public TextMeshProUGUI ChatMessageBox;
+    public TMP_InputField ChatMessageBox;
     private ChatLog LobbyChatLog;
     private bool IsGameStarting;
 
@@ -24,6 +24,7 @@ public class Lobby : SceneBase<Lobby>
     public void OnSendClicked()
     {
         LobbyChatLog.AddChatItem("NOOB", ChatMessageBox.text);
+        ChatMessageBox.text = "";
     }
 
     public void OnStartGameClicked()
