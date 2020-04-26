@@ -28,7 +28,7 @@ extern class EventSystem& gEventSystem;
 extern class NetworkManager& gNetManager;
 
 int initializeServer(int maxUsers);
-int initializeClient(char* ip);
+int initializeClient(char* ip, char* username);
 
 enum class CommandId : char
 {

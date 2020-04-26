@@ -32,6 +32,10 @@ public class AndrickPlugin
     [DllImport("AndrickPlugin")]
     [return: MarshalAs(UnmanagedType.LPStr)]
     public static extern string ReadMessageLog();
+    
+    [DllImport("AndrickPlugin")]
+    [return: MarshalAs(UnmanagedType.LPStr)]
+    public static extern string GetUsername();
 
     //Testing //daddy is dll
     [DllImport("AndrickPlugin")]

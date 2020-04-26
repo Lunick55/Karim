@@ -22,9 +22,7 @@ int ActivateClient(char* ip, char* username)
 	gNetManager.mpClient = nullptr;
 	gNetManager.mpPacketHandler = nullptr;
 
-	int result = initializeClient(ip);
-
-	gEventSystem.queueNetworkEvent(std::make_shared<ConnectionRequestJoinEvent>(gNetManager.mpClient->getId(), username));
+	int result = initializeClient(ip, username);
 
 	return result;
 }
@@ -89,6 +87,16 @@ char* ReadMessageLog()
 	return 0;
 }
 
+char* GetUsername()
+{
+	char* name = NULL;
+
+	name = (char*)::CoTaskMemAlloc(strlen(gNetManager.mpClient->getUsername().c_str() + sizeof(char)));
+
+	strcpy(name, gNetManager.mpClient->getUsername().c_str());
+
+	return name;
+}
 
 //Testing
 char* FromDaddy(char* inbound)

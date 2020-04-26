@@ -37,8 +37,7 @@ public class Lobby : SceneBase<Lobby>
 
     public void OnSendClicked()
     {
-        //LobbyChatLog.AddChatItem("NOOB", ChatMessageBox.text);
-        AndrickPlugin.CreateMessagePacket(string.Format("{0}: {1}", "NOOB", ChatMessageBox.text));
+        AndrickPlugin.CreateMessagePacket(string.Format("{0}: {1}", AndrickPlugin.GetUsername(), ChatMessageBox.text));
         ChatMessageBox.text = "";
     }
 

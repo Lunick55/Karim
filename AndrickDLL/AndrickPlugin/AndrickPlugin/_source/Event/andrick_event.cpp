@@ -53,6 +53,8 @@ void ConnectionRequestAcceptedEvent::execute()
 {
 	gNetManager.mpPacketHandler->setServerAddress(serverAddress);
 	gNetManager.mpClient->setUserId(newUserId);
+
+	gEventSystem.queueNetworkEvent(std::make_shared<ConnectionRequestJoinEvent>(gNetManager.mpClient->getId(), gNetManager.mpClient->getUsername()));
 	std::cout << "Our connection request was accepted! UserId: " << std::to_string(newUserId) << std::endl;
 }
 

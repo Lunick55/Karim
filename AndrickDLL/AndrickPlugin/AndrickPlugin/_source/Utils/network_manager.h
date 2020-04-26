@@ -68,6 +68,7 @@ ANDRICK_PLUGIN_SYMBOL void SendPackets();
 ANDRICK_PLUGIN_SYMBOL void CreatePacket(char* packet);
 ANDRICK_PLUGIN_SYMBOL void CreateMessagePacket(char* packet);
 ANDRICK_PLUGIN_SYMBOL char* ReadMessageLog();
+ANDRICK_PLUGIN_SYMBOL char* GetUsername();
 
 //Testing //daddy is dll
 ANDRICK_PLUGIN_SYMBOL char* FromDaddy(char* inbound);

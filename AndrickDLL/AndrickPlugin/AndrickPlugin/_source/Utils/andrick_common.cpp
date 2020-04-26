@@ -31,7 +31,7 @@ int initializeServer(int maxUsers)
 	}
 }
 
-int initializeClient(char* ip)
+int initializeClient(char* ip, char* username)
 {
 	gNetManager.mpClient = std::make_shared<Client>();
 	gEventSystem.addListener(gNetManager.mpClient, EventProcessingType::CLIENTSIDE);
@@ -44,6 +44,7 @@ int initializeClient(char* ip)
 		if (gNetManager.mpPacketHandler->connect(ip))
 		{
 			//std::cout << "Client spinning up..." << std::endl;
+			gNetManager.mpClient->setUsername(username);
 			return 1;
 		}
 		else
