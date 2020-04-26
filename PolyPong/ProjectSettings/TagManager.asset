@@ -41,3 +41,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: GoalLine
+    uniqueID: 1616415301
+    locked: 0
+  - name: PlayerPaddle
+    uniqueID: 2658232513
+    locked: 0

@@ -53,7 +53,8 @@ public class PongManager : MonoBehaviour
     private void UpdateGoalPosts()
     {
         Vector3 WorldRadius = Vector3.right * Camera.main.orthographicSize * PolygonRadiusInVerticalScreenUnits;
-        float GoalWidth = WorldRadius.x * 0.08f;
+        float PlayerThiccness = WorldRadius.x * 0.08f;
+        float GoalThiccness = PlayerThiccness * 0.5f;
 
         //Special case because we can't create a closed shape.
         if (ActivePlayers.Count == 2)
@@ -74,7 +75,7 @@ public class PongManager : MonoBehaviour
 
                 Goal PlayerGoal = ActivePlayers[i].GetComponent<Goal>();
                 PlayerGoal.SetGoalPosition(GoalLeft, GoalRight);
-                PlayerGoal.SetGoalWidth(GoalWidth);
+                PlayerGoal.SetGoalThickness(GoalThiccness);
             }
         }
         else
@@ -97,8 +98,18 @@ public class PongManager : MonoBehaviour
 
                 Goal PlayerGoal = ActivePlayers[i].GetComponent<Goal>();
                 PlayerGoal.SetGoalPosition(GoalLeft, GoalRight);
-                PlayerGoal.SetGoalWidth(GoalWidth);
+                PlayerGoal.SetGoalThickness(GoalThiccness);
             }
+        }
+
+        for (int i = 0; i < ActivePlayers.Count; ++i)
+        {
+            Goal PlayerGoal = ActivePlayers[i].GetComponent<Goal>();
+            float GoalXSize = PlayerGoal.GetXScale();
+            SpriteRenderer Renderer = ActivePlayers[i].GetComponent<SpriteRenderer>();
+            Renderer.size = new Vector2(GoalXSize, PlayerThiccness);
+            BoxCollider2D Collider = ActivePlayers[i].GetComponent<BoxCollider2D>();
+            Collider.size = new Vector2(GoalXSize, PlayerThiccness);
         }
     }
 

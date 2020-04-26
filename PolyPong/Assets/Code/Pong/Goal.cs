@@ -8,31 +8,106 @@ public class Goal : MonoBehaviour
     public Vector3 GoalPostRight = Vector3.zero;
     public Vector3 GoalPostLeft = Vector3.zero;
 
+    private Vector3 GoalPostRightVisualPosition = Vector3.zero;
+    private Vector3 GoalPostLeftVisualPosition = Vector3.zero;
+
+    public float GoalColorAlphaScale = 0.5f;
+    public int GoalIndices = 30;
+    public int CapIndices = 10;
+    public float GoalWidthScale = 0.8f;
+
+    public float GoalSizeMagnitude;
+
     public void Awake()
     {
         GoalRenderer = GetComponent<LineRenderer>();
-        GoalRenderer.positionCount = 2;
-        GoalRenderer.numCapVertices = 0;
+        GoalRenderer.positionCount = GoalIndices;
+        GoalRenderer.numCapVertices = CapIndices;
+        GoalSizeMagnitude = 0.0f;
     }
 
     public void SetGoalColor(Color PlayerColor)
     {
-        GoalRenderer.startColor = PlayerColor;
-        GoalRenderer.endColor = PlayerColor;
+        //PlayerColor.a = GoalColorAlphaScale;
+        //GoalRenderer.startColor = PlayerColor;
+        //GoalRenderer.endColor = PlayerColor;
+
+        Gradient gradient = new Gradient();
+        gradient.SetKeys(
+            new GradientColorKey[] { 
+                new GradientColorKey(PlayerColor, 0.0f), 
+                new GradientColorKey(PlayerColor, 1.0f) },
+            
+            
+            new GradientAlphaKey[] {
+                new GradientAlphaKey(0.7f, 0.0f),
+                new GradientAlphaKey(0.99f, 0.5f),
+                new GradientAlphaKey(0.7f, 0.1f)
+                //new GradientAlphaKey(0.0f, 0.0f), 
+                //new GradientAlphaKey(0.8f, 0.1f), 
+                //new GradientAlphaKey(0.98f, 0.5f), 
+                //new GradientAlphaKey(0.8f, 0.9f),
+                //new GradientAlphaKey(0.0f, 1.0f)
+            }
+        );
+
+        GoalRenderer.colorGradient = gradient;
+        //for (int i = 0; i < GoalRenderer.colorGradient.colorKeys.Length; ++i)
+        //{
+        //    GoalRenderer.colorGradient.colorKeys[i].color.r = PlayerColor.r;
+        //}
     }
 
-    public void SetGoalWidth(float Width)
+    public void SetGoalThickness(float Thickness)
     {
-        GoalRenderer.startWidth = Width;
+        GoalRenderer.startWidth = Thickness;
+        GoalRenderer.endWidth = Thickness;
+    }
+
+    private void SetGoalWidthScale()
+    {
+        Vector3 Middle = (GoalPostLeft + GoalPostRight) * 0.5f;
+        Vector3 LeftDir = (GoalPostLeft - Middle) * GoalWidthScale;
+        Vector3 RightDir = (GoalPostRight - Middle) * GoalWidthScale;
+
+        GoalPostLeftVisualPosition = Middle + LeftDir;
+        GoalPostRightVisualPosition = Middle + RightDir;
+    }
+
+    public float GetXScale()
+    {
+        return GoalSizeMagnitude * 0.4f;
+    }
+
+    public float GetGoalSize()
+    {
+        return GoalSizeMagnitude;
     }
 
     public void SetGoalPosition(Vector3 LeftGoalPost, Vector3 RightGoalPost)
     {
         GoalPostLeft = LeftGoalPost;
         GoalPostRight = RightGoalPost;
+        GoalSizeMagnitude = (GoalPostLeft - GoalPostRight).magnitude;
 
-        GoalRenderer.SetPosition(0, GoalPostLeft);
-        GoalRenderer.SetPosition(1, GoalPostRight);
+        SetGoalWidthScale();
+
+        //GoalRenderer.SetPosition(0, GoalPostLeftVisualPosition);
+        //GoalRenderer.SetPosition(1, GoalPostRightVisualPosition);
+        UpdatePositions();
         GetComponent<Player>().ResetPlayerPosition();
+    }
+
+    private void UpdatePositions()
+    {
+        float DistBetween = (GoalSizeMagnitude * GoalWidthScale) / GoalIndices;
+        Vector3 DistVec = (GoalPostRightVisualPosition - GoalPostLeftVisualPosition).normalized * DistBetween;
+
+        for (int i = 0; i < GoalIndices; ++i)
+        {
+            GoalRenderer.SetPosition(i, GoalPostLeftVisualPosition + (DistVec * i));
+        }
+        //GoalRenderer.SetPosition(0, GoalPostLeftVisualPosition);
+        //GoalRenderer.SetPosition(1, GoalPostRightVisualPosition);
     }
 }

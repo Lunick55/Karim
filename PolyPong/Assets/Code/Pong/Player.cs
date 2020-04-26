@@ -19,6 +19,8 @@ public class Player : MonoBehaviour
     private float InputDirection = 0.0f;
     private float MoveSpeed = 1.0f;
 
+    private float XScale;
+
     public void Awake()
     {
         InitColor();
@@ -69,7 +71,10 @@ public class Player : MonoBehaviour
         else
             InputDirection = 0;
 
-        AlphaAlongGoal = Mathf.Clamp(AlphaAlongGoal + InputDirection * Time.fixedDeltaTime * MoveSpeed, 0.0f, 1.0f);
+        float GoalXScale = PlayerGoal.GetXScale();
+        float LerpConvert = GoalXScale / PlayerGoal.GetGoalSize() * 0.5f;
+
+        AlphaAlongGoal = Mathf.Clamp(AlphaAlongGoal + InputDirection * Time.fixedDeltaTime * MoveSpeed, LerpConvert, 1.0f - LerpConvert);
         UpdatePosition();
     }
 
@@ -89,9 +94,10 @@ public class Player : MonoBehaviour
     //TODO: THIS DOESNT WORK WILL FIX LATER
     private void UpdatePaddleDirection()
     {
-        Vector2 Direction = PlayerGoal.GoalPostLeft - PlayerGoal.GoalPostRight;
+        Vector3 Direction = PlayerGoal.GoalPostLeft - PlayerGoal.GoalPostRight;
+
+        Debug.Log(Vector2.SignedAngle(Vector3.right, Direction));
         Vector3 Rotation = transform.rotation.eulerAngles;
-        Rotation = Quaternion.AngleAxis(Vector2.SignedAngle(Vector2.right, Direction), Vector2.right) * Rotation;
-        transform.rotation = Quaternion.Euler(Rotation);
+        transform.rotation = Quaternion.Euler(Vector3.forward * Vector2.SignedAngle(Vector3.right, Direction));
     }
 }

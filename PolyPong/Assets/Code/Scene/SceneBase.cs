@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class SceneBase<T> : Singleton<T> where T : Singleton<T>
 {
     private static GameObject persistenceInstance;
+    public List<Player> ConnectedPlayers = new List<Player>();
 
     public GameObject GetPersistentTracker()
     {
