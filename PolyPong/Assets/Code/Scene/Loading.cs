@@ -11,7 +11,6 @@ public struct ClientConnectionInfo
 
 public struct ServerCreationInfo
 {
-    public string username;
     public string maxUsers;
 }
 
