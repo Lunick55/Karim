@@ -61,18 +61,21 @@ extern "C"
 #endif
 	// C header here
 
-	void shutdownRakNet()
+	int shutdownRakNet()
 	{
+		int result = 0;
 		if (gNetManager.mpServer)
 		{
 			gEventSystem.removeListener(gNetManager.mpServer);
 			gNetManager.mpServer.reset();
+			result += 1;
 		}
 		
-		if (gNetManager.mpClient->isActive)
+		if (gNetManager.mpClient)
 		{
 			gEventSystem.removeListener(gNetManager.mpClient);
 			gNetManager.mpClient.reset();
+			result += 1;
 		}
 		
 		if (gNetManager.mpPacketHandler)
@@ -80,11 +83,23 @@ extern "C"
 			if (gNetManager.mpPacketHandler->disconnect())
 			{
 				std::cout << "Successfully disconnected." << std::endl;
+				result += 1;
 				if (gNetManager.mpPacketHandler->shutdown())
 				{
 					std::cout << "Successfully shutdown RakNet." << std::endl;
+					result += 1;
 				}
 			}
+		}
+
+		//haha am programmer
+		if (result < 3)
+		{
+			return 0;
+		}
+		else
+		{
+			return 1;
 		}
 	}
 

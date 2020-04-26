@@ -29,6 +29,11 @@ int ActivateClient(char* ip)
 	return result;
 }
 
+int ShutdownNetwork()
+{
+	return shutdownRakNet();
+}
+
 bool TestMeDaddy()
 {
 	return true;

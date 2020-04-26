@@ -6,33 +6,33 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
-  - enabled: 1
     path: Assets/Resources/Scenes/Persistent/CameraManager.unity
     guid: 98d058aa63aead145bb0e798e78c68ae
-  - enabled: 1
+  - enabled: 0
     path: Assets/Resources/Scenes/LoadingMenu.unity
     guid: c5b857e40525a0d4baaa912b1f03ac47
-  - enabled: 1
+  - enabled: 0
     path: Assets/Resources/Scenes/TitleMenu.unity
     guid: 26f5030b853941b4ab26f0987319b6ad
-  - enabled: 1
+  - enabled: 0
     path: Assets/Resources/Scenes/CreateServer.unity
     guid: 47e2d09766a3c4f4aac9c4145f191dc3
-  - enabled: 1
+  - enabled: 0
     path: Assets/Resources/Scenes/JoinServer.unity
     guid: 9717300c3c710474ebaead63c16124d3
-  - enabled: 1
+  - enabled: 0
     path: Assets/Resources/Scenes/LobbyClient.unity
     guid: 63c5c7033b3dacc45b616f77f183915f
-  - enabled: 1
+  - enabled: 0
     path: Assets/Resources/Scenes/LobbyServer.unity
     guid: f52b6e7142683404bb20806a665666e4
-  - enabled: 1
+  - enabled: 0
     path: Assets/Resources/Scenes/PlaySpectate.unity
     guid: a6601915f10999447a9b418876af2b5e
-  - enabled: 1
+  - enabled: 0
     path: Assets/Resources/Scenes/PlayPlayer.unity
     guid: 09d35b854c1e49941b4d1efe8a31b8ef
+  - enabled: 1
+    path: Assets/Resources/Scenes/_TestScenes/testingStuff.unity
+    guid: 57fa97d19c38db64bb606e9ca35dae96
   m_configObjects: {}

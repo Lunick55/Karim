@@ -15,6 +15,9 @@ public class AndrickPlugin
     public static extern int ActivateClient(string ip);
 
     [DllImport("AndrickPlugin")]
+    public static extern int ShutdownNetwork();
+
+    [DllImport("AndrickPlugin")]
     public static extern void UpdateClient();
 
     [DllImport("AndrickPlugin")]

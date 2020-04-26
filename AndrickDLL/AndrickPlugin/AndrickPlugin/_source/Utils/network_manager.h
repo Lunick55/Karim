@@ -47,6 +47,7 @@ extern "C"
 // C++ code exposed to user program.
 ANDRICK_PLUGIN_SYMBOL int ActivateServer(int maxUsers);
 ANDRICK_PLUGIN_SYMBOL int ActivateClient(char* ip);
+ANDRICK_PLUGIN_SYMBOL int ShutdownNetwork();
 ANDRICK_PLUGIN_SYMBOL void UpdateClient();
 ANDRICK_PLUGIN_SYMBOL void UpdateServer();
 ANDRICK_PLUGIN_SYMBOL bool TestMeDaddy();

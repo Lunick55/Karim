@@ -17,7 +17,8 @@ static const int sMAX_USERNAME_LENGTH = 20;
 static const int sMAX_USERS = 64;
 static const int sMAX_MESSAGE_LENGTH = 128;
 static const int sDEFAULT_MAX_USERS = 10;
-static const int sPORT = 12975;
+//static const int sPORT = 12975;
+static const int sPORT = 5555;
 
 static const int MAX_INPUT_LENGTH = 512;
 
@@ -120,7 +121,7 @@ extern "C"
 {
 #endif
 	// C header here
-	extern void shutdownRakNet();
+	extern int shutdownRakNet();
 	extern RakNet::Time getTime();
 #ifdef __cplusplus
 }
