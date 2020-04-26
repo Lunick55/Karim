@@ -21,6 +21,9 @@ EditorBuildSettings:
     path: Assets/Resources/Scenes/JoinServer.unity
     guid: 9717300c3c710474ebaead63c16124d3
   - enabled: 1
+    path: Assets/Resources/Scenes/LobbyClient.unity
+    guid: 63c5c7033b3dacc45b616f77f183915f
+  - enabled: 1
     path: Assets/Resources/Scenes/Lobby.unity
     guid: f52b6e7142683404bb20806a665666e4
   - enabled: 1
