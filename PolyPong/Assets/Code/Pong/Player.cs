@@ -2,6 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public struct PlayerData
+{
+    public int ID;
+}
+
 public class Player : MonoBehaviour
 {
     //The player's user id from the server

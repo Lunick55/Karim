@@ -13,6 +13,14 @@ public class Lobby : SceneBase<Lobby>
     {
         LobbyChatLog = GetComponent<ChatLog>();
         IsGameCountdownRunning = false;
+
+        PlayerData pData = new PlayerData();
+        //AndrickPlugin.GetPlayerData(); //TODO:
+        Player myPlayer = new Player();
+        myPlayer.PlayerID = pData.ID;
+        myPlayer.name = AndrickPlugin.GetUsername();
+
+        Instance.GetPersistentInstance().ConnectedPlayers.Add(myPlayer);
     }
 
     public void Update()
@@ -23,6 +31,7 @@ public class Lobby : SceneBase<Lobby>
         AndrickPlugin.ProcessPackets();
         AndrickPlugin.ExecuteEvents();
 
+        //
         string tempLog = AndrickPlugin.ReadMessageLog();
         while(tempLog != null)
         {

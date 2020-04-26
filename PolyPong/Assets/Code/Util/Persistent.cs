@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class Persistent : MonoBehaviour
 {
-    private static GameObject instance;
+    public static GameObject instance;
+
+    public List<Player> ConnectedPlayers = new List<Player>();
 
     private void Awake()
     {
