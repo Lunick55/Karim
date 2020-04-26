@@ -8,7 +8,7 @@ using UnityEngine;
 
 public class CameraResizer : MonoBehaviour
 {
-    private static readonly Vector2 GAME_RESOLUTION = new Vector2(1920, 1080);
+    private static readonly Vector2 GAME_RESOLUTION = new Vector2(960, 540);
     private Camera mCamera;
 
     private void Awake()
