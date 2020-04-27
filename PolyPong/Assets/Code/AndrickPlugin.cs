@@ -55,7 +55,10 @@ public class AndrickPlugin
     public static extern void GetConnectedUserIds(int[] ids);
     
     [DllImport("AndrickPlugin")]
-    public static extern bool DidWeConnectToServer();
+    public static extern bool DidWeInitiallyConnectToServer();
+
+    [DllImport("AndrickPlugin")]
+    public static extern bool DidServerAcceptOurConnection();
 
     [DllImport("AndrickPlugin")]
     public static extern void DisconnectUser();

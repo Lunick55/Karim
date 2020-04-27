@@ -35,13 +35,16 @@ public class Lobby : SceneBase<Lobby>
             int[] playerIDs = new int[AndrickPlugin.GetConnectedUserCount()];
             AndrickPlugin.GetConnectedUserIds(playerIDs);
             
-            for (int i = 0; i < playerIDs.Length; i++)
+            for (int i = 0; i < playerIDs.Length; ++i)
             {
-                if (Persistent.Instance.ConnectedPlayers[i].PlayerID != playerIDs[i])
+                for (int j = 0; j < Persistent.Instance.ConnectedPlayers.Count; ++j)
                 {
-                    PlayerInfo player = new PlayerInfo();
-                    player.PlayerID = playerIDs[i];
-                    Persistent.Instance.ConnectedPlayers.Add(player);
+                    if (Persistent.Instance.ConnectedPlayers[j].PlayerID != playerIDs[i])
+                    {
+                        PlayerInfo player = new PlayerInfo();
+                        player.PlayerID = playerIDs[i];
+                        Persistent.Instance.ConnectedPlayers.Add(player);
+                    }
                 }
             }
         }

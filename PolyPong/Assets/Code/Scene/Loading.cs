@@ -53,11 +53,19 @@ public class Loading : SceneBase<Loading>
         StartCoroutine(ElipseLoader());
         //Send the data off to the server and wait for a response.
 
-        while (!AndrickPlugin.DidWeConnectToServer())
+        while (!AndrickPlugin.DidWeInitiallyConnectToServer())
         {
             AndrickPlugin.ProcessPackets();
             AndrickPlugin.ExecuteEvents();
             Debug.Log("LOADING...");
+            yield return new WaitForEndOfFrame();
+        }
+
+        while (!AndrickPlugin.DidServerAcceptOurConnection())
+        {
+            AndrickPlugin.ProcessPackets();
+            AndrickPlugin.ExecuteEvents();
+            AndrickPlugin.SendPackets();
             yield return new WaitForEndOfFrame();
         }
 

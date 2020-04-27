@@ -77,7 +77,7 @@ public class SceneBase<T> : Singleton<T> where T : Singleton<T>
 
     public void Shutdown()
     {
-        if (!Persistent.Instance.isServer && AndrickPlugin.DidWeConnectToServer())
+        if (!Persistent.Instance.isServer && AndrickPlugin.DidServerAcceptOurConnection())
         {
             AndrickPlugin.DisconnectUser();
         }

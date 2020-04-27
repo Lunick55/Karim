@@ -40,12 +40,18 @@ void ProcessPackets()
 
 void ExecuteEvents()
 {
-	gEventSystem.executeQueuedLocalEvents();
+	if (gNetManager.mpPacketHandler && gNetManager.mpPacketHandler->isInitialized())
+	{
+		gEventSystem.executeQueuedLocalEvents();
+	}
 }
 
 void SendPackets()
 {
-	gEventSystem.sendQueuedNetworkEvents();
+	if (gNetManager.mpPacketHandler && gNetManager.mpPacketHandler->isInitialized())
+	{
+		gEventSystem.sendQueuedNetworkEvents();
+	}
 }
 
 void CreatePacket(char* packet)
@@ -104,14 +110,19 @@ int GetConnectedUserCount()
 	return (int)gNetManager.mpClient->getConnectedUserCount();
 }
 
-void GetConnectedUserId(int ids[])
+void GetConnectedUserIds(int ids[])
 {
 	gNetManager.mpClient->getConnectedUserIds(ids);
 }
 
-bool DidWeConnectToServer()
+bool DidWeInitiallyConnectToServer()
 {
 	return gNetManager.mpPacketHandler && gNetManager.mpPacketHandler->mIsConnected;
+}
+
+int DidServerAcceptOurConnection()
+{
+	return gNetManager.mpPacketHandler && gNetManager.mpPacketHandler->mServerAcceptsMe;
 }
 
 void DisconnectUser()

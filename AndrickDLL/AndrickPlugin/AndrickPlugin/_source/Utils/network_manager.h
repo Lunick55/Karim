@@ -55,7 +55,8 @@ extern "C"
 // C++ code exposed to user program.
 ANDRICK_PLUGIN_SYMBOL bool ActivateServer(int maxUsers);
 ANDRICK_PLUGIN_SYMBOL bool ActivateClient(char* ip, char* username);
-ANDRICK_PLUGIN_SYMBOL bool DidWeConnectToServer();
+ANDRICK_PLUGIN_SYMBOL bool DidWeInitiallyConnectToServer();
+ANDRICK_PLUGIN_SYMBOL int DidServerAcceptOurConnection();
 
 ANDRICK_PLUGIN_SYMBOL void DisconnectUser();
 ANDRICK_PLUGIN_SYMBOL void RequestJoinServer();
@@ -71,7 +72,7 @@ ANDRICK_PLUGIN_SYMBOL char* ReadMessageLog();
 ANDRICK_PLUGIN_SYMBOL char* GetUsername();
 ANDRICK_PLUGIN_SYMBOL void GetPlayerData(PlayerData& data);
 ANDRICK_PLUGIN_SYMBOL int GetConnectedUserCount();
-ANDRICK_PLUGIN_SYMBOL void GetConnectedUserId(int ids[]);
+ANDRICK_PLUGIN_SYMBOL void GetConnectedUserIds(int ids[]);
 
 #ifdef __cplusplus // Start __cplusplus
 }
