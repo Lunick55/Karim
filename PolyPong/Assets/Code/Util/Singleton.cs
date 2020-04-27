@@ -12,7 +12,6 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
     private static T instance;
     public static ServerCreationInfo ServerInfo;
     public static ClientConnectionInfo ClientInfo;
-    public static bool IsServer = true;
 
     //public static T Instance
     //{

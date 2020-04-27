@@ -45,4 +45,12 @@ public class AndrickPlugin
     [DllImport("AndrickPlugin")]
     public static extern void ToDaddy(Cummies incuming);
 
+    [DllImport("AndrickPlugin")]
+    public static extern void GetPlayerData(ref PlayerData data);
+
+    [DllImport("AndrickPlugin")]
+    public static extern int GetConnectedUserCount();
+
+    [DllImport("AndrickPlugin")]
+    public static extern void GetConnectedUserId(int[] ids);
 }

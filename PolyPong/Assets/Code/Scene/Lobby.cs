@@ -14,17 +14,38 @@ public class Lobby : SceneBase<Lobby>
         LobbyChatLog = GetComponent<ChatLog>();
         IsGameCountdownRunning = false;
 
-        PlayerData pData = new PlayerData();
-        //AndrickPlugin.GetPlayerData(); //TODO:
-        Player myPlayer = new Player();
-        myPlayer.PlayerID = pData.ID;
-        myPlayer.name = AndrickPlugin.GetUsername();
+        if (!Instance.GetPersistentInstance().isServer)
+        {
+            PlayerData pData = new PlayerData();
+            AndrickPlugin.GetPlayerData(ref pData);
 
-        Instance.GetPersistentInstance().ConnectedPlayers.Add(myPlayer);
+            Player myPlayer = new Player();
+            myPlayer.PlayerID = pData.ID;
+            myPlayer.name = AndrickPlugin.GetUsername();
+
+            Instance.GetPersistentInstance().ConnectedPlayers.Add(myPlayer);
+        }
     }
 
     public void Update()
     {
+        if (!Instance.GetPersistentInstance().isServer)
+        {
+            int[] playerIDs = new int[AndrickPlugin.GetConnectedUserCount()];
+            AndrickPlugin.GetConnectedUserId(playerIDs);
+
+            for (int i = 0; i < playerIDs.Length; i++)
+            {
+                if (Instance.GetPersistentInstance().ConnectedPlayers[i].PlayerID != playerIDs[i])
+                {
+                    Player player = new Player();
+                    player.PlayerID = playerIDs[i];
+
+                    Instance.GetPersistentInstance().ConnectedPlayers.Add(player);
+                }
+            }
+        }
+
         if (Input.GetKeyDown(KeyCode.Return))
             OnSendClicked();
 

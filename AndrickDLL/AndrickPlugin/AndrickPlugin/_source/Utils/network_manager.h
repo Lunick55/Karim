@@ -8,12 +8,10 @@
 #include <_source/Networking/Packet/andrick_packethandler.h>
 
 #pragma pack(push, 1)
-struct Cummies
+struct PlayerData
 {
-	int numCummies = 0;
-	bool cumFriend = false;
-	float cumPercent = 0.5f;
-	//char* cumName;
+public:
+	int ID;
 };
 #pragma pack(pop)
 
@@ -32,8 +30,6 @@ public:
 	std::shared_ptr<class Client> mpClient;
 	std::shared_ptr<class Server> mpServer;
 	std::shared_ptr<class PacketHandler> mpPacketHandler;
-
-	struct Cummies cum;
 
 private:
 };
@@ -69,10 +65,9 @@ ANDRICK_PLUGIN_SYMBOL void CreatePacket(char* packet);
 ANDRICK_PLUGIN_SYMBOL void CreateMessagePacket(char* packet);
 ANDRICK_PLUGIN_SYMBOL char* ReadMessageLog();
 ANDRICK_PLUGIN_SYMBOL char* GetUsername();
-
-//Testing //daddy is dll
-ANDRICK_PLUGIN_SYMBOL char* FromDaddy(char* inbound);
-ANDRICK_PLUGIN_SYMBOL void ToDaddy(Cummies incuming);
+ANDRICK_PLUGIN_SYMBOL void GetPlayerData(PlayerData& data);
+ANDRICK_PLUGIN_SYMBOL int GetConnectedUserCount();
+ANDRICK_PLUGIN_SYMBOL void GetConnectedUserId(int ids[]);
 
 #ifdef __cplusplus // Start __cplusplus
 }

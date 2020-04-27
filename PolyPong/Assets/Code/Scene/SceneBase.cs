@@ -11,8 +11,9 @@ public class SceneBase<T> : Singleton<T> where T : Singleton<T>
     {
         if (!persistenceInstance)
         {
-            persistenceInstance = Instantiate(Resources.Load<GameObject>("Prefab/Persistent/POLY_PONG_CORE"));
-            persistenceInstance.name = "POLY_PONG_CORE";
+            //persistenceInstance = Instantiate(Resources.Load<GameObject>("Prefab/Persistent/POLY_PONG_CORE"));
+            //persistenceInstance.name = "POLY_PONG_CORE";
+            persistenceInstance = GameObject.Find("POLY_PONG_CORE");
         }
 
         return persistenceInstance;

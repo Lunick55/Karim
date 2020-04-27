@@ -28,6 +28,7 @@ public:
 	const std::string& getUsername() const;
 	const AuthorityId& getAuthority() const;
 	const RakNet::SystemAddress& getAddress() const { return mAddress; };
+	void getConnectedUserId(int ids[]);
 
 	inline void setServersMaxUserCount(std::size_t maxUsers) { mServersMaxUserCount = maxUsers; };
 	inline void setConnectedUserCount(std::size_t maxUsers) { mConnectedUserCount = maxUsers; };

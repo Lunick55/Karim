@@ -15,7 +15,7 @@ public class CreateServer : SceneBase<CreateServer>
         int maxUsers = 0;
         if (int.TryParse(maxUserInput.text.ToString(), out maxUsers))
         {
-            IsServer = true;
+            Instance.GetPersistentInstance().isServer = true;
             ServerInfo.maxUsers = maxUserInput.text;
             GetSceneTracker().LoadSceneSynchronously(SceneInfoList.LOADING_MENU);
             AndrickPlugin.ActivateServer(maxUsers);

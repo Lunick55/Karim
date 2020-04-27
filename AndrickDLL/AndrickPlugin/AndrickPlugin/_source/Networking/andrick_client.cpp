@@ -105,6 +105,16 @@ bool Client::getClientFromUsername(const std::string& username, std::shared_ptr<
 	return success;
 }
 
+void Client::getConnectedUserId(int ids[]) 
+{
+	int i = 0;
+	for (auto iter = mClientMap.begin(); iter != mClientMap.end(); ++iter)
+	{
+		ids[i] = iter->second->getId();
+		i++;
+	}
+}
+
 void Client::initNewUser(const UserId id, const std::string& username)
 {
 	std::shared_ptr<Client> newUser = std::make_shared<Client>();

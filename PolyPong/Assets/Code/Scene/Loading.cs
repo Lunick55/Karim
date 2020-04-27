@@ -29,7 +29,7 @@ public class Loading : SceneBase<Loading>
 
     public void Awake()
     {
-        if (IsServer)
+        if (Instance.GetPersistentInstance().isServer)
         {
             HandleServerCreation();
         }
@@ -56,7 +56,7 @@ public class Loading : SceneBase<Loading>
 
         ClientConnectionCoroutine = null;
         Debug.Log("LOADING");
-        //GetSceneTracker().LoadSceneSynchronously(SceneInfoList.LOBBY_CLIENT);
+        GetSceneTracker().LoadSceneSynchronously(SceneInfoList.LOBBY);
         IsLoading = false;
     }
 

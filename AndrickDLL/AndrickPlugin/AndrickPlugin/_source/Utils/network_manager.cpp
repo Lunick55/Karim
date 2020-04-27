@@ -98,30 +98,19 @@ char* GetUsername()
 	return name;
 }
 
-//Testing
-char* FromDaddy(char* inbound)
+void GetPlayerData(PlayerData& data)
 {
-	//TODO: check if you can just not do this complex shit and just return a normal char*
-
-	std::string temp = "FUCKING JERIIAH";
-	strcpy(inbound, temp.c_str());
-
-	//ULONG ulSize = strlen(inbound) + sizeof(char);
-	//char* pszReturn = NULL;
-	//pszReturn = (char*)::CoTaskMemAlloc(ulSize);
-	//// Copy the contents of szSampleString
-	//// to the memory pointed to by pszReturn.
-	//strcpy(pszReturn, inbound);
-	//// Return pszReturn.
-	//return pszReturn;
-
-	return inbound;
+	data.ID = gNetManager.mpClient->getId();
+	//More if needed
 }
 
-void ToDaddy(Cummies incuming)
+int GetConnectedUserCount()
 {
-	NetworkManager::get();
-	EventSystem::get();
+	return gNetManager.mpClient->getConnectedUserCount();
+}
 
-	gNetManager.cum = (incuming);	
+
+void GetConnectedUserId(int ids[])
+{
+	gNetManager.mpClient->getConnectedUserId(ids);
 }

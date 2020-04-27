@@ -8,6 +8,8 @@ public class Persistent : MonoBehaviour
 
     public List<Player> ConnectedPlayers = new List<Player>();
 
+    public bool isServer;
+
     private void Awake()
     {
         if (!instance)
@@ -17,7 +19,7 @@ public class Persistent : MonoBehaviour
         }
         else
         {
-            Destroy(gameObject);
+            //Destroy(gameObject);
         }
     }
 }
