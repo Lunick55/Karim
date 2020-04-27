@@ -6,10 +6,10 @@ using UnityEngine;
 public class AndrickPlugin
 {
     [DllImport("AndrickPlugin")]
-    public static extern int ActivateServer(int maxUsers);
+    public static extern bool ActivateServer(int maxUsers);
 
     [DllImport("AndrickPlugin")]
-    public static extern int ActivateClient(string ip, string username);
+    public static extern bool ActivateClient(string ip, string username);
 
     [DllImport("AndrickPlugin")]
     public static extern int ShutdownNetwork();
@@ -53,4 +53,10 @@ public class AndrickPlugin
 
     [DllImport("AndrickPlugin")]
     public static extern void GetConnectedUserId(int[] ids);
+    
+    [DllImport("AndrickPlugin")]
+    public static extern bool DidWeConnectToServer();
+
+    [DllImport("AndrickPlugin")]
+    public static extern void DisconnectUser();
 }

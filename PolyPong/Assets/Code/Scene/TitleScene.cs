@@ -6,11 +6,11 @@ public class TitleScene : SceneBase<TitleScene>
 {
     public void OnCreateServerPressed()
     {
-        GetPersistentTracker().GetComponent<SceneTracker>().LoadSceneSynchronously(SceneInfoList.CREATE_SERVER);
+        Persistent.Instance.GetComponent<SceneTracker>().LoadSceneSynchronously(SceneInfoList.CREATE_SERVER);
     }
 
     public void OnJoinServerPressed()
     {
-        GetPersistentTracker().GetComponent<SceneTracker>().LoadSceneSynchronously(SceneInfoList.JOIN_SERVER);
+        Persistent.Instance.GetComponent<SceneTracker>().LoadSceneSynchronously(SceneInfoList.JOIN_SERVER);
     }
 }

@@ -14,7 +14,7 @@ public class Lobby : SceneBase<Lobby>
         LobbyChatLog = GetComponent<ChatLog>();
         IsGameCountdownRunning = false;
 
-        if (!Instance.GetPersistentInstance().isServer)
+        if (!Persistent.Instance.isServer)
         {
             PlayerData pData = new PlayerData();
             AndrickPlugin.GetPlayerData(ref pData);
@@ -23,27 +23,28 @@ public class Lobby : SceneBase<Lobby>
             myPlayer.PlayerID = pData.ID;
             myPlayer.name = AndrickPlugin.GetUsername();
             myPlayer.IsLocallyControlled = true;
-            Instance.GetPersistentInstance().ConnectedPlayers.Add(myPlayer);
+            Persistent.Instance.ConnectedPlayers.Add(myPlayer);
         }
     }
 
     public void Update()
     {
-        if (!Instance.GetPersistentInstance().isServer)
+        if (!Persistent.Instance.isServer)
         {
-            int[] playerIDs = new int[AndrickPlugin.GetConnectedUserCount()];
-            AndrickPlugin.GetConnectedUserId(playerIDs);
-
-            for (int i = 0; i < playerIDs.Length; i++)
-            {
-                if (Instance.GetPersistentInstance().ConnectedPlayers[i].PlayerID != playerIDs[i])
-                {
-                    Player player = new Player();
-                    player.PlayerID = playerIDs[i];
-
-                    Instance.GetPersistentInstance().ConnectedPlayers.Add(player);
-                }
-            }
+            Debug.Log("YOOO");
+            //int[] playerIDs = new int[AndrickPlugin.GetConnectedUserCount()];
+            //AndrickPlugin.GetConnectedUserId(playerIDs);
+            //
+            //for (int i = 0; i < playerIDs.Length; i++)
+            //{
+            //    if (Persistent.Instance.ConnectedPlayers[i].PlayerID != playerIDs[i])
+            //    {
+            //        Player player = new Player();
+            //        player.PlayerID = playerIDs[i];
+            //
+            //        Persistent.Instance.ConnectedPlayers.Add(player);
+            //    }
+            //}
         }
 
         if (Input.GetKeyDown(KeyCode.Return))
@@ -67,8 +68,11 @@ public class Lobby : SceneBase<Lobby>
 
     public void OnSendClicked()
     {
-        AndrickPlugin.CreateMessagePacket(string.Format("{0}: {1}", AndrickPlugin.GetUsername(), ChatMessageBox.text));
-        ChatMessageBox.text = "";
+        if (!Persistent.Instance.isServer)
+        {
+            AndrickPlugin.CreateMessagePacket(string.Format("{0}: {1}", AndrickPlugin.GetUsername(), ChatMessageBox.text));
+            ChatMessageBox.text = "";
+        }
     }
 
     public void OnStartGameClicked()

@@ -22,6 +22,7 @@ void NewIncomingConnectionEvent::execute()
 	{
 		evnt = std::make_shared<ConnectionRequestAcceptedEvent>(gNetManager.mpPacketHandler->getServerAddress(), userId, false, userId);
 		gEventSystem.queueNetworkEvent(evnt);
+
 		//auto userMap = gDemoState->mpServer->getConnectedUsers();
 		//for (auto iter = userMap.begin(); iter != userMap.end(); ++iter)
 		//{
@@ -135,7 +136,6 @@ std::size_t ConnectionRequestJoinEvent::allocatePacket(char*& out)
 
 ///Server -> Client - Everything is good, you can enter the server
 #pragma region ConnectionJoinAcceptedEvent
-
 ConnectionJoinAcceptedEvent::ConnectionJoinAcceptedEvent(const std::string& username, std::size_t maxUserCount, std::size_t connectedUserCount,
 	bool isBroadcast, UserId receiverId) :
 	SendableEvent(EventId::CONNECTION_JOIN_ACCEPTED, EventProcessingType::CLIENTSIDE, isBroadcast, receiverId),
@@ -143,7 +143,6 @@ ConnectionJoinAcceptedEvent::ConnectionJoinAcceptedEvent(const std::string& user
 {
 	///TODO: Take in an array of connected user data to populate mpClientMap
 }
-
 void ConnectionJoinAcceptedEvent::execute()
 {
 	gNetManager.mpClient->setServersMaxUserCount(mMaxUserCount);
@@ -153,7 +152,6 @@ void ConnectionJoinAcceptedEvent::execute()
 
 	std::cout << mUsername << " successfully joined the server! - " << std::to_string(mConnectedUserCount) << "/" << std::to_string(mMaxUserCount) << " online." << std::endl;
 }
-
 std::size_t ConnectionJoinAcceptedEvent::allocatePacket(char*& out)
 {
 	std::size_t packetSize = sizeof(JoinAcceptedPacket);
@@ -161,18 +159,15 @@ std::size_t ConnectionJoinAcceptedEvent::allocatePacket(char*& out)
 	memcpy(out, (char*)&JoinAcceptedPacket(mUsername, (char)mMaxUserCount, (char)mConnectedUserCount), packetSize);
 	return packetSize;
 }
-
 #pragma endregion
 
 #pragma region ConnectionJoinFailedEvent
-
 ConnectionJoinFailedEvent::ConnectionJoinFailedEvent(UserId userId, const std::string& errorMessage) :
 	SendableEvent(EventId::CONNECTION_JOIN_FAILED, EventProcessingType::BOTH, false, userId),
 	userId(userId), errorMessage(errorMessage)
 {
 
 }
-
 void ConnectionJoinFailedEvent::execute()
 {
 	if (gNetManager.mpPacketHandler->isServer())
@@ -192,7 +187,6 @@ void ConnectionJoinFailedEvent::execute()
 		gEventSystem.queueNetworkEvent(joinFailedEvnt);
 	}
 }
-
 std::size_t ConnectionJoinFailedEvent::allocatePacket(char*& out)
 {
 	std::size_t packetSize = sizeof(JoinFailedPacket);
@@ -200,13 +194,10 @@ std::size_t ConnectionJoinFailedEvent::allocatePacket(char*& out)
 	memcpy(out, (char*)&JoinFailedPacket(userId, errorMessage), packetSize);
 	return packetSize;
 }
-
 #pragma endregion
-
 
 ///Server -> All Clients - A new user joined the server
 #pragma region ConnectionNewUserJoinedEvent
-
 ConnectionNewUserJoinedEvent::ConnectionNewUserJoinedEvent(UserId user, const std::string& username,
 	bool isBroadcast, UserId receiverId) :
 	SendableEvent(EventId::CONNECTION_REQUEST_ACCEPTED, EventProcessingType::CLIENTSIDE, isBroadcast, receiverId),
@@ -214,7 +205,6 @@ ConnectionNewUserJoinedEvent::ConnectionNewUserJoinedEvent(UserId user, const st
 {
 
 }
-
 void ConnectionNewUserJoinedEvent::execute()
 {
 	std::cout << "A new user has just joined the server. Don't be shy, say hi to " << mUsername << "!" << std::endl;
@@ -222,9 +212,11 @@ void ConnectionNewUserJoinedEvent::execute()
 	if (mUserId != gNetManager.mpClient->getId())
 	{
 		gNetManager.mpClient->initNewUser(mUserId, mUsername);
+
+		std::shared_ptr<MessageEvent> packetData = std::make_shared<MessageEvent>("Server:" + mUsername + " joined the server!");
+		gEventSystem.queueNetworkEvent(packetData);
 	}
 }
-
 std::size_t ConnectionNewUserJoinedEvent::allocatePacket(char*& out)
 {
 	std::size_t packetSize = sizeof(NewUserJoinedServerPacket);
@@ -232,7 +224,6 @@ std::size_t ConnectionNewUserJoinedEvent::allocatePacket(char*& out)
 	memcpy(out, (char*)&NewUserJoinedServerPacket(mUserId, mUsername), packetSize);
 	return packetSize;
 }
-
 #pragma endregion
 
 //#pragma region GenericEvent
@@ -244,7 +235,6 @@ std::size_t ConnectionNewUserJoinedEvent::allocatePacket(char*& out)
 //	return packetSize;
 //}
 //#pragma endregion
-
 //#pragma region CommandEvent
 //CommandEvent::CommandEvent(std::shared_ptr<Command> command, bool isBroadcast, UserId receiverId) :
 //	SendableEvent(EventId::COMMAND, EventProcessingType::BOTH, isBroadcast, receiverId),
@@ -271,14 +261,12 @@ std::size_t ConnectionNewUserJoinedEvent::allocatePacket(char*& out)
 //#pragma endregion
 
 #pragma region UserDisconnectedEvent
-
 UserDisconnectedEvent::UserDisconnectedEvent(UserId userId) :
 	SendableEvent(EventId::USER_DISCONNECTED, EventProcessingType::BOTH, gNetManager.mpPacketHandler->isServer()),
 	userId(userId)
 {
 
 }
-
 void UserDisconnectedEvent::execute()
 {
 	std::cout << "User disconnected!" << std::endl;
@@ -287,6 +275,14 @@ void UserDisconnectedEvent::execute()
 
 	if (gNetManager.mpPacketHandler->isServer())
 	{
+		std::shared_ptr<Client> client;
+		gNetManager.mpServer->getClientById(userId, client);
+		if (client)
+		{
+			std::shared_ptr<MessageEvent> packetData = std::make_shared<MessageEvent>("Server:" + client->getUsername() + " disconnected!");
+			gEventSystem.queueNetworkEvent(packetData);
+		}
+
 		gNetManager.mpServer->disconnectClient(userId);
 	}
 	else if (gNetManager.mpClient->getId() == userId)
@@ -299,7 +295,6 @@ void UserDisconnectedEvent::execute()
 		gNetManager.mpClient->setConnectedUserCount(gNetManager.mpClient->getConnectedUserCount() - 1);
 	}
 }
-
 std::size_t UserDisconnectedEvent::allocatePacket(char*& out)
 {
 	std::size_t packetSize = sizeof(UserDisconnectedPacket);
@@ -307,18 +302,15 @@ std::size_t UserDisconnectedEvent::allocatePacket(char*& out)
 	memcpy(out, (char*)&UserDisconnectedPacket(userId), packetSize);
 	return packetSize;
 }
-
 #pragma endregion
 
 #pragma region MessageEvent
-
 MessageEvent::MessageEvent(const std::string& message) :
 	SendableEvent(EventId::MESSAGE, EventProcessingType::BOTH, gNetManager.mpPacketHandler->isServer()),
 	mMessage(message)
 {
 
 }
-
 void MessageEvent::execute()
 {
 	if (gNetManager.mpServer)
@@ -336,7 +328,6 @@ void MessageEvent::execute()
 		gNetManager.mpClient->chatlog.push(mMessage);
 	}
 }
-
 std::size_t MessageEvent::allocatePacket(char*& out)
 {
 	std::size_t packetSize = sizeof(MessagePacket);
@@ -344,5 +335,4 @@ std::size_t MessageEvent::allocatePacket(char*& out)
 	memcpy(out, (char*)&MessagePacket(mMessage), packetSize);
 	return packetSize;
 }
-
 #pragma endregion

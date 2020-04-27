@@ -76,8 +76,12 @@ bool PacketHandler::connect(const char* ipAddress)
 		RakNet::ConnectionAttemptResult result = mpPeer->Connect(ipAddress, sPORT, 0, 0);
 		return (result == RakNet::ConnectionAttemptResult::CONNECTION_ATTEMPT_STARTED);
 	}
+	else
+	{
+		mIsConnected = false;
+	}
 
-	return false;
+	return mIsConnected;
 }
 
 bool PacketHandler::disconnect()
@@ -173,6 +177,7 @@ int PacketHandler::processInboundPackets()
 			std::cout << "andrick_ID_CONNECTION_REQUEST_ACCEPTED" << std::endl;
 			ConnectionRequestAcceptedPacket* requestAcceptedPacket = (ConnectionRequestAcceptedPacket*)packet->data;
 			newEvents.push_back(std::make_shared<ConnectionRequestAcceptedEvent>(packet->systemAddress, requestAcceptedPacket->newUserId));
+			gNetManager.mpPacketHandler->mIsConnected = true;
 			break;
 		}
 		case andrick_ID_CONNECTION_ATTEMPT_FAILED:///Server sends this to Client - Server rejected us for some reason

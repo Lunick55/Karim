@@ -59,7 +59,7 @@ public class TestScene : MonoBehaviour
 
     public void StartServer()
     {
-        if (AndrickPlugin.ActivateServer(5) != 0)
+        if (AndrickPlugin.ActivateServer(5))
         {
             server = true;
             testInit.SetActive(false);
@@ -77,7 +77,7 @@ public class TestScene : MonoBehaviour
     public void StartClient()
     {
         console.text = "Client Init Trying...";
-        if (AndrickPlugin.ActivateClient("192.168.1.18", "friend") != 0)
+        if (AndrickPlugin.ActivateClient("192.168.1.18", "friend"))
         {
             client = true;
             testInit.SetActive(false);

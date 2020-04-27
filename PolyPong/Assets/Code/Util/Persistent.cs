@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Persistent : MonoBehaviour
+public class Persistent : Singleton<Persistent>
 {
     public static GameObject instance;
 

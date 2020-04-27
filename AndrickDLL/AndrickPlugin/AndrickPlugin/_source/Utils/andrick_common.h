@@ -27,8 +27,8 @@ static constexpr int BOID_COUNT = 1;
 extern class EventSystem& gEventSystem;
 extern class NetworkManager& gNetManager;
 
-int initializeServer(int maxUsers);
-int initializeClient(char* ip, char* username);
+bool initializeServer(int maxUsers);
+bool initializeClient(char* ip, char* username);
 
 enum class CommandId : char
 {

@@ -16,7 +16,7 @@ public class JoinServer : SceneBase<JoinServer>
 
         ClientInfo.username = usernameInput.text;
         ClientInfo.ipAddress = ipAddress.text;
-        Instance.GetPersistentInstance().isServer = false;
+        Persistent.Instance.isServer = false;
         GetSceneTracker().LoadSceneSynchronously(SceneInfoList.LOADING_MENU);
         AndrickPlugin.ActivateClient(ClientInfo.ipAddress, ClientInfo.username);        
         //GetSceneTracker().LoadSceneAsync(SceneInfoList.LOADING_MENU, UnityEngine.SceneManagement.LoadSceneMode.Single, OnSceneLoaded);

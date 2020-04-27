@@ -1,7 +1,7 @@
 #include <_source/Utils/andrick_common.h>
 #include <_source/Utils/network_manager.h>
 
-int ActivateServer(int maxUsers)
+bool ActivateServer(int maxUsers)
 {
 	NetworkManager::get();
 	EventSystem::get();
@@ -13,7 +13,7 @@ int ActivateServer(int maxUsers)
 	return initializeServer(maxUsers);
 }
 
-int ActivateClient(char* ip, char* username)
+bool ActivateClient(char* ip, char* username)
 {
 	NetworkManager::get();
 	EventSystem::get();
@@ -22,9 +22,7 @@ int ActivateClient(char* ip, char* username)
 	gNetManager.mpClient = nullptr;
 	gNetManager.mpPacketHandler = nullptr;
 
-	int result = initializeClient(ip, username);
-
-	return result;
+	return initializeClient(ip, username);
 }
 
 int ShutdownNetwork()
@@ -59,11 +57,8 @@ void CreatePacket(char* packet)
 
 void CreateMessagePacket(char* packet)
 {
-	//Turn into packet
 	std::shared_ptr<MessageEvent> packetData = std::make_shared<MessageEvent>(std::string(packet));
 	gEventSystem.queueNetworkEvent(packetData);
-
-	//Add packet to queue
 }
 
 char* ReadMessageLog()
@@ -106,11 +101,26 @@ void GetPlayerData(PlayerData& data)
 
 int GetConnectedUserCount()
 {
-	return gNetManager.mpClient->getConnectedUserCount();
+	return (int)gNetManager.mpClient->getConnectedUserCount();
 }
-
 
 void GetConnectedUserId(int ids[])
 {
 	gNetManager.mpClient->getConnectedUserId(ids);
+}
+
+bool DidWeConnectToServer()
+{
+	return gNetManager.mpPacketHandler && gNetManager.mpPacketHandler->mIsConnected;
+}
+
+void DisconnectUser()
+{
+	gEventSystem.queueNetworkEvent(std::make_shared<UserDisconnectedEvent>(gNetManager.mpClient->getId()));
+}
+
+void RequestJoinServer()
+{
+	//gEventSystem.queueNetworkEvent(std::make_shared<ConnectionRequestJoinEvent>(
+	//	gNetManager.mpClient->getId(), gNetManager.mpClient->getUsername()));
 }

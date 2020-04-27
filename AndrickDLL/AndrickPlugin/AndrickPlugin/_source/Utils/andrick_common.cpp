@@ -10,7 +10,7 @@
 EventSystem& gEventSystem = EventSystem::get();
 NetworkManager& gNetManager = NetworkManager::get();
 
-int initializeServer(int maxUsers)
+bool initializeServer(int maxUsers)
 {
 	gNetManager.mpServer = std::make_shared<Server>();
 	gEventSystem.addListener(gNetManager.mpServer, EventProcessingType::SERVERSIDE);
@@ -20,40 +20,39 @@ int initializeServer(int maxUsers)
 
 	gNetManager.mpServer->setMaxUsers(maxUsers);
 
-	if (gNetManager.mpPacketHandler->startup(gNetManager.mpServer->getMaxUserCount()))
+	if (gNetManager.mpPacketHandler->startup((int)gNetManager.mpServer->getMaxUserCount()))
 	{
 		//printf("\nServer spinning up... \n");
-		return 1;
+		return true;
 	}
 	else
 	{
-		return 0;
+		return false;
 	}
 }
 
-int initializeClient(char* ip, char* username)
+bool initializeClient(char* ip, char* username)
 {
 	gNetManager.mpClient = std::make_shared<Client>();
 	gEventSystem.addListener(gNetManager.mpClient, EventProcessingType::CLIENTSIDE);
 	gNetManager.mpPacketHandler = std::make_shared<PacketHandler>();
 	std::cout << "Initializing client packet handler!" << std::endl;
 
-	//TODO: maybe not be one?
 	if (gNetManager.mpPacketHandler->startup(1))
 	{
 		if (gNetManager.mpPacketHandler->connect(ip))
 		{
 			//std::cout << "Client spinning up..." << std::endl;
 			gNetManager.mpClient->setUsername(username);
-			return 1;
+			return true;
 		}
 		else
 		{
 			//std::cout << "Failed to connect to server." << std::endl;
-			return 0;
+			return false;
 		}
 	}
-	return 0;
+	return false;
 }
 
 #ifdef __cplusplus

@@ -27,9 +27,9 @@ public class Loading : SceneBase<Loading>
 
     private bool IsLoading;
 
-    public void Awake()
+    public virtual void Start()
     {
-        if (Instance.GetPersistentInstance().isServer)
+        if (Persistent.Instance.isServer)
         {
             HandleServerCreation();
         }
@@ -52,10 +52,16 @@ public class Loading : SceneBase<Loading>
     {
         StartCoroutine(ElipseLoader());
         //Send the data off to the server and wait for a response.
-        yield return new WaitForSeconds(5.0f);
+
+        while (!AndrickPlugin.DidWeConnectToServer())
+        {
+            AndrickPlugin.ProcessPackets();
+            AndrickPlugin.ExecuteEvents();
+            Debug.Log("LOADING...");
+            yield return new WaitForEndOfFrame();
+        }
 
         ClientConnectionCoroutine = null;
-        Debug.Log("LOADING");
         GetSceneTracker().LoadSceneSynchronously(SceneInfoList.LOBBY);
         IsLoading = false;
     }
@@ -66,8 +72,8 @@ public class Loading : SceneBase<Loading>
         {
           IsLoading = true;
           Debug.Log("LOADING");
-          //GetSceneTracker().LoadSceneSynchronously(SceneInfoList.LOADING_MENU);
-          ServerCreationCoroutine = StartCoroutine(WaitForServerCreationResult(ServerInfo));
+          GetSceneTracker().LoadSceneSynchronously(SceneInfoList.LOBBY);
+          //ServerCreationCoroutine = StartCoroutine(WaitForServerCreationResult(ServerInfo));
         }
     }
 

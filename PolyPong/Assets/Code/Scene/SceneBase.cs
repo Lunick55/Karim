@@ -7,27 +7,51 @@ public class SceneBase<T> : Singleton<T> where T : Singleton<T>
 {
     private static GameObject persistenceInstance;
 
-    public GameObject GetPersistentTracker()
+    public void Awake()
     {
         if (!persistenceInstance)
         {
-            //persistenceInstance = Instantiate(Resources.Load<GameObject>("Prefab/Persistent/POLY_PONG_CORE"));
-            //persistenceInstance.name = "POLY_PONG_CORE";
-            persistenceInstance = GameObject.Find("POLY_PONG_CORE");
+            if (!Persistent.Instance)
+            {
+                persistenceInstance = Instantiate(Resources.Load<GameObject>("Prefab/Persistent/POLY_PONG_CORE"));
+                persistenceInstance.name = "POLY_PONG_CORE";
+                Debug.Log("CREATING INSTANCE");
+            }
+            else
+            {
+                persistenceInstance = GameObject.Find("POLY_PONG_CORE");
+            }
         }
-
-        return persistenceInstance;
     }
 
-    public Persistent GetPersistentInstance()
-    {
-        return GetPersistentTracker().GetComponent<Persistent>();
-    }
+    //public GameObject GetPersistentTracker()
+    //{
+    //    if (!persistenceInstance)
+    //    {
+    //        if (!Persistent.Instance)
+    //        {
+    //            persistenceInstance = Instantiate(Resources.Load<GameObject>("Prefab/Persistent/POLY_PONG_CORE"));
+    //            persistenceInstance.name = "POLY_PONG_CORE";
+    //            Debug.Log("CREATING INSTANCE");
+    //        }
+    //        else
+    //        {
+    //            persistenceInstance = GameObject.Find("POLY_PONG_CORE");
+    //        }
+    //    }
+    //
+    //    return persistenceInstance;
+    //}
+
+   //public Persistent GetPersistentInstance()
+   //{
+   //    return persistenceInstance.GetComponent<Persistent>();
+   //}
 
 
     public SceneTracker GetSceneTracker()
     {
-        return GetPersistentTracker().GetComponent<SceneTracker>();
+        return Persistent.Instance.GetComponent<SceneTracker>();
     }
 
     public void OnQuitPressed()
@@ -53,6 +77,11 @@ public class SceneBase<T> : Singleton<T> where T : Singleton<T>
 
     public void Shutdown()
     {
+        if (!Persistent.Instance.isServer)
+        {
+            AndrickPlugin.DisconnectUser();
+        }
+
         if (AndrickPlugin.ShutdownNetwork() == 0)
         {
             Debug.Log("Shutdown is a no-go");

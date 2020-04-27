@@ -53,8 +53,12 @@ extern "C"
 #endif // End __cplusplus
 
 // C++ code exposed to user program.
-ANDRICK_PLUGIN_SYMBOL int ActivateServer(int maxUsers);
-ANDRICK_PLUGIN_SYMBOL int ActivateClient(char* ip, char* username);
+ANDRICK_PLUGIN_SYMBOL bool ActivateServer(int maxUsers);
+ANDRICK_PLUGIN_SYMBOL bool ActivateClient(char* ip, char* username);
+ANDRICK_PLUGIN_SYMBOL bool DidWeConnectToServer();
+
+ANDRICK_PLUGIN_SYMBOL void DisconnectUser();
+ANDRICK_PLUGIN_SYMBOL void RequestJoinServer();
 
 //Networking
 ANDRICK_PLUGIN_SYMBOL int ShutdownNetwork();
