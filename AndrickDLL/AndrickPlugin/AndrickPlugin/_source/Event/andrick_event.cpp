@@ -11,45 +11,30 @@ void NewIncomingConnectionEvent::execute()
 {
 	std::cout << "New incoming connection..." << std::endl;
 
-	//Check if we have room.
 	UserId userId;
 	std::string errorMessage;
-
 	std::shared_ptr<SendableEvent> evnt;
 
-	//Send an accepted/failed event to the client
 	if (gNetManager.mpServer->processNewIncomingUser(clientAddress, userId, errorMessage))
 	{
 		evnt = std::make_shared<ConnectionRequestAcceptedEvent>(gNetManager.mpPacketHandler->getServerAddress(), userId, false, userId);
 		gEventSystem.queueNetworkEvent(evnt);
-
-		//auto userMap = gDemoState->mpServer->getConnectedUsers();
-		//for (auto iter = userMap.begin(); iter != userMap.end(); ++iter)
-		//{
-		//	std::shared_ptr<SendableEvent> connectedUserData = std::make_shared<BoidDataEvent>(
-		//		andrick_ID_BOID_DATA_PUSH_EVENT, iter->second->->boids, boidEvntPacket->senderId
-		//	);
-		//
-		//	gEventSystem.queueNetworkEvent(connectedUserData);
-		//}
 	}
 	else
 	{
 		evnt = std::make_shared<ConnectionRequestFailedEvent>(clientAddress, errorMessage);
 		gEventSystem.queueNetworkEvent(evnt);
 	}
-
 }
 #pragma endregion
 
-///Server -> Client - server got the connection and you can join
 #pragma region ConnectionRequestAcceptedEvent
+///Server -> Client - server got the connection and you can join
 ConnectionRequestAcceptedEvent::ConnectionRequestAcceptedEvent(RakNet::SystemAddress serverAddress, UserId newUserId,
 	bool isBroadcast, UserId receiverId) :
 	SendableEvent(EventId::CONNECTION_REQUEST_ACCEPTED, EventProcessingType::CLIENTSIDE, isBroadcast, receiverId),
 	serverAddress(serverAddress),
 	newUserId(newUserId) {}
-
 void ConnectionRequestAcceptedEvent::execute()
 {
 	gNetManager.mpPacketHandler->setServerAddress(serverAddress);
@@ -59,7 +44,6 @@ void ConnectionRequestAcceptedEvent::execute()
 	gEventSystem.queueNetworkEvent(std::make_shared<ConnectionRequestJoinEvent>(gNetManager.mpClient->getId(), gNetManager.mpClient->getUsername()));
 	std::cout << "Our connection request was accepted! UserId: " << std::to_string(newUserId) << std::endl;
 }
-
 std::size_t ConnectionRequestAcceptedEvent::allocatePacket(char*& out)
 {
 	std::size_t packetSize = sizeof(ConnectionRequestAcceptedPacket);
@@ -69,14 +53,13 @@ std::size_t ConnectionRequestAcceptedEvent::allocatePacket(char*& out)
 }
 #pragma endregion
 
-///Server -> Client - server got the connection but it's full so bye
 #pragma region ConnectionRequestFailedEvent
+///Server -> Client - server got the connection but it's full so bye
 void ConnectionRequestFailedEvent::execute()
 {
 	gNetManager.mpPacketHandler->mServerAcceptsMe = -1;
 	std::cout << "Our connection request failed:\n\t" << errorMessage << std::endl;
 }
-
 std::size_t ConnectionRequestFailedEvent::allocatePacket(char*& out)
 {
 	std::size_t packetSize = sizeof(ConnectionRequestFailedPacket);
@@ -86,9 +69,9 @@ std::size_t ConnectionRequestFailedEvent::allocatePacket(char*& out)
 }
 #pragma endregion
 
+#pragma region ConnectionRequestJoinEvent
 ///Client -> Server - client asks if it can join with andrick specific 
 ///data (username, authority, etc)
-#pragma region ConnectionRequestJoinEvent
 ConnectionRequestJoinEvent::ConnectionRequestJoinEvent(UserId userId, const std::string& username,
 	bool isBroadcast, UserId receiverId) :
 	SendableEvent(EventId::CONNECTION_REQUEST_JOIN, EventProcessingType::SERVERSIDE, isBroadcast, receiverId),
@@ -97,7 +80,6 @@ ConnectionRequestJoinEvent::ConnectionRequestJoinEvent(UserId userId, const std:
 {
 
 }
-
 void ConnectionRequestJoinEvent::execute()
 {
 	if (gNetManager.mpServer->isUsernameTaken(mUsername))
@@ -126,7 +108,6 @@ void ConnectionRequestJoinEvent::execute()
 		gEventSystem.queueNetworkEvent(broadcastEvnt);
 	}
 }
-
 std::size_t ConnectionRequestJoinEvent::allocatePacket(char*& out)
 {
 	std::size_t packetSize = sizeof(RequestJoinServerPacket);
@@ -136,8 +117,8 @@ std::size_t ConnectionRequestJoinEvent::allocatePacket(char*& out)
 }
 #pragma endregion
 
-///Server -> Client - Everything is good, you can enter the server
 #pragma region ConnectionJoinAcceptedEvent
+///Server -> Client - Everything is good, you can enter the server
 ConnectionJoinAcceptedEvent::ConnectionJoinAcceptedEvent(const std::string& username, std::size_t maxUserCount, std::size_t connectedUserCount,
 	bool isBroadcast, UserId receiverId) :
 	SendableEvent(EventId::CONNECTION_JOIN_ACCEPTED, EventProcessingType::CLIENTSIDE, isBroadcast, receiverId),
@@ -199,8 +180,8 @@ std::size_t ConnectionJoinFailedEvent::allocatePacket(char*& out)
 }
 #pragma endregion
 
-///Server -> All Clients - A new user joined the server
 #pragma region ConnectionNewUserJoinedEvent
+///Server -> All Clients - A new user joined the server
 ConnectionNewUserJoinedEvent::ConnectionNewUserJoinedEvent(UserId user, const std::string& username,
 	bool isBroadcast, UserId receiverId) :
 	SendableEvent(EventId::CONNECTION_REQUEST_ACCEPTED, EventProcessingType::CLIENTSIDE, isBroadcast, receiverId),
@@ -228,40 +209,6 @@ std::size_t ConnectionNewUserJoinedEvent::allocatePacket(char*& out)
 	return packetSize;
 }
 #pragma endregion
-
-//#pragma region GenericEvent
-//std::size_t GenericEvent::allocatePacket(char*& out)
-//{
-//	std::size_t packetSize = sizeof(GenericEventPacket);
-//	out = (char*)malloc(packetSize);
-//	memcpy(out, (char*)&GenericEventPacket(packetId, userId), packetSize);
-//	return packetSize;
-//}
-//#pragma endregion
-//#pragma region CommandEvent
-//CommandEvent::CommandEvent(std::shared_ptr<Command> command, bool isBroadcast, UserId receiverId) :
-//	SendableEvent(EventId::COMMAND, EventProcessingType::BOTH, isBroadcast, receiverId),
-//	command(command) {}
-//
-//void CommandEvent::execute() 
-//{ 
-//	command->runCommand(); 
-//}
-//#pragma endregion
-//
-//#pragma region WhisperCommandEvent
-//WhisperCommandEvent::WhisperCommandEvent(std::shared_ptr<WhisperCommand> command) :
-//	CommandEvent(command, false, command->mpReciever->getId()) {}
-//
-//std::size_t WhisperCommandEvent::allocatePacket(char*& out)
-//{
-//	std::shared_ptr<WhisperCommand> whisperCommandData = std::dynamic_pointer_cast<WhisperCommand>(command);
-//	std::size_t packetSize = sizeof(WhisperPacket);
-//	out = (char*)malloc(packetSize);
-//	memcpy(out, (char*)&WhisperPacket(whisperCommandData->mpSender->getId(), whisperCommandData->mpReciever->getId(), whisperCommandData->mMessage.c_str()), packetSize);
-//	return packetSize;
-//}
-//#pragma endregion
 
 #pragma region UserDisconnectedEvent
 UserDisconnectedEvent::UserDisconnectedEvent(UserId userId) :

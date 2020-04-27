@@ -9,13 +9,9 @@ PacketHandler::PacketHandler() :
 	mpPeer(nullptr)
 {
 	if (gNetManager.mpServer)
-	{
-		mIsServer = true;//gNetManager.mpServer->isActive;
-	}
+		mIsServer = true;
 	else
-	{
 		mIsServer = false;
-	}
 }
 
 bool PacketHandler::startup(int maxConnections)
@@ -61,8 +57,6 @@ bool PacketHandler::shutdown()
 		mpPeer->Shutdown(500);
 		RakNet::RakPeerInterface::DestroyInstance(mpPeer);
 		mpPeer = nullptr;
-
-		//gDemoState->mIsOnline = false;
 		return true;
 	}
 
@@ -91,7 +85,6 @@ bool PacketHandler::disconnect()
 			mpPeer->CloseConnection(mpPeer->GetSystemAddressFromIndex(i), true);
 		}
 
-		//gDemoState->mIsOnline = false;
 		return true;
 	}
 
@@ -103,14 +96,8 @@ int PacketHandler::processInboundPackets()
 	RakNet::Packet* packet;
 	int packetsProcessed = 0;
 
-	for (packet = mpPeer->Receive(); 
-		packet != nullptr; 
-		mpPeer->DeallocatePacket(packet), packet = mpPeer->Receive(), ++packetsProcessed)
+	for (packet = mpPeer->Receive(); packet != nullptr; mpPeer->DeallocatePacket(packet), packet = mpPeer->Receive(), ++packetsProcessed)
 	{
-		//Ignore this for now. We can ask about bitstream later
-		//RakNet::BitStream inBitStream(packet->data, packet->length, false);
-		//inBitStream.Read(messageId);
-
 		std::vector<std::shared_ptr<Event>> newEvents;
 
 		switch (packet->data[0])
@@ -161,10 +148,8 @@ int PacketHandler::processInboundPackets()
 			std::cout << "ID_REMOTE_CONNECTION_LOST" << std::endl;
 			break;
 		case ID_REMOTE_NEW_INCOMING_CONNECTION:
-		{
 			std::cout << "ID_REMOTE_NEW_INCOMING_CONNECTION" << std::endl;
 			break;
-		}
 			////////////////////////////////////////////////
 			// CUSTOM PACKETS                             
 			////////////////////////////////////////////////
@@ -223,6 +208,7 @@ int PacketHandler::processInboundPackets()
 		{
 			MessagePacket* messagePacket = (MessagePacket*)packet->data;
 			newEvents.push_back(std::make_shared<MessageEvent>(messagePacket->message));
+			break;
 		}
 			////////////////////////////////////////////////
 			// UNKNOWN PACKETS                            

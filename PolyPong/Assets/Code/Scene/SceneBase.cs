@@ -75,6 +75,16 @@ public class SceneBase<T> : Singleton<T> where T : Singleton<T>
 
     private void OnApplicationQuit()
     {
-        Shutdown();
+        //if (!Persistent.Instance.isNetworkActive) return;
+
+        if (AndrickPlugin.ShutdownNetwork() == 0)
+        {
+            Debug.Log("Shutdown is a no-go");
+        }
+        else
+        {
+            Debug.Log("I've died inside again");
+        }
+        //Shutdown();
     }
 }
