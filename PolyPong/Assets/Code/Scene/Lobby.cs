@@ -22,7 +22,7 @@ public class Lobby : SceneBase<Lobby>
             Player myPlayer = new Player();
             myPlayer.PlayerID = pData.ID;
             myPlayer.name = AndrickPlugin.GetUsername();
-
+            myPlayer.IsLocallyControlled = true;
             Instance.GetPersistentInstance().ConnectedPlayers.Add(myPlayer);
         }
     }

@@ -38,11 +38,12 @@ public class Goal : MonoBehaviour
                 new GradientColorKey(PlayerColor, 0.0f), 
                 new GradientColorKey(PlayerColor, 1.0f) },
             
-            
             new GradientAlphaKey[] {
-                new GradientAlphaKey(0.7f, 0.0f),
-                new GradientAlphaKey(0.99f, 0.5f),
-                new GradientAlphaKey(0.7f, 0.1f)
+                new GradientAlphaKey(0.8f, 0.0f),
+                new GradientAlphaKey(0.93f, 0.4f),
+                new GradientAlphaKey(0.95f, 0.5f),
+                new GradientAlphaKey(0.93f, 0.6f),
+                new GradientAlphaKey(0.8f, 1.0f)
                 //new GradientAlphaKey(0.0f, 0.0f), 
                 //new GradientAlphaKey(0.8f, 0.1f), 
                 //new GradientAlphaKey(0.98f, 0.5f), 

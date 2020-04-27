@@ -16,9 +16,7 @@ public class Player : MonoBehaviour
     public Color PlayerColor;
     public int Score;
     private Goal PlayerGoal;
-
-    public float MinColor = 0.6f;
-    public float MaxColor = 0.8f;
+    public bool IsLocallyControlled;
 
     [Range(0, 1)] private float AlphaAlongGoal = 0.0f;
     private float InputDirection = 0.0f;
@@ -53,7 +51,9 @@ public class Player : MonoBehaviour
 
     private Color GetRandomColor()
     {
-        return new Color(Rand(MinColor, MaxColor), Rand(MinColor, MaxColor), Rand(MinColor, MaxColor));
+        Color C = Random.ColorHSV(0.0f, 1.0f, 0.3f, 0.5f, 0.8f, 1f);
+        C.r += 0.1f;//ColorHSV leans toward green/blue for some reason.
+        return C;// new Color(Rand(MinColor, MaxColor), Rand(MinColor, MaxColor), Rand(MinColor, MaxColor));
     }
 
     private float Rand(float Min, float Max)
@@ -69,6 +69,36 @@ public class Player : MonoBehaviour
 
     public void FixedUpdate()
     {
+        if (IsLocallyControlled)
+            UpdateLocalPaddleMovement();
+    }
+
+    private void UpdatePosition()
+    {
+        Vector2 LerpedPosition = Vector2.Lerp(PlayerGoal.GoalPostLeft, PlayerGoal.GoalPostRight, AlphaAlongGoal);
+        transform.position = LerpedPosition;
+        UpdatePaddleDirection();
+    }
+
+    private void UpdatePaddleSize()
+    {
+
+    }
+
+    public void UpdateRemotePaddleMovement(float Alpha)
+    {
+        if (!IsLocallyControlled)
+        {
+            float GoalXScale = PlayerGoal.GetXScale();
+            float LerpConvert = GoalXScale / PlayerGoal.GetGoalSize() * 0.5f;
+
+            AlphaAlongGoal = Alpha;
+            UpdatePosition();
+        }
+    }
+
+    public void UpdateLocalPaddleMovement()
+    {
         if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
             InputDirection = 1;
         else if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
@@ -81,19 +111,8 @@ public class Player : MonoBehaviour
 
         AlphaAlongGoal = Mathf.Clamp(AlphaAlongGoal + InputDirection * Time.fixedDeltaTime * MoveSpeed, LerpConvert, 1.0f - LerpConvert);
         UpdatePosition();
-    }
 
-    private void UpdatePosition()
-    {
-        Vector2 LerpedPosition = Vector2.Lerp(PlayerGoal.GoalPostLeft, PlayerGoal.GoalPostRight, AlphaAlongGoal);
-        transform.position = LerpedPosition;
-
-        UpdatePaddleDirection();
-    }
-
-    private void UpdatePaddleSize()
-    {
-
+        //Send new alpha to DLL
     }
 
     //TODO: THIS DOESNT WORK WILL FIX LATER

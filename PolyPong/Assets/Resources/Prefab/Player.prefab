@@ -51,8 +51,8 @@ MonoBehaviour:
   Username: Andy
   PlayerColor: {r: 0.99607843, g: 0.8666667, b: 0.38039216, a: 1}
   Score: 0
-  MinColor: 0.6
-  MaxColor: 1
+  MinColor: 0.2
+  MaxColor: 0.8
 --- !u!114 &5879096503200770654
 MonoBehaviour:
   m_ObjectHideFlags: 0
