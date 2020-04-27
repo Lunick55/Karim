@@ -17,8 +17,8 @@ public class CreateServer : SceneBase<CreateServer>
         {
             Persistent.Instance.isServer = true;
             Persistent.Instance.ServerInfo.maxUsers = maxUserInput.text;
-            GetSceneTracker().LoadSceneSynchronously(SceneInfoList.LOADING_MENU);
             AndrickPlugin.ActivateServer(maxUsers);
+            GetSceneTracker().LoadSceneSynchronously(SceneInfoList.SERVER_CONTROL_PANEL);
         }
 
         //GetSceneTracker().LoadSceneAsync(SceneInfoList.LOADING_MENU, UnityEngine.SceneManagement.LoadSceneMode.Single, OnSceneLoaded);

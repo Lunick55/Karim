@@ -107,7 +107,10 @@ void GetPlayerData(PlayerData& data)
 
 int GetConnectedUserCount()
 {
-	return (int)gNetManager.mpClient->getConnectedUserCount();
+	if (gNetManager.mpPacketHandler->isServer())
+		return (int)gNetManager.mpServer->getConnectedUserCount();
+	else
+		return (int)gNetManager.mpClient->getConnectedUserCount();
 }
 
 void GetConnectedUserIds(int ids[])

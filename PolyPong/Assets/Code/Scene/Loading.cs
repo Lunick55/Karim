@@ -111,22 +111,21 @@ public class Loading : SceneBase<Loading>
         {
           IsLoading = true;
           Debug.Log("LOADING");
-          GetSceneTracker().LoadSceneSynchronously(SceneInfoList.LOBBY);
-          //ServerCreationCoroutine = StartCoroutine(WaitForServerCreationResult(ServerInfo));
+          GetSceneTracker().LoadSceneSynchronously(SceneInfoList.SERVER_CONTROL_PANEL);
         }
     }
 
-    IEnumerator WaitForServerCreationResult(ServerCreationInfo ServerInfo)
-    {
-        StartCoroutine(ElipseLoader());
-
-        //Send the data off to the server and wait for a response.
-        yield return new WaitForSeconds(5.0f);
-
-        ServerCreationCoroutine = null;
-        GetSceneTracker().LoadSceneSynchronously(SceneInfoList.LOBBY);
-        IsLoading = false;
-    }
+   //IEnumerator WaitForServerCreationResult(ServerCreationInfo ServerInfo)
+   //{
+   //    StartCoroutine(ElipseLoader());
+   //
+   //    //Send the data off to the server and wait for a response.
+   //    yield return new WaitForSeconds(5.0f);
+   //
+   //    ServerCreationCoroutine = null;
+   //    GetSceneTracker().LoadSceneSynchronously(SceneInfoList.LOBBY);
+   //    IsLoading = false;
+   //}
 
     IEnumerator ElipseLoader()
     {
