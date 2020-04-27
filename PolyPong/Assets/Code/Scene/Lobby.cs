@@ -9,6 +9,9 @@ public class Lobby : SceneBase<Lobby>
     private ChatLog LobbyChatLog;
     private bool IsGameCountdownRunning;
 
+    private List<int> IncomingServerPlayerIDs = new List<int>();
+    private List<int> LocalPlayerIDs = new List<int>();
+
     public void Start()
     {
         LobbyChatLog = GetComponent<ChatLog>();
@@ -32,19 +35,26 @@ public class Lobby : SceneBase<Lobby>
         if (!Persistent.Instance.isServer)
         {
             Debug.Log("YOOO");
+            //Get list of all connected users from server.
             int[] playerIDs = new int[AndrickPlugin.GetConnectedUserCount()];
             AndrickPlugin.GetConnectedUserIds(playerIDs);
-            
-            for (int i = 0; i < playerIDs.Length; ++i)
+
+            IncomingServerPlayerIDs.Clear();
+            IncomingServerPlayerIDs.AddRange(playerIDs);
+
+            LocalPlayerIDs.Clear();
+            foreach (PlayerInfo Info in Persistent.Instance.ConnectedPlayers)
             {
-                for (int j = 0; j < Persistent.Instance.ConnectedPlayers.Count; ++j)
+                LocalPlayerIDs.Add(Info.PlayerID);
+            }
+
+            for (int i = 0; i < IncomingServerPlayerIDs.Count; ++i)
+            {
+                if (!LocalPlayerIDs.Contains(IncomingServerPlayerIDs[i]))
                 {
-                    if (Persistent.Instance.ConnectedPlayers[j].PlayerID != playerIDs[i])
-                    {
-                        PlayerInfo player = new PlayerInfo();
-                        player.PlayerID = playerIDs[i];
-                        Persistent.Instance.ConnectedPlayers.Add(player);
-                    }
+                    PlayerInfo player = new PlayerInfo();
+                    player.PlayerID = playerIDs[i];
+                    Persistent.Instance.ConnectedPlayers.Add(player);
                 }
             }
         }
