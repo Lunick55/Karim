@@ -59,7 +59,10 @@ ANDRICK_PLUGIN_SYMBOL bool DidWeInitiallyConnectToServer();
 ANDRICK_PLUGIN_SYMBOL int DidServerAcceptOurConnection(int& result);
 
 ANDRICK_PLUGIN_SYMBOL void DisconnectUser();
-ANDRICK_PLUGIN_SYMBOL void RequestJoinServer();
+
+ANDRICK_PLUGIN_SYMBOL int GetMaxUserCount();
+
+ANDRICK_PLUGIN_SYMBOL void GetUsernames(char* Usernames, int MaxLength);
 
 //Networking
 ANDRICK_PLUGIN_SYMBOL int ShutdownNetwork();

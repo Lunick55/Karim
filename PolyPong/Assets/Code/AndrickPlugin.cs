@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
+using System.Text;
 using UnityEngine;
 
 public class AndrickPlugin
@@ -52,7 +53,13 @@ public class AndrickPlugin
     public static extern int GetConnectedUserCount();
 
     [DllImport("AndrickPlugin")]
+    public static extern int GetMaxUserCount();
+
+    [DllImport("AndrickPlugin")]
     public static extern void GetConnectedUserIds(int[] ids);
+
+    [DllImport("AndrickPlugin")]
+    public static extern void GetUsernames(StringBuilder Usernames, int MaxLength);
     
     [DllImport("AndrickPlugin")]
     public static extern bool DidWeInitiallyConnectToServer();

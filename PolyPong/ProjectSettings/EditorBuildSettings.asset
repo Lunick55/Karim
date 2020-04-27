@@ -26,6 +26,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Resources/Scenes/PlayPlayer.unity
     guid: 09d35b854c1e49941b4d1efe8a31b8ef
+  - enabled: 1
+    path: Assets/Resources/Scenes/ServerControlPanel.unity
+    guid: fac19185d76e7ee428c793e45864f0a2
   - enabled: 0
     path: Assets/Resources/Scenes/_TestScenes/testingStuff.unity
     guid: 57fa97d19c38db64bb606e9ca35dae96

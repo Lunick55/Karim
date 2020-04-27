@@ -134,8 +134,26 @@ void DisconnectUser()
 	gEventSystem.queueNetworkEvent(std::make_shared<UserDisconnectedEvent>(gNetManager.mpClient->getId()));
 }
 
-void RequestJoinServer()
+int GetMaxUserCount()
 {
-	//gEventSystem.queueNetworkEvent(std::make_shared<ConnectionRequestJoinEvent>(
-	//	gNetManager.mpClient->getId(), gNetManager.mpClient->getUsername()));
+	return (int)gNetManager.mpPacketHandler->getMaxConnections();
+}
+
+void GetUsernames(char* Usernames, int MaxLength)
+{
+	//Max length is max connections * max length for username
+	auto clientMap = gNetManager.mpServer->getConnectedUsers();
+	for (int i = 0; i < clientMap.size(); ++i)
+	{
+		std::string username = clientMap.at(i)->getUsername();
+		for (int j = 0; j < username.size(); ++j)
+		{
+			int index = i * sMAX_USERNAME_LENGTH + j;
+			if (MaxLength > index)
+			{
+				Usernames[(i * sMAX_USERNAME_LENGTH) + j] = username[j];
+			}
+		}
+		Usernames[(i * sMAX_MESSAGE_LENGTH) + (int)username.length()] = '\0';
+	}
 }
