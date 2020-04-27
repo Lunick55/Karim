@@ -56,7 +56,7 @@ extern "C"
 ANDRICK_PLUGIN_SYMBOL bool ActivateServer(int maxUsers);
 ANDRICK_PLUGIN_SYMBOL bool ActivateClient(char* ip, char* username);
 ANDRICK_PLUGIN_SYMBOL bool DidWeInitiallyConnectToServer();
-ANDRICK_PLUGIN_SYMBOL int DidServerAcceptOurConnection();
+ANDRICK_PLUGIN_SYMBOL int DidServerAcceptOurConnection(int& result);
 
 ANDRICK_PLUGIN_SYMBOL void DisconnectUser();
 ANDRICK_PLUGIN_SYMBOL void RequestJoinServer();

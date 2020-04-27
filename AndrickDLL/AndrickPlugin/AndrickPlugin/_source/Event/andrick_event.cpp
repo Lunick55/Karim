@@ -72,6 +72,7 @@ std::size_t ConnectionRequestAcceptedEvent::allocatePacket(char*& out)
 #pragma region ConnectionRequestFailedEvent
 void ConnectionRequestFailedEvent::execute()
 {
+	gNetManager.mpPacketHandler->mServerAcceptsMe = -1;
 	std::cout << "Our connection request failed:\n\t" << errorMessage << std::endl;
 }
 
@@ -148,7 +149,7 @@ void ConnectionJoinAcceptedEvent::execute()
 	gNetManager.mpClient->setServersMaxUserCount(mMaxUserCount);
 	gNetManager.mpClient->setConnectedUserCount(mConnectedUserCount);
 	gNetManager.mpClient->setUsername(mUsername);
-	gNetManager.mpPacketHandler->mServerAcceptsMe = true;
+	gNetManager.mpPacketHandler->mServerAcceptsMe = 1;
 	///TODO: Send over client data from server and initialize the mpClientMap
 
 	std::cout << mUsername << " successfully joined the server! - " << std::to_string(mConnectedUserCount) << "/" << std::to_string(mMaxUserCount) << " online." << std::endl;

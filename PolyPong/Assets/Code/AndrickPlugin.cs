@@ -58,7 +58,7 @@ public class AndrickPlugin
     public static extern bool DidWeInitiallyConnectToServer();
 
     [DllImport("AndrickPlugin")]
-    public static extern bool DidServerAcceptOurConnection();
+    public static extern int DidServerAcceptOurConnection(ref int result);
 
     [DllImport("AndrickPlugin")]
     public static extern void DisconnectUser();

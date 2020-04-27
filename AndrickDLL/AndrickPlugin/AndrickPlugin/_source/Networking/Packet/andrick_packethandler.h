@@ -27,7 +27,7 @@ public:
 	const std::size_t getMaxConnections() const { return mMaxConnections; }
 
 	bool mIsConnected = false;
-	bool mServerAcceptsMe = false;
+	int mServerAcceptsMe = 0;
 private:
 	bool mIsServer;
 

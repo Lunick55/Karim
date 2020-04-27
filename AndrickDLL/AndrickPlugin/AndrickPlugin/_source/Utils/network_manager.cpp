@@ -117,12 +117,16 @@ void GetConnectedUserIds(int ids[])
 
 bool DidWeInitiallyConnectToServer()
 {
-	return gNetManager.mpPacketHandler && gNetManager.mpPacketHandler->mIsConnected;
+	return gNetManager.mpPacketHandler->mIsConnected;
 }
 
-int DidServerAcceptOurConnection()
+int DidServerAcceptOurConnection(int& result)
 {
-	return gNetManager.mpPacketHandler && gNetManager.mpPacketHandler->mServerAcceptsMe;
+	result = 0;
+	if (gNetManager.mpPacketHandler)
+		result = gNetManager.mpPacketHandler->mServerAcceptsMe;
+
+	return result;
 }
 
 void DisconnectUser()

@@ -24,19 +24,16 @@ public class Loading : SceneBase<Loading>
     private const int MAX_ELIPSE = 4;
     private const string ELIPSE = ".";
     private const float TIME_BETWEEN_ELIPSE = 1.0f;
+    private const float MAX_WAIT_TIME = 5.0f;
 
     private bool IsLoading;
 
     public virtual void Start()
     {
         if (Persistent.Instance.isServer)
-        {
             HandleServerCreation();
-        }
         else 
-        {
             HandleClientConnecting();
-        }
     }
 
     public void HandleClientConnecting()
@@ -51,27 +48,58 @@ public class Loading : SceneBase<Loading>
     IEnumerator WaitForClientConnectingResult(ClientConnectionInfo ClientInfo)
     {
         StartCoroutine(ElipseLoader());
-        //Send the data off to the server and wait for a response.
+        float WaitCounter = 0.0f;
 
-        while (!AndrickPlugin.DidWeInitiallyConnectToServer())
+        if (!AndrickPlugin.ActivateClient(ClientInfo.ipAddress, ClientInfo.username))
         {
-            AndrickPlugin.ProcessPackets();
-            AndrickPlugin.ExecuteEvents();
-            Debug.Log("LOADING...");
-            yield return new WaitForEndOfFrame();
+            GetSceneTracker().LoadSceneSynchronously(SceneInfoList.TITLE_MENU);
+        }
+        else
+        {
+            while (!AndrickPlugin.DidWeInitiallyConnectToServer())
+            {
+                if (WaitCounter >= MAX_WAIT_TIME)
+                {
+                    GetSceneTracker().LoadSceneSynchronously(SceneInfoList.TITLE_MENU);
+                    yield return null;
+                }
+
+                AndrickPlugin.ProcessPackets();
+                AndrickPlugin.ExecuteEvents();
+                AndrickPlugin.SendPackets();
+                WaitCounter += Time.deltaTime;
+                yield return new WaitForEndOfFrame();
+            }
+
+            WaitCounter = 0.0f;
+            int Result = 0;
+            while (AndrickPlugin.DidServerAcceptOurConnection(ref Result) == 0)
+            {
+                if (WaitCounter >= MAX_WAIT_TIME)
+                {
+                    GetSceneTracker().LoadSceneSynchronously(SceneInfoList.TITLE_MENU);
+                    yield return null;
+                }
+
+                AndrickPlugin.ProcessPackets();
+                AndrickPlugin.ExecuteEvents();
+                AndrickPlugin.SendPackets();
+                WaitCounter += Time.deltaTime;
+                yield return new WaitForEndOfFrame();
+            }
+
+            ClientConnectionCoroutine = null;
+
+            if (Result == 1)
+                GetSceneTracker().LoadSceneSynchronously(SceneInfoList.LOBBY);
+            else
+            {
+                GetSceneTracker().LoadSceneSynchronously(SceneInfoList.TITLE_MENU);
+            }
         }
 
-        while (!AndrickPlugin.DidServerAcceptOurConnection())
-        {
-            AndrickPlugin.ProcessPackets();
-            AndrickPlugin.ExecuteEvents();
-            AndrickPlugin.SendPackets();
-            yield return new WaitForEndOfFrame();
-        }
-
-        ClientConnectionCoroutine = null;
-        GetSceneTracker().LoadSceneSynchronously(SceneInfoList.LOBBY);
         IsLoading = false;
+        yield return null;
     }
 
     public void HandleServerCreation()
