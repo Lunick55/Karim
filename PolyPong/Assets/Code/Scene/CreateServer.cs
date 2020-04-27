@@ -6,37 +6,29 @@ using TMPro;
 
 public class CreateServer : SceneBase<CreateServer>
 {
+    private const string SERVER_NAME = "Server";
+
     public TMP_InputField maxUserInput;
+    public TMP_InputField portInput;
 
     public void OnCreateServer()
     {
-        //Set necessary data that needs to be sent to the server in persistent handler
-        //So then we can ask the server about this info in the lobby
-        int maxUsers = 0;
+        int maxUsers;
         if (int.TryParse(maxUserInput.text.ToString(), out maxUsers))
         {
-            Persistent.Instance.isServer = true;
-            Persistent.Instance.ServerInfo.maxUsers = maxUserInput.text;
-            if (AndrickPlugin.ActivateServer(maxUsers))
+            int port;
+            if (int.TryParse(portInput.text.ToString(), out port))
             {
-                Persistent.Instance.isNetworkActive = true;
-                GetSceneTracker().LoadSceneSynchronously(SceneInfoList.SERVER_CONTROL_PANEL);
-            }
-            else
-            {
-                GetSceneTracker().LoadSceneSynchronously(SceneInfoList.TITLE_MENU);
+                if (AndrickPlugin.InitServer(SERVER_NAME, port, maxUsers))
+                {
+                    Persistent.Instance.SetLocalUser(new Server(port, maxUsers));
+                    SetScene(SceneInfoList.SERVER_CONTROL_PANEL);
+                }
+                else
+                {
+                    SetScene(SceneInfoList.TITLE_MENU);
+                }
             }
         }
-
-        //GetSceneTracker().LoadSceneAsync(SceneInfoList.LOADING_MENU, UnityEngine.SceneManagement.LoadSceneMode.Single, OnSceneLoaded);
     }
-
-    //IEnumerator OnSceneLoaded(AsyncOperation loadOperation)
-    //{
-    //    yield return new WaitUntil(() => loadOperation.isDone == true);
-    //
-    //
-    //    Debug.Log("HELLO?FE<FEBGEJBGFJGB: " + SceneInfoList.CREATE_SERVER.sceneID);
-    //    GetSceneTracker().UnloadSceneAsync(SceneInfoList.CREATE_SERVER);
-    //}
 }

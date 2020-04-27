@@ -15,18 +15,10 @@ public class SceneTracker : MonoBehaviour
         SceneInfo info, LoadSceneMode mode = LoadSceneMode.Additive,
         Func<AsyncOperation, IEnumerator> loadHandler = null)
     {
-        //if (info.sceneType == SceneType.FULLSCREEN)
-        //{
-        //    Debug.Log(string.Format("Adding fullscreen scene: {0} to history.", info.sceneID));
-        //    mSceneHistory.Push(info);
-        //}
-
         AsyncOperation loadOperation = SceneManager.LoadSceneAsync(info.sceneID, mode);
 
         if (loadHandler != null)
-        {
             StartCoroutine(loadHandler(loadOperation));
-        }
 
         return loadOperation;
     }
@@ -37,12 +29,8 @@ public class SceneTracker : MonoBehaviour
         AsyncOperation unloadOperation = SceneManager.UnloadSceneAsync(info.sceneID,
             UnloadSceneOptions.UnloadAllEmbeddedSceneObjects);
 
-        //Debug.Log(string.Format("Unloading scene with id: {0} to history.", sceneID));
-
         if (unloadHandler != null)
-        {
             StartCoroutine(unloadHandler(unloadOperation));
-        }
 
         return unloadOperation;
     }

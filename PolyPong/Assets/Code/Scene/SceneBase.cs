@@ -29,62 +29,42 @@ public class SceneBase<T> : Singleton<T> where T : Singleton<T>
         return Persistent.Instance.GetComponent<SceneTracker>();
     }
 
+    public void SetScene(SceneInfo SceneID)
+    {
+        GetSceneTracker().LoadSceneSynchronously(SceneID);
+    }
+
+    private void ShutdownRakNet()
+    {
+        if (Persistent.Instance.IsCurrentUserTheServer())
+        {
+            if (AndrickPlugin.ShutdownServer())
+            {
+                Debug.Log("Successfully shutdown the server!");
+            }
+        }
+        else
+        {
+            if (AndrickPlugin.ShutdownClient())
+            {
+                Debug.Log("Successfully shutdown the client!");
+            }
+        }
+    }
+
+    public void OnMainMenuPressed()
+    {
+        ShutdownRakNet();
+        GetSceneTracker().LoadSceneSynchronously(SceneInfoList.TITLE_MENU);
+    }
+
     public void OnQuitPressed()
     {
         Application.Quit();
     }
 
-    public void OnMainMenuPressed()
-    {
-        Shutdown();
-        GetSceneTracker().LoadSceneSynchronously(SceneInfoList.TITLE_MENU);
-    }
-
-    public void OnJoinLobbyClient()
-    {
-        //Send over the necessary info to the server.
-        GetSceneTracker().LoadSceneSynchronously(SceneInfoList.LOBBY);
-    }
-
-    public void OnJoinLobbyServer()
-    {
-        GetSceneTracker().LoadSceneSynchronously(SceneInfoList.LOBBY);
-    }
-
-    public void Shutdown()
-    {
-        if (!Persistent.Instance.isNetworkActive) return;
-
-        int Result = 0;
-        if (!Persistent.Instance.isServer && AndrickPlugin.DidServerAcceptOurConnection(ref Result) == 1)
-        {
-            AndrickPlugin.DisconnectUser();
-        }
-
-        if (AndrickPlugin.ShutdownNetwork() == 0)
-        {
-            Debug.Log("Shutdown is a no-go");
-        }
-        else
-        {
-            Debug.Log("I've died inside again");
-        }
-
-        Persistent.Instance.isNetworkActive = false;
-    }
-
     private void OnApplicationQuit()
     {
-        //if (!Persistent.Instance.isNetworkActive) return;
-
-        if (AndrickPlugin.ShutdownNetwork() == 0)
-        {
-            Debug.Log("Shutdown is a no-go");
-        }
-        else
-        {
-            Debug.Log("I've died inside again");
-        }
-        //Shutdown();
+        ShutdownRakNet();
     }
 }

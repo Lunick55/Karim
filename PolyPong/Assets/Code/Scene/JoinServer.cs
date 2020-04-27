@@ -12,7 +12,6 @@ public class JoinServer : SceneBase<JoinServer>
     {
         Persistent.Instance.ClientInfo.username = usernameInput.text;
         Persistent.Instance.ClientInfo.ipAddress = ipAddress.text;
-        Persistent.Instance.isServer = false;
         GetSceneTracker().LoadSceneSynchronously(SceneInfoList.LOADING_MENU);
     }
 }

@@ -4,13 +4,6 @@ using UnityEngine;
 
 public class TitleScene : SceneBase<TitleScene>
 {
-    public void OnCreateServerPressed()
-    {
-        Persistent.Instance.GetComponent<SceneTracker>().LoadSceneSynchronously(SceneInfoList.CREATE_SERVER);
-    }
-
-    public void OnJoinServerPressed()
-    {
-        Persistent.Instance.GetComponent<SceneTracker>().LoadSceneSynchronously(SceneInfoList.JOIN_SERVER);
-    }
+    public void OnCreateServerPressed() { GetSceneTracker().LoadSceneSynchronously(SceneInfoList.CREATE_SERVER); }
+    public void OnJoinServerPressed() { GetSceneTracker().LoadSceneSynchronously(SceneInfoList.JOIN_SERVER); }
 }

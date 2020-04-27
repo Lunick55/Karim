@@ -11,23 +11,23 @@ public class ServerControlPanel : SceneBase<TitleScene>
 
     public void Update()
     {
-        if (Persistent.Instance.isNetworkActive && Persistent.Instance.isServer)
-        {
-            AndrickPlugin.ProcessPackets();
-            AndrickPlugin.ExecuteEvents();
-            UserCountText.text = string.Format("{0} / {1}", AndrickPlugin.GetConnectedUserCount().ToString(), AndrickPlugin.GetMaxUserCount().ToString());
-            GetUsernames();
-            AndrickPlugin.SendPackets();
-        }
+        //if (Persistent.Instance.isNetworkActive && Persistent.Instance.isServer)
+        //{
+        //    AndrickPlugin.ProcessPackets();
+        //    AndrickPlugin.ExecuteEvents();
+        //    UserCountText.text = string.Format("{0} / {1}", AndrickPlugin.GetConnectedUserCount().ToString(), AndrickPlugin.GetMaxUserCount().ToString());
+        //    GetUsernames();
+        //    AndrickPlugin.SendPackets();
+        //}
     }
 
-    private void GetUsernames()
-    {
-        StringBuilder sb = new StringBuilder(AndrickPlugin.GetMaxUserCount() * 64);
-        AndrickPlugin.GetUsernames(sb, sb.Capacity);
-
-        UserNamesText.text = sb.ToString();
-    }
+    //private void GetUsernames()
+    //{
+    //    StringBuilder sb = new StringBuilder(AndrickPlugin.GetMaxUserCount() * 64);
+    //    AndrickPlugin.GetUsernames(sb, sb.Capacity);
+    //
+    //    UserNamesText.text = sb.ToString();
+    //}
     
     //private string CleanseString(StringBuilder sb)
     //{

@@ -4,25 +4,31 @@ using UnityEngine;
 
 public class Persistent : Singleton<Persistent>
 {
-    public static GameObject instance;
-
-    public List<PlayerInfo> ConnectedPlayers = new List<PlayerInfo>();
-    public ServerCreationInfo ServerInfo;
+    public static GameObject Object;
     public ClientConnectionInfo ClientInfo;
+    public User CurrentUser;
+    public List<User> ConnectedUsers = new List<User>();
 
-    public bool isNetworkActive = false;
-    public bool isServer;
+    public bool IsCurrentUserTheServer()
+    {
+        return CurrentUser.mUserType == UserType.SERVER;
+    }
 
     private void Awake()
     {
-        if (!instance)
+        if (!Object)
         {
-            instance = gameObject;
+            Object = gameObject;
             DontDestroyOnLoad(gameObject);
         }
         else
         {
-            //Destroy(gameObject);
+            Destroy(gameObject);
         }
+    }
+
+    public void SetLocalUser(User LocalUser)
+    {
+        CurrentUser = LocalUser;
     }
 }

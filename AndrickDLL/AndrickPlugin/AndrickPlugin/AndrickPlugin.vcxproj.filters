@@ -13,35 +13,47 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Header Files\Examples">
-      <UniqueIdentifier>{be49289f-c1af-420d-b442-f530f4ba55dd}</UniqueIdentifier>
+    <Filter Include="Header Files\OLD">
+      <UniqueIdentifier>{587e0dc1-85d5-455e-af9b-876a7bbf5bff}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Examples">
-      <UniqueIdentifier>{3f8ee028-7453-4f8a-b4c8-f1e9f2d4444a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Networking">
+    <Filter Include="Header Files\OLD\Networking">
       <UniqueIdentifier>{04d100e2-303c-4a66-9cfc-1b0eabc72007}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Common">
-      <UniqueIdentifier>{b0a016a3-2f30-4c49-9274-252e42adcf7e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Common">
-      <UniqueIdentifier>{a9be3848-1ce1-460e-a15d-ac876cef12ec}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Networking">
-      <UniqueIdentifier>{4ea58234-f239-4695-b917-707b8c491a48}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Networking\Packet">
+    <Filter Include="Header Files\OLD\Networking\Packet">
       <UniqueIdentifier>{77a558ed-8ed1-478d-9cc7-525918ea875c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Networking\Packet">
-      <UniqueIdentifier>{6c8c6c43-880c-4081-878c-600b7450be32}</UniqueIdentifier>
+    <Filter Include="Header Files\OLD\Common">
+      <UniqueIdentifier>{b0a016a3-2f30-4c49-9274-252e42adcf7e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Event">
+    <Filter Include="Header Files\OLD\Event">
+      <UniqueIdentifier>{6a7cc04f-7842-4f1f-bba1-8d284b941ec0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\OLD\Examples">
+      <UniqueIdentifier>{be49289f-c1af-420d-b442-f530f4ba55dd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\OLD">
+      <UniqueIdentifier>{bde35481-e88f-4acb-91ab-6a7e6ea319c2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\OLD\Common">
+      <UniqueIdentifier>{a9be3848-1ce1-460e-a15d-ac876cef12ec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\OLD\Event">
       <UniqueIdentifier>{b2a98943-60e6-46a8-966d-d6c2bceb2cf0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Event">
-      <UniqueIdentifier>{6a7cc04f-7842-4f1f-bba1-8d284b941ec0}</UniqueIdentifier>
+    <Filter Include="Source Files\OLD\Examples">
+      <UniqueIdentifier>{3f8ee028-7453-4f8a-b4c8-f1e9f2d4444a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\OLD\Networking">
+      <UniqueIdentifier>{4ea58234-f239-4695-b917-707b8c491a48}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\OLD\Networking\Packet">
+      <UniqueIdentifier>{6c8c6c43-880c-4081-878c-600b7450be32}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Andrick">
+      <UniqueIdentifier>{862678ab-1d97-4a3a-bab7-6fb156b5db05}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Andrick">
+      <UniqueIdentifier>{fcb7d975-3eac-4e34-9e13-179666dd7129}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -49,34 +61,49 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="template_examples\PluginTemplateExample.h">
-      <Filter>Header Files\Examples</Filter>
+      <Filter>Header Files\OLD\Examples</Filter>
     </ClInclude>
     <ClInclude Include="_source\Networking\andrick_server.h">
-      <Filter>Header Files\Networking</Filter>
+      <Filter>Header Files\OLD\Networking</Filter>
     </ClInclude>
     <ClInclude Include="_source\Utils\andrick_common.h">
-      <Filter>Header Files\Common</Filter>
+      <Filter>Header Files\OLD\Common</Filter>
     </ClInclude>
     <ClInclude Include="_source\Networking\andrick_client.h">
-      <Filter>Header Files\Networking</Filter>
+      <Filter>Header Files\OLD\Networking</Filter>
     </ClInclude>
     <ClInclude Include="_source\Networking\Packet\andrick_packet.h">
-      <Filter>Header Files\Networking\Packet</Filter>
+      <Filter>Header Files\OLD\Networking\Packet</Filter>
     </ClInclude>
     <ClInclude Include="_source\Networking\Packet\andrick_packethandler.h">
-      <Filter>Header Files\Networking\Packet</Filter>
+      <Filter>Header Files\OLD\Networking\Packet</Filter>
     </ClInclude>
     <ClInclude Include="_source\Event\andrick_event.h">
-      <Filter>Header Files\Event</Filter>
+      <Filter>Header Files\OLD\Event</Filter>
     </ClInclude>
     <ClInclude Include="_source\Event\andrick_eventSystem.h">
-      <Filter>Header Files\Event</Filter>
+      <Filter>Header Files\OLD\Event</Filter>
     </ClInclude>
     <ClInclude Include="_source\Event\andrick_event_chatmessage.h">
-      <Filter>Header Files\Event</Filter>
+      <Filter>Header Files\OLD\Event</Filter>
     </ClInclude>
     <ClInclude Include="_source\Utils\network_manager.h">
-      <Filter>Header Files\Common</Filter>
+      <Filter>Header Files\OLD\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="NetworkManager.h">
+      <Filter>Header Files\Andrick</Filter>
+    </ClInclude>
+    <ClInclude Include="Server.h">
+      <Filter>Header Files\Andrick</Filter>
+    </ClInclude>
+    <ClInclude Include="User.h">
+      <Filter>Header Files\Andrick</Filter>
+    </ClInclude>
+    <ClInclude Include="Client.h">
+      <Filter>Header Files\Andrick</Filter>
+    </ClInclude>
+    <ClInclude Include="PacketBank.h">
+      <Filter>Header Files\Andrick</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -84,31 +111,43 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="template_examples\PluginTemplateExample.cpp">
-      <Filter>Source Files\Examples</Filter>
+      <Filter>Source Files\OLD\Examples</Filter>
     </ClCompile>
     <ClCompile Include="_source\Utils\andrick_common.cpp">
-      <Filter>Source Files\Common</Filter>
+      <Filter>Source Files\OLD\Common</Filter>
     </ClCompile>
     <ClCompile Include="_source\Networking\andrick_server.cpp">
-      <Filter>Source Files\Networking</Filter>
+      <Filter>Source Files\OLD\Networking</Filter>
     </ClCompile>
     <ClCompile Include="_source\Networking\andrick_client.cpp">
-      <Filter>Source Files\Networking</Filter>
+      <Filter>Source Files\OLD\Networking</Filter>
     </ClCompile>
     <ClCompile Include="_source\Networking\Packet\andrick_packethandler.cpp">
-      <Filter>Source Files\Networking\Packet</Filter>
+      <Filter>Source Files\OLD\Networking\Packet</Filter>
     </ClCompile>
     <ClCompile Include="_source\Event\andrick_event.cpp">
-      <Filter>Source Files\Event</Filter>
+      <Filter>Source Files\OLD\Event</Filter>
     </ClCompile>
     <ClCompile Include="_source\Event\andrick_eventSystem.cpp">
-      <Filter>Source Files\Event</Filter>
+      <Filter>Source Files\OLD\Event</Filter>
     </ClCompile>
     <ClCompile Include="_source\Event\andrick_event_chatmessage.cpp">
-      <Filter>Source Files\Event</Filter>
+      <Filter>Source Files\OLD\Event</Filter>
     </ClCompile>
     <ClCompile Include="_source\Utils\network_manager.cpp">
-      <Filter>Source Files\Common</Filter>
+      <Filter>Source Files\OLD\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="NetworkingManager.cpp">
+      <Filter>Source Files\Andrick</Filter>
+    </ClCompile>
+    <ClCompile Include="Server.cpp">
+      <Filter>Source Files\Andrick</Filter>
+    </ClCompile>
+    <ClCompile Include="User.cpp">
+      <Filter>Source Files\Andrick</Filter>
+    </ClCompile>
+    <ClCompile Include="Client.cpp">
+      <Filter>Source Files\Andrick</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

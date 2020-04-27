@@ -28,10 +28,6 @@ public class Goal : MonoBehaviour
 
     public void SetGoalColor(Color PlayerColor)
     {
-        //PlayerColor.a = GoalColorAlphaScale;
-        //GoalRenderer.startColor = PlayerColor;
-        //GoalRenderer.endColor = PlayerColor;
-
         Gradient gradient = new Gradient();
         gradient.SetKeys(
             new GradientColorKey[] { 
@@ -44,19 +40,10 @@ public class Goal : MonoBehaviour
                 new GradientAlphaKey(0.95f, 0.5f),
                 new GradientAlphaKey(0.93f, 0.6f),
                 new GradientAlphaKey(0.8f, 1.0f)
-                //new GradientAlphaKey(0.0f, 0.0f), 
-                //new GradientAlphaKey(0.8f, 0.1f), 
-                //new GradientAlphaKey(0.98f, 0.5f), 
-                //new GradientAlphaKey(0.8f, 0.9f),
-                //new GradientAlphaKey(0.0f, 1.0f)
             }
         );
 
         GoalRenderer.colorGradient = gradient;
-        //for (int i = 0; i < GoalRenderer.colorGradient.colorKeys.Length; ++i)
-        //{
-        //    GoalRenderer.colorGradient.colorKeys[i].color.r = PlayerColor.r;
-        //}
     }
 
     public void SetGoalThickness(float Thickness)
@@ -92,9 +79,6 @@ public class Goal : MonoBehaviour
         GoalSizeMagnitude = (GoalPostLeft - GoalPostRight).magnitude;
 
         SetGoalWidthScale();
-
-        //GoalRenderer.SetPosition(0, GoalPostLeftVisualPosition);
-        //GoalRenderer.SetPosition(1, GoalPostRightVisualPosition);
         UpdatePositions();
         GetComponent<Player>().ResetPlayerPosition();
     }
@@ -105,10 +89,6 @@ public class Goal : MonoBehaviour
         Vector3 DistVec = (GoalPostRightVisualPosition - GoalPostLeftVisualPosition).normalized * DistBetween;
 
         for (int i = 0; i < GoalIndices; ++i)
-        {
             GoalRenderer.SetPosition(i, GoalPostLeftVisualPosition + (DistVec * i));
-        }
-        //GoalRenderer.SetPosition(0, GoalPostLeftVisualPosition);
-        //GoalRenderer.SetPosition(1, GoalPostRightVisualPosition);
     }
 }

@@ -111,7 +111,6 @@ public class Player : MonoBehaviour
         //Send new alpha to DLL
     }
 
-    //TODO: THIS DOESNT WORK WILL FIX LATER
     private void UpdatePaddleDirection()
     {
         Vector3 Direction = PlayerGoal.GoalPostLeft - PlayerGoal.GoalPostRight;

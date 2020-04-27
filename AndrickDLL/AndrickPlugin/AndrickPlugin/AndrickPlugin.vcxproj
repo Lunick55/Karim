@@ -158,8 +158,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Client.h" />
     <ClInclude Include="main\lib.h" />
+    <ClInclude Include="NetworkManager.h" />
+    <ClInclude Include="PacketBank.h" />
+    <ClInclude Include="Server.h" />
     <ClInclude Include="template_examples\PluginTemplateExample.h" />
+    <ClInclude Include="User.h" />
     <ClInclude Include="_source\Event\andrick_event.h" />
     <ClInclude Include="_source\Event\andrick_eventSystem.h" />
     <ClInclude Include="_source\Event\andrick_event_chatmessage.h" />
@@ -171,8 +176,12 @@
     <ClInclude Include="_source\Utils\network_manager.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Client.cpp" />
     <ClCompile Include="main\dllmain.cpp" />
+    <ClCompile Include="NetworkingManager.cpp" />
+    <ClCompile Include="Server.cpp" />
     <ClCompile Include="template_examples\PluginTemplateExample.cpp" />
+    <ClCompile Include="User.cpp" />
     <ClCompile Include="_source\Event\andrick_event.cpp" />
     <ClCompile Include="_source\Event\andrick_eventSystem.cpp" />
     <ClCompile Include="_source\Event\andrick_event_chatmessage.cpp" />
