@@ -106,7 +106,7 @@ int GetConnectedUserCount()
 
 void GetConnectedUserId(int ids[])
 {
-	gNetManager.mpClient->getConnectedUserId(ids);
+	gNetManager.mpClient->getConnectedUserIds(ids);
 }
 
 bool DidWeConnectToServer()

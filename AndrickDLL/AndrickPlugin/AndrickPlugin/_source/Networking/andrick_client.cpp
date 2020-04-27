@@ -105,7 +105,7 @@ bool Client::getClientFromUsername(const std::string& username, std::shared_ptr<
 	return success;
 }
 
-void Client::getConnectedUserId(int ids[]) 
+void Client::getConnectedUserIds(int ids[]) 
 {
 	int i = 0;
 	for (auto iter = mClientMap.begin(); iter != mClientMap.end(); ++iter)

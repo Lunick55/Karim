@@ -9,14 +9,11 @@ public struct PlayerData
 
 public class Player : MonoBehaviour
 {
-    //The player's user id from the server
-    public int PlayerID;
-    public string Username;
+    public PlayerInfo PlayerData;
 
     public Color PlayerColor;
     public int Score;
     private Goal PlayerGoal;
-    public bool IsLocallyControlled;
 
     [Range(0, 1)] private float AlphaAlongGoal = 0.0f;
     private float InputDirection = 0.0f;
@@ -31,10 +28,9 @@ public class Player : MonoBehaviour
         ResetPlayerPosition();
     }
 
-    public void Init(int ID, string Name)
+    public void Init(PlayerInfo Info)
     {
-        PlayerID = ID;
-        Username = Name;
+        PlayerData = Info;
     }
 
     private void InitGoal()
@@ -69,7 +65,7 @@ public class Player : MonoBehaviour
 
     public void FixedUpdate()
     {
-        if (IsLocallyControlled)
+        //if (IsLocallyControlled)
             UpdateLocalPaddleMovement();
     }
 
@@ -87,7 +83,7 @@ public class Player : MonoBehaviour
 
     public void UpdateRemotePaddleMovement(float Alpha)
     {
-        if (!IsLocallyControlled)
+        if (!PlayerData.IsLocallyControlled)
         {
             float GoalXScale = PlayerGoal.GetXScale();
             float LerpConvert = GoalXScale / PlayerGoal.GetGoalSize() * 0.5f;

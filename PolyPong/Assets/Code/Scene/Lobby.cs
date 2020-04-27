@@ -19,9 +19,9 @@ public class Lobby : SceneBase<Lobby>
             PlayerData pData = new PlayerData();
             AndrickPlugin.GetPlayerData(ref pData);
 
-            Player myPlayer = new Player();
+            PlayerInfo myPlayer = new PlayerInfo();
             myPlayer.PlayerID = pData.ID;
-            myPlayer.name = AndrickPlugin.GetUsername();
+            myPlayer.Username = AndrickPlugin.GetUsername();
             myPlayer.IsLocallyControlled = true;
             Persistent.Instance.ConnectedPlayers.Add(myPlayer);
         }
@@ -32,19 +32,18 @@ public class Lobby : SceneBase<Lobby>
         if (!Persistent.Instance.isServer)
         {
             Debug.Log("YOOO");
-            //int[] playerIDs = new int[AndrickPlugin.GetConnectedUserCount()];
-            //AndrickPlugin.GetConnectedUserId(playerIDs);
-            //
-            //for (int i = 0; i < playerIDs.Length; i++)
-            //{
-            //    if (Persistent.Instance.ConnectedPlayers[i].PlayerID != playerIDs[i])
-            //    {
-            //        Player player = new Player();
-            //        player.PlayerID = playerIDs[i];
-            //
-            //        Persistent.Instance.ConnectedPlayers.Add(player);
-            //    }
-            //}
+            int[] playerIDs = new int[AndrickPlugin.GetConnectedUserCount()];
+            AndrickPlugin.GetConnectedUserIds(playerIDs);
+            
+            for (int i = 0; i < playerIDs.Length; i++)
+            {
+                if (Persistent.Instance.ConnectedPlayers[i].PlayerID != playerIDs[i])
+                {
+                    PlayerInfo player = new PlayerInfo();
+                    player.PlayerID = playerIDs[i];
+                    Persistent.Instance.ConnectedPlayers.Add(player);
+                }
+            }
         }
 
         if (Input.GetKeyDown(KeyCode.Return))

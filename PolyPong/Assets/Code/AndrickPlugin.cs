@@ -52,7 +52,7 @@ public class AndrickPlugin
     public static extern int GetConnectedUserCount();
 
     [DllImport("AndrickPlugin")]
-    public static extern void GetConnectedUserId(int[] ids);
+    public static extern void GetConnectedUserIds(int[] ids);
     
     [DllImport("AndrickPlugin")]
     public static extern bool DidWeConnectToServer();

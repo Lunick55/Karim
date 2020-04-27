@@ -6,11 +6,10 @@ public class PongManager : MonoBehaviour
 {
     public int MaxPlayers = 5;
     private List<Player> ActivePlayers;
+    private GameObject PlayerPrefab;
 
     private Vector3 OriginOfPolygon = Vector3.zero;
     public float PolygonRadiusInVerticalScreenUnits = 0.9f;
-
-    private GameObject PlayerPrefab;
 
     public void Start()
     {

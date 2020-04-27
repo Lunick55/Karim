@@ -9,9 +9,6 @@ EditorBuildSettings:
     path: Assets/Resources/Scenes/TitleMenu.unity
     guid: 26f5030b853941b4ab26f0987319b6ad
   - enabled: 1
-    path: Assets/Resources/Scenes/Persistent/CameraManager.unity
-    guid: 98d058aa63aead145bb0e798e78c68ae
-  - enabled: 1
     path: Assets/Resources/Scenes/LoadingMenu.unity
     guid: c5b857e40525a0d4baaa912b1f03ac47
   - enabled: 1
