@@ -41,7 +41,7 @@ public class Loading : SceneBase<Loading>
         if (ClientConnectionCoroutine == null)
         {
             IsLoading = true;
-            ClientConnectionCoroutine = StartCoroutine(WaitForClientConnectingResult(ClientInfo));
+            ClientConnectionCoroutine = StartCoroutine(WaitForClientConnectingResult(Persistent.Instance.ClientInfo));
         }
     }
 
@@ -52,6 +52,7 @@ public class Loading : SceneBase<Loading>
 
         if (!AndrickPlugin.ActivateClient(ClientInfo.ipAddress, ClientInfo.username))
         {
+            Debug.Log("Failed to successfully activate the client.");
             GetSceneTracker().LoadSceneSynchronously(SceneInfoList.TITLE_MENU);
         }
         else
@@ -60,6 +61,7 @@ public class Loading : SceneBase<Loading>
             {
                 if (WaitCounter >= MAX_WAIT_TIME)
                 {
+                    Debug.Log("Wait time is too long for initial connection.");
                     GetSceneTracker().LoadSceneSynchronously(SceneInfoList.TITLE_MENU);
                     yield return null;
                 }
@@ -77,6 +79,7 @@ public class Loading : SceneBase<Loading>
             {
                 if (WaitCounter >= MAX_WAIT_TIME)
                 {
+                    Debug.Log("Wait time is too long for server authentification.");
                     GetSceneTracker().LoadSceneSynchronously(SceneInfoList.TITLE_MENU);
                     yield return null;
                 }

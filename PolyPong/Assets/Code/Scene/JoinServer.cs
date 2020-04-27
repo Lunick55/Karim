@@ -10,8 +10,8 @@ public class JoinServer : SceneBase<JoinServer>
 
     public void OnConnectPressed()
     {
-        ClientInfo.username = usernameInput.text;
-        ClientInfo.ipAddress = ipAddress.text;
+        Persistent.Instance.ClientInfo.username = usernameInput.text;
+        Persistent.Instance.ClientInfo.ipAddress = ipAddress.text;
         Persistent.Instance.isServer = false;
         GetSceneTracker().LoadSceneSynchronously(SceneInfoList.LOADING_MENU);
     }

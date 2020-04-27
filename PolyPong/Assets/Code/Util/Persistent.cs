@@ -7,6 +7,8 @@ public class Persistent : Singleton<Persistent>
     public static GameObject instance;
 
     public List<PlayerInfo> ConnectedPlayers = new List<PlayerInfo>();
+    public ServerCreationInfo ServerInfo;
+    public ClientConnectionInfo ClientInfo;
 
     public bool isServer;
 

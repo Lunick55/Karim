@@ -10,8 +10,6 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
 {
     //private static readonly int INSTANCE_COUNT = 1;
     private static T instance;
-    public static ServerCreationInfo ServerInfo;
-    public static ClientConnectionInfo ClientInfo;
 
     //public static T Instance
     //{
