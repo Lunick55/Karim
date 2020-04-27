@@ -24,31 +24,6 @@ public class SceneBase<T> : Singleton<T> where T : Singleton<T>
         }
     }
 
-    //public GameObject GetPersistentTracker()
-    //{
-    //    if (!persistenceInstance)
-    //    {
-    //        if (!Persistent.Instance)
-    //        {
-    //            persistenceInstance = Instantiate(Resources.Load<GameObject>("Prefab/Persistent/POLY_PONG_CORE"));
-    //            persistenceInstance.name = "POLY_PONG_CORE";
-    //            Debug.Log("CREATING INSTANCE");
-    //        }
-    //        else
-    //        {
-    //            persistenceInstance = GameObject.Find("POLY_PONG_CORE");
-    //        }
-    //    }
-    //
-    //    return persistenceInstance;
-    //}
-
-   //public Persistent GetPersistentInstance()
-   //{
-   //    return persistenceInstance.GetComponent<Persistent>();
-   //}
-
-
     public SceneTracker GetSceneTracker()
     {
         return Persistent.Instance.GetComponent<SceneTracker>();
@@ -61,6 +36,7 @@ public class SceneBase<T> : Singleton<T> where T : Singleton<T>
 
     public void OnMainMenuPressed()
     {
+        Shutdown();
         GetSceneTracker().LoadSceneSynchronously(SceneInfoList.TITLE_MENU);
     }
 
@@ -77,6 +53,8 @@ public class SceneBase<T> : Singleton<T> where T : Singleton<T>
 
     public void Shutdown()
     {
+        if (!Persistent.Instance.isNetworkActive) return;
+
         int Result = 0;
         if (!Persistent.Instance.isServer && AndrickPlugin.DidServerAcceptOurConnection(ref Result) == 1)
         {
@@ -91,6 +69,8 @@ public class SceneBase<T> : Singleton<T> where T : Singleton<T>
         {
             Debug.Log("I've died inside again");
         }
+
+        Persistent.Instance.isNetworkActive = false;
     }
 
     private void OnApplicationQuit()

@@ -10,6 +10,7 @@ public class Persistent : Singleton<Persistent>
     public ServerCreationInfo ServerInfo;
     public ClientConnectionInfo ClientInfo;
 
+    public bool isNetworkActive = false;
     public bool isServer;
 
     private void Awake()

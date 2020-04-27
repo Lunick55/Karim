@@ -4,17 +4,20 @@ using UnityEngine;
 using TMPro;
 using System.Text;
 
-public class ServerControlPanel : MonoBehaviour
+public class ServerControlPanel : SceneBase<TitleScene>
 {
     public TextMeshProUGUI UserCountText;
     public TextMeshProUGUI UserNamesText;
 
     public void Update()
     {
-        if (Persistent.Instance.isServer)
+        if (Persistent.Instance.isNetworkActive && Persistent.Instance.isServer)
         {
-            UserCountText.text = string.Format("{0} / {1}", AndrickPlugin.GetConnectedUserCount(), AndrickPlugin.GetMaxUserCount());
+            AndrickPlugin.ProcessPackets();
+            AndrickPlugin.ExecuteEvents();
+            UserCountText.text = string.Format("{0} / {1}", AndrickPlugin.GetConnectedUserCount().ToString(), AndrickPlugin.GetMaxUserCount().ToString());
             GetUsernames();
+            AndrickPlugin.SendPackets();
         }
     }
 
@@ -22,8 +25,8 @@ public class ServerControlPanel : MonoBehaviour
     {
         StringBuilder sb = new StringBuilder(AndrickPlugin.GetMaxUserCount() * 64);
         AndrickPlugin.GetUsernames(sb, sb.Capacity);
-    
-        UserCountText.text = sb.ToString();
+
+        UserNamesText.text = sb.ToString();
     }
     
     //private string CleanseString(StringBuilder sb)

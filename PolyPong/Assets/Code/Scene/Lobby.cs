@@ -32,32 +32,32 @@ public class Lobby : SceneBase<Lobby>
 
     public void Update()
     {
-        if (!Persistent.Instance.isServer)
-        {
-            Debug.Log("YOOO");
-            //Get list of all connected users from server.
-            int[] playerIDs = new int[AndrickPlugin.GetConnectedUserCount()];
-            AndrickPlugin.GetConnectedUserIds(playerIDs);
-
-            IncomingServerPlayerIDs.Clear();
-            IncomingServerPlayerIDs.AddRange(playerIDs);
-
-            LocalPlayerIDs.Clear();
-            foreach (PlayerInfo Info in Persistent.Instance.ConnectedPlayers)
-            {
-                LocalPlayerIDs.Add(Info.PlayerID);
-            }
-
-            for (int i = 0; i < IncomingServerPlayerIDs.Count; ++i)
-            {
-                if (!LocalPlayerIDs.Contains(IncomingServerPlayerIDs[i]))
-                {
-                    PlayerInfo player = new PlayerInfo();
-                    player.PlayerID = playerIDs[i];
-                    Persistent.Instance.ConnectedPlayers.Add(player);
-                }
-            }
-        }
+        //if (!Persistent.Instance.isServer)
+        //{
+        //    Debug.Log("YOOO");
+        //    //Get list of all connected users from server.
+        //    int[] playerIDs = new int[AndrickPlugin.GetConnectedUserCount()];
+        //    AndrickPlugin.GetConnectedUserIds(playerIDs);
+        //
+        //    IncomingServerPlayerIDs.Clear();
+        //    IncomingServerPlayerIDs.AddRange(playerIDs);
+        //
+        //    LocalPlayerIDs.Clear();
+        //    foreach (PlayerInfo Info in Persistent.Instance.ConnectedPlayers)
+        //    {
+        //        LocalPlayerIDs.Add(Info.PlayerID);
+        //    }
+        //
+        //    for (int i = 0; i < IncomingServerPlayerIDs.Count; ++i)
+        //    {
+        //        if (!LocalPlayerIDs.Contains(IncomingServerPlayerIDs[i]))
+        //        {
+        //            PlayerInfo player = new PlayerInfo();
+        //            player.PlayerID = playerIDs[i];
+        //            Persistent.Instance.ConnectedPlayers.Add(player);
+        //        }
+        //    }
+        //}
 
         if (Input.GetKeyDown(KeyCode.Return))
             OnSendClicked();
@@ -82,6 +82,7 @@ public class Lobby : SceneBase<Lobby>
     {
         if (!Persistent.Instance.isServer)
         {
+            Debug.Log(string.Format("Creating message packet. {0}: {1}", AndrickPlugin.GetUsername(), ChatMessageBox.text));
             AndrickPlugin.CreateMessagePacket(string.Format("{0}: {1}", AndrickPlugin.GetUsername(), ChatMessageBox.text));
             ChatMessageBox.text = "";
         }

@@ -12,6 +12,7 @@ NetworkManager& gNetManager = NetworkManager::get();
 
 bool initializeServer(int maxUsers)
 {
+	shutdownRakNet();
 	gNetManager.mpServer = std::make_shared<Server>();
 	gEventSystem.addListener(gNetManager.mpServer, EventProcessingType::SERVERSIDE);
 	gNetManager.mpServer->isActive = true;
